@@ -1,13 +1,12 @@
 Hiringapp::Application.routes.draw do |map|
-  root :to => "welcome#index"
-  
   constraints(:subdomain => /.+/) do 
-    root :to => "welcome#index"
+    devise_for :users
+    root :to => "current_account#index"
   end
   
-  devise_for :users
-
+  devise_for :admins
   resources :accounts
+  root :to => "welcome#index"
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
@@ -16,9 +15,6 @@ Hiringapp::Application.routes.draw do |map|
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
-
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
 
   # Sample resource route with options:
   #   resources :products do

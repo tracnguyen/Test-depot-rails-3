@@ -1,8 +1,7 @@
-class User < ActiveRecord::Base
+class Admin < ActiveRecord::Base
 
   devise \
     :database_authenticatable,
-    :registerable,
     :recoverable,
     :rememberable,
     :trackable,
@@ -10,6 +9,4 @@ class User < ActiveRecord::Base
     :validatable
 
   attr_accessible :email, :password, :password_confirmation
-  
-  belongs_to :account
 end
