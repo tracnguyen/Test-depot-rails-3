@@ -46,6 +46,10 @@ Hiringapp::Application.routes.draw do |map|
   #     resources :products
   #   end
 
+  constraints(:subdomain => /.+/) do 
+    root :to => "welcome#index"
+  end
+
   root :to => "welcome#index"
 
   # See how all your routes lay out with "rake routes"
