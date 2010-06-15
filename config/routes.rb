@@ -7,8 +7,7 @@ Hiringapp::Application.routes.draw do |map|
   
   devise_for :users
 
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
+  resources :accounts
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
