@@ -10,9 +10,11 @@
     = csrf_meta_tag
   %body
     #container
-      #header HEADER
-        p.notice= notice
-        p.alert= alert
-      #sidebar SIDEBAR
-      #content= yield
-      #footer FOOTER
+      #header
+        %p.notice= notice
+        %p.alert= alert
+      #sidebar
+      #content
+        %h1 HiRing
+        = yield
+      #footer
