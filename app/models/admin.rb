@@ -5,8 +5,12 @@ class Admin < ActiveRecord::Base
     :recoverable,
     :rememberable,
     :trackable,
-    :lockable,
     :validatable
+  
+  devise :lockable, \
+    :lock_strategy => :failed_attempts,
+    :maximum_attempts => 5,
+    :unlock_strategy => :email
 
   attr_accessible :email, :password, :password_confirmation
 end

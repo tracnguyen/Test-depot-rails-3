@@ -6,9 +6,11 @@ class User < ActiveRecord::Base
     :recoverable,
     :rememberable,
     :trackable,
-    :lockable,
     :validatable
-
+  
+  devise :lockable, :lock_strategy => :none, :unlock_strategy => :none
+  after_create :lock_access!
+  
   attr_accessible :email, :password, :password_confirmation
   
   belongs_to :account
