@@ -6,6 +6,14 @@ body, p, ol, ul, td {
   line-height: 18px;
 }
 
+#container {
+  width: 800px;
+  margin-left: 10%;
+}
+
+html form.formtastic fieldset { display: block; }
+html form.formtastic fieldset > ol > li { display: block; }
+
 pre {
   background-color: #eee;
   padding: 10px;

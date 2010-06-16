@@ -1,14 +1,14 @@
-- semantic_form_for @job do |f|
-  -if @job.errors.any?
+= semantic_form_for @job do |f|
+  - if @job.errors.any?
     #errorExplanation
       %h2= "#{pluralize(@job.errors.count, "error")} prohibited this job from being saved:"
       %ul
         - @job.errors.full_messages.each do |msg|
           %li= msg
-  - f.inputs do
+  = f.inputs do
     = f.input :title, :label => "Job Title"
     = f.input :description, :as => :text, :label => "Job Description"
     = f.input :status, :as => :select, :collection => [['Draft', 'draft'],['Open', 'open'],['Close', 'close']]
             
-  - f.buttons do
+  = f.buttons do
     = f.commit_button 'Save'

@@ -18,7 +18,6 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 gem "devise", :git => "git://github.com/plataformatec/devise.git"
 gem "haml", ">=3.0.4"
 gem "will_paginate", ">=3.0.pre"
-gem "formtastic", "1.0.0.beta"
 gem "rails3-generators", :git => "git://github.com/indirect/rails3-generators.git"
 gem "state_machine"
 
@@ -30,6 +29,6 @@ end
 group :cucumber do
   gem "cucumber", ">=0.6.3"
   gem "cucumber-rails", ">=0.3.0"
-  gem "capybara", ">=0.3.6"
+  # gem "capybara", ">=0.3.6"
   gem "database_cleaner", ">=0.5.0"
 end
