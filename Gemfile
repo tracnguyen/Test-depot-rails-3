@@ -20,6 +20,7 @@ gem "haml", ">=3.0.4"
 gem "will_paginate", ">=3.0.pre"
 gem "formtastic", "1.0.0.beta"
 gem "rails3-generators", :git => "git://github.com/indirect/rails3-generators.git"
+gem "state_machine"
 
 group :test do
   gem "rspec", ">=2.0.0.beta.8"

@@ -5,8 +5,10 @@
       %ul
         - @job.errors.full_messages.each do |msg|
           %li= msg
-
-  = f.input :title, :label => "Job Title"
-  = f.input :description, :as => :text, :label => "Job Description"
-  = f.input :status, :as => :select, :collection => ["Open", "Close"]        
-  = f.commit_button 'Save'
+  - f.inputs do
+    = f.input :title, :label => "Job Title"
+    = f.input :description, :as => :text, :label => "Job Description"
+    = f.input :status, :as => :select, :collection => ["Open", "Close"]
+            
+  - f.buttons do
+    = f.commit_button 'Save'
