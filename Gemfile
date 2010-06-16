@@ -18,7 +18,7 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 gem "devise", :git => "git://github.com/plataformatec/devise.git"
 gem "haml", ">=3.0.4"
 gem "will_paginate", ">=3.0.pre"
-gem "formtastic", ">=0.9.8"
+gem "formtastic", "1.0.0.beta"
 gem "rails3-generators", :git => "git://github.com/indirect/rails3-generators.git"
 
 group :test do

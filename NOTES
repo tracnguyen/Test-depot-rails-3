@@ -2,5 +2,8 @@ Install:
 ==
   gem install bundler
   bundle install
-  manually install formtastic gem: gem install formtastic --pre
+  install formtastic as plugin: 
+    $rails plugin install http://github.com/justinfrench/formtastic.git -r rails3
+    $rails g formtastic:install
+    
   
