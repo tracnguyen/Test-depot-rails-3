@@ -2,3 +2,5 @@ Install:
 ==
   gem install bundler
   bundle install
+  manually install formtastic gem: gem install formtastic --pre
+  
