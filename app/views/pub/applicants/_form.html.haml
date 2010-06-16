@@ -1,0 +1,17 @@
+- semantic_form_for [:pub, :job, @applicant] do |f|
+  -if @applicant.errors.any?
+    #errorExplanation
+      %h2= "#{pluralize(@applicant.errors.count, "error")} prohibited this applicant from being saved:"
+      %ul
+        - @applicant.errors.full_messages.each do |msg|
+          %li= msg
+
+  - f.inputs do 
+    = f.input :first_name, :label => "First name"
+    = f.input :last_name, :label => "Last name"
+    = f.input :email, :label => "Email"
+    = f.input :phone, :label => "Phone"
+    = f.input :job_id, :as => :hidden, :value => @applicant.job_id
+    
+  - f.buttons do
+    = f.commit_button 'Save'

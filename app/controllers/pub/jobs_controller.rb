@@ -1,4 +1,6 @@
 class Pub::JobsController < ApplicationController
+  layout 'account'
+  
   # GET /jobs
   # GET /jobs.xml
   def index

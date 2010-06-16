@@ -1,4 +1,6 @@
 class Job < ActiveRecord::Base
+  has_many :applicants
+  
   scope :open, where(:status => "open")
   
   state_machine :status, :initial => :draft do

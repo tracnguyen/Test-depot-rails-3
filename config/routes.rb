@@ -4,7 +4,9 @@ Hiringapp::Application.routes.draw do |map|
     resources :jobs
     
     namespace :pub do
-      resources :jobs 
+      resources :jobs do
+        resources :applicants
+      end
     end
     
     root :to => "current_account#index"
