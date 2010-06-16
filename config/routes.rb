@@ -3,6 +3,10 @@ Hiringapp::Application.routes.draw do |map|
     devise_for :users
     resources :jobs
     
+    namespace :pub do
+      resources :jobs 
+    end
+    
     root :to => "current_account#index"
   end
   

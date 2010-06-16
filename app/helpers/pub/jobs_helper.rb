@@ -1,0 +1,2 @@
+module Pub::JobsHelper
+end
