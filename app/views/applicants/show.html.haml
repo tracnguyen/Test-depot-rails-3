@@ -10,8 +10,11 @@
 %p
   %b Phone:
   = @applicant.phone
-%p
-  %b Status:
-  = @applicant.status
+
+= form_for(@applicant, :remote => true) do |f|
+  = f.label "Status"
+  = f.select :status, [["New", "new"], ["Screened", "screened"], ["Interviewed", "interviewed"], ["Offered", "offered"], ["Hired", "hired"], ["Rejected", "rejected"]]
+  %br
+  = f.submit 'Save', :disable_with => "Please wait..."
 
 = link_to 'Back', applicants_path
