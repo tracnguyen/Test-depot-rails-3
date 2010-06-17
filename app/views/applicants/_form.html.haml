@@ -12,7 +12,7 @@
     = f.input :email, :label => "Email"
     = f.input :phone, :label => "Phone"
     = f.input :job_id, :as => :hidden, :value => @applicant.job_id
-    = f.input :status, :as => :select, :collection => Applicant::STATUS_LIST
+    = f.input :status, :as => :select, :collection => application_status_collection
     = f.input :attachment, :as => :file
     
   - f.buttons do

@@ -16,7 +16,7 @@
    
 = form_for(@applicant, :remote => true) do |f|
   = f.label "Status"
-  = f.select :status, Applicant::STATUS_LIST
+  = f.select :status, application_status_collection
   %br
   = f.submit 'Save', :disable_with => "Please wait..."
 
