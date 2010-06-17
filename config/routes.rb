@@ -14,7 +14,10 @@ Hiringapp::Application.routes.draw do |map|
       end
     end
     
-    root :to => "dashboard#index", :as => :dashboard
+    match "dashboard" => "dashboard#index", :as => :dashboard
+    match "dashboard" => "dashboard#index", :as => :user_root_path # for devise
+    
+    root :to => "pub/jobs#index"
   end
   
   resources :accounts

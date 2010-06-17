@@ -59,7 +59,7 @@ body {
 
 #content {
   width: 620px;
-  min-height: 600px;
+  min-height: 340px;
   margin-bottom: 40px;
 }
 
@@ -80,7 +80,7 @@ body {
 h1#title {
   color: navy;
   font: bold 4em/1 Helvetica, Arial, sans-serif;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 h1 {
@@ -88,8 +88,6 @@ h1 {
   color: #2f4f4f;
   margin-bottom: 15px;
 }
-
-#flashes { margin: 10px 0; padding: 5px 0; }
 
 h2 {
   font: bold 1.5em/1 "Times New Roman", serif;
@@ -115,6 +113,9 @@ th { font-weight: bold; padding-bottom: 5px; }
 div.field, div.actions {
   margin-bottom: 10px;
 }
+
+#flashes { margin: 10px 0; padding: 5px 0; }
+#flashes p { max-width: 28em; }
 
 #notice {
   color: green;

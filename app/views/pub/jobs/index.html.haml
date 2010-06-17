@@ -1,16 +1,22 @@
-%h1 Listing jobs
+- if @jobs.empty?
 
-%table
-  %tr
-    %th Title
-    %th Description
-    %th Status
-    %th
+  %p Thank you for your interest in our company,
+  %p Unfortunately there are no current opening positions.
+  %p Please check back later!
 
-  - @jobs.each do |job|
+- else
+  %h1 Current openings
+  
+  %table
     %tr
-      %td= job.title
-      %td= job.description
-      %td= job.status
-      %td= link_to 'Show', pub_job_path(job)
-
+      %th Title
+      %th Description
+      %th Status
+      %th
+  
+    - @jobs.each do |job|
+      %tr
+        %td= job.title
+        %td= job.description
+        %td= job.status
+        %td= link_to 'Show', pub_job_path(job)
