@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   
   belongs_to :account
   
-  def account_owner?
-    self.account == Account.where({:user_id => self.id})
+  def owns?(account)
+    account.owner == self
   end
 end

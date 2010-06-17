@@ -1,5 +1,5 @@
 class UsersController < BaseAccountController
-  before_filter :authenticate_user!
+  before_filter :require_owner
   
   def index
     @users = User.unconfirmed
