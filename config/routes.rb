@@ -6,7 +6,9 @@ Hiringapp::Application.routes.draw do |map|
     match "users/:id/confirm" => "users#confirm", :as => :confirm_user
     
     resources :jobs
-    resources :applicants
+    resources :applicants do
+      get :filter, :on => :collection
+    end
     
     namespace :pub do
       resources :jobs do

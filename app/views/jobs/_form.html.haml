@@ -8,7 +8,7 @@
   = f.inputs do
     = f.input :title, :label => "Job Title"
     = f.input :description, :as => :text, :label => "Job Description"
-    = f.input :status, :as => :select, :collection => Job::STATUS_LIST
+    = f.input :status, :as => :select, :collection => job_status_collection
             
   = f.buttons do
     = f.commit_button 'Save'

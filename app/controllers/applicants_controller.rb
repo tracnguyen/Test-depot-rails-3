@@ -80,4 +80,11 @@ class ApplicantsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def filter
+    @job = params[:job_title]
+    @status = params[:apt_status]
+    conditions = (@job == "0" ? {} : {:job_id => @job}).merge!((@status == "all" ? {} : {:status => @status}))
+    @applicants = Applicant.where(conditions)    
+  end
 end

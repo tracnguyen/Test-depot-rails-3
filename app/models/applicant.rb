@@ -5,8 +5,6 @@ class Applicant < ActiveRecord::Base
                     :path => ":rails_root/public/assets/attachments/:basename.:extension", 
                     :url => "/assets/attachments/:basename.:extension"
                     
-  STATUS_LIST = [["New", "new"], ["Screened", "screened"], ["Interviewed", "interviewed"], ["Offered", "offered"], ["Hired", "hired"], ["Rejected", "rejected"]]
-                    
   state_machine :status, :initial => :new do
     event :change_status do
       transition :new => :screened

@@ -1,22 +1,27 @@
+- content_for :head do
+  :javascript
+    $(function(){
+      $('#job_title, #apt_status').change(function(){
+        $('#job_filter').submit();
+      })
+    })
+    
 %h1 Listing applicants
 
-%table
-  %tr
-    %th First name
-    %th Last name
-    %th Email
-    %th Phone
-    %th Status
-    %th
-    %th
+%br
+%h2 Filter options
 
-  - @applicants.each do |applicant|
-    %tr
-      %td= applicant.first_name
-      %td= applicant.last_name
-      %td= applicant.email
-      %td= applicant.phone
-      %td= applicant.status
-      %td= link_to 'Show', applicant_path(applicant) 
-      %td= link_to 'Delete', applicant, :confirm => 'Are you sure?', :method => :delete
+- form_tag(filter_applicants_path, :method => :get, :remote => true, :id => 'job_filter') do
+  %p 
+    Job title:
+    = select_tag :job_title, job_filter_collection
+  %p 
+    Status:
+    = select_tag :apt_status, apt_status_filter_collection
+
+#applicants
+  = render :partial => 'applicants', :locals => { :applicants => @applicants}
+
+
+
       
