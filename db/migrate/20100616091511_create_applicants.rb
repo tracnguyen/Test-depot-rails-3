@@ -6,6 +6,7 @@ class CreateApplicants < ActiveRecord::Migration
       t.string :email
       t.string :phone
       t.integer :job_id
+      t.integer :account_id
       t.string :status
       
       t.timestamps

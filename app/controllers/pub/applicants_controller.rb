@@ -11,7 +11,7 @@ class Pub::ApplicantsController < BaseAccountController
   end
 
   def create
-    @applicant = Applicant.new(params[:applicant])
+    @applicant = current_account.applicants.build(params[:applicant])
 
     respond_to do |format|
       if @applicant.save

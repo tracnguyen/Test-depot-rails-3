@@ -1,5 +1,6 @@
 class Applicant < ActiveRecord::Base
   belongs_to :job
+  belongs_to :account
   
   has_attached_file :attachment, 
                     :path => ":rails_root/public/assets/attachments/:basename.:extension", 

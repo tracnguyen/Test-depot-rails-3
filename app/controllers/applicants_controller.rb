@@ -2,7 +2,7 @@ class ApplicantsController < BaseAccountController
   # GET /applicants
   # GET /applicants.xml
   def index
-    @applicants = Applicant.all
+    @applicants = current_account.applicants
 
     respond_to do |format|
       format.html # index.html.erb
@@ -74,7 +74,7 @@ class ApplicantsController < BaseAccountController
     @job = params[:job_title]
     @status = params[:apt_status]
     conditions = (@job == "0" ? {} : {:job_id => @job}).merge!((@status == "all" ? {} : {:status => @status}))
-    @applicants = Applicant.where(conditions)
+    @applicants = current_account.applicants.where(conditions)
     respond_to do |format|
       format.html { render :partial => 'applicants', :locals => {:applicants => @applicants} }
     end
