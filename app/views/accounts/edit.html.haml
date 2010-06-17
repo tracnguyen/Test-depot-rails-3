@@ -1,0 +1,22 @@
+%h1 Editing account
+
+= form_for @account do |f|
+  -if @account.errors.any?
+    #errorExplanation
+      %h2= "#{pluralize(@account.errors.count, "error")} prohibited this account from being saved:"
+      %ul
+        - @account.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :subdomain
+    = f.text_field :subdomain
+  .actions
+    = f.submit 'Save'
+
+= link_to 'Show', @account
+\|
+= link_to 'Back', accounts_path

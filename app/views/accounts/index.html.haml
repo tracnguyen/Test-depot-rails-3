@@ -6,13 +6,12 @@
     %th Subdomain
     %th
     %th
-    %th
 
   - @accounts.each do |account|
     %tr
       %td= account.name
-      %td= account.subdomain
-      %td= link_to 'Show', account
+      %td= link_to account.subdomain, account_root_url(:subdomain => account.subdomain)
+      %td= link_to 'Edit', edit_account_path(account)
       %td= link_to 'Destroy', account, :confirm => 'Are you sure?', :method => :delete
 
 %br

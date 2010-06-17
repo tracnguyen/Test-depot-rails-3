@@ -15,9 +15,10 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 # To use debugger
 # gem 'ruby-debug'
 
+gem "subdomain-fu", :git => "git://github.com/nhowell/subdomain-fu.git"
 gem "devise", :git => "git://github.com/plataformatec/devise.git"
 gem "haml", ">=3.0.4"
-gem "will_paginate", ">=3.0.pre"
+# gem "will_paginate", ">=3.0.pre"
 gem "rails3-generators", :git => "git://github.com/indirect/rails3-generators.git"
 gem "state_machine"
 gem "paperclip"
