@@ -4,7 +4,7 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.xml
   def index
-    @jobs = Job.all
+    @jobs = current_account.jobs
 
     respond_to do |format|
       format.html # index.html.erb
@@ -42,7 +42,7 @@ class JobsController < ApplicationController
   # POST /jobs
   # POST /jobs.xml
   def create
-    @job = Job.new(params[:job])
+    @job = current_account.jobs.build(params[:job])
 
     respond_to do |format|
       if @job.save

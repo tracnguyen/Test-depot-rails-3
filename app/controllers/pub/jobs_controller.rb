@@ -4,7 +4,7 @@ class Pub::JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.xml
   def index
-    @jobs = Job.open
+    @jobs = current_account.jobs
 
     respond_to do |format|
       format.html # index.html.erb

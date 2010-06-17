@@ -1,4 +1,5 @@
 class Job < ActiveRecord::Base
+  belongs_to :account
   has_many :applicants
   
   scope :open, where(:status => "open")
