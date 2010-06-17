@@ -1,0 +1,26 @@
+!!! XML
+!!!
+%html
+  %head
+    %title Hiring application
+    %script{ :type => "text/javascript", :src => "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" }
+    %script{ :type => "text/javascript", :src => "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js" }
+    = stylesheet_link_tag "scaffold.css"
+    = javascript_include_tag :all
+    = csrf_meta_tag
+  %body
+    #container
+      #header
+        - if admin_signed_in?
+          = current_admin.email
+          |
+          = link_to "Sign out", destroy_admin_session_path
+        - else
+          = link_to "Sign in", new_admin_session_path
+        %p#notice= notice
+        %p#alert= alert
+      #sidebar
+      #content
+        %h1 HiRing
+        = yield
+      #footer

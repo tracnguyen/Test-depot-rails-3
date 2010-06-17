@@ -13,7 +13,11 @@ Hiringapp::Application.routes.draw do |map|
     root :to => "current_account#index"
   end
   
-  devise_for :admins
+  devise_for :admins, :controllers => {
+    :sessions => "main/sessions",
+    :passwords => "main/passwords",
+    :unlocks => "main/unlocks"
+  }
   resources :accounts
   root :to => "welcome#index"
 end
