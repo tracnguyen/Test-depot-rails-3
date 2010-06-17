@@ -1,0 +1,20 @@
+%h1 Listing applicants
+
+%table
+  %tr
+    %th First name
+    %th Last name
+    %th Email
+    %th Phone
+    %th
+    %th
+    %th
+
+  - @applicants.each do |applicant|
+    %tr
+      %td= applicant.first_name
+      %td= applicant.last_name
+      %td= applicant.email
+      %td= applicant.phone
+      %td= link_to 'Show', applicant_path(applicant) 
+
