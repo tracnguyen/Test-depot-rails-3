@@ -11,6 +11,8 @@ class Pub::ApplicantsController < BaseAccountController
   end
 
   def create
+    params[:account_id] = current_account.id
+    params[:job_id] = params[:job_id]
     @applicant = current_account.applicants.build(params[:applicant])
 
     respond_to do |format|
