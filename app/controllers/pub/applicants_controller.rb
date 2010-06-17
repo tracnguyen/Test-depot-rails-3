@@ -1,6 +1,4 @@
 class Pub::ApplicantsController < ApplicationController
-  layout 'account'
-  
   # GET /applicants
   # GET /applicants.xml
   def index

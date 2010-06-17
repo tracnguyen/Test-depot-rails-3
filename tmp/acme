@@ -1,0 +1,17 @@
+/home/aht/hiringapp
+/lib/font/bit/lucsans/euro.8.font
+/lib/font/bit/lucm/unicode.9.font
+  0.0000000  43.5937500
+w Newcol Kill Putall Dump tmp/acme Exit |spc fzm db/mig db/seeds.rb config/routes.rb
+c          0 New Cut Paste Snarf Sort Zerox Delcol
+c          1 New Cut Paste Snarf Sort Zerox Delcol 
+f          0          26          39          39   1.7293998 
+         26          46          39           1           0 /home/aht/hiringapp/app/ Del Snarf Get | Look 
+f          0          50          30          30  11.1902340 
+         50          53          30           1           0 /home/aht/hiringapp/app/models/ Del Snarf Get | Look 
+f          0          69          94          94  22.1770092 
+         69          58         106           1           0 /home/aht/hiringapp/app/controllers/ Del Snarf Get | Look 
+f          0          60          28          28  36.2156663 
+         60          52          28           1           0 /home/aht/hiringapp/app/views/ Del Snarf Get | Look 
+f          1          88         757         757   1.7293998 
+         88          62        1585           0           0 /home/aht/hiringapp/config/routes.rb Del Snarf Undo | Look Get

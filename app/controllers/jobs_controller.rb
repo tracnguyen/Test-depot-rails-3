@@ -1,5 +1,5 @@
 class JobsController < ApplicationController
-  layout 'account'
+  before_filter :authenticate_user!
   
   # GET /jobs
   # GET /jobs.xml
