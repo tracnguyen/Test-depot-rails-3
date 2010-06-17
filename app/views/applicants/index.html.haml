@@ -8,6 +8,7 @@
     %th Phone
     %th Status
     %th
+    %th
 
   - @applicants.each do |applicant|
     %tr
@@ -17,4 +18,5 @@
       %td= applicant.phone
       %td= applicant.status
       %td= link_to 'Show', applicant_path(applicant) 
-
+      %td= link_to 'Delete', applicant, :confirm => 'Are you sure?', :method => :delete
+      

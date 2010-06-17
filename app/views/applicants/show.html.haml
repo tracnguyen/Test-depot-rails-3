@@ -16,7 +16,7 @@
    
 = form_for(@applicant, :remote => true) do |f|
   = f.label "Status"
-  = f.select :status, [["New", "new"], ["Screened", "screened"], ["Interviewed", "interviewed"], ["Offered", "offered"], ["Hired", "hired"], ["Rejected", "rejected"]]
+  = f.select :status, Applicant::STATUS_LIST
   %br
   = f.submit 'Save', :disable_with => "Please wait..."
 

@@ -3,6 +3,8 @@ class Job < ActiveRecord::Base
   
   scope :open, where(:status => "open")
   
+  STATUS_LIST = [['Draft', 'draft'],['Open', 'open'],['Close', 'close']]
+  
   state_machine :status, :initial => :draft do
 
     event :change_status do
