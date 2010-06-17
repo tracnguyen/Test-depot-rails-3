@@ -12,20 +12,20 @@
   %body
     #container
       #header
-        - if user_signed_in?
-          = current_user.email
-          |
-          = link_to "Jobs", jobs_path
-          |
-          = link_to "Applications", applicants_path
-          |
-          = link_to "Sign out", destroy_user_session_path
-        - else
-          = link_to "Sign in", new_user_session_path
-          |
-          = link_to "Sign up", new_user_registration_path
-        |
-        = link_to "Public jobs board", pub_jobs_path
+        #left= link_to "Public jobs board", pub_jobs_path
+        #right
+          - if user_signed_in?
+            = current_user.email
+            |
+            = link_to "Jobs", jobs_path
+            |
+            = link_to "Applications", applicants_path
+            |
+            = link_to "Sign out", destroy_user_session_path
+          - else
+            = link_to "Sign in", new_user_session_path
+            |
+            = link_to "Sign up", new_user_registration_path
         %p#notice= notice
         %p#alert= alert
       #sidebar

@@ -67,6 +67,14 @@ body {
   width: 940px;
 }
 
+#header #right {
+  float: right;
+}
+
+#header #left {
+  float: left;
+}
+
 #sidebar ul { margin-bottom: 20px }
 #sidebar ul li {
   display: block;
