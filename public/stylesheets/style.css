@@ -67,13 +67,10 @@ body {
   width: 940px;
 }
 
-#header #right {
-  float: right;
-}
-
-#header #left {
-  float: left;
-}
+#header #links, #header #flashes { width: 940px; float: left; }
+#header #right { float: right; }
+#header #left { float: left; }
+#header #flashes { margin: 10px 0; padding: 5px 0; }
 
 #sidebar ul { margin-bottom: 20px }
 #sidebar ul li {
