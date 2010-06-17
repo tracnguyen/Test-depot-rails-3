@@ -21,17 +21,6 @@ class ApplicantsController < BaseAccountController
     end
   end
 
-  # GET /applicants/new
-  # GET /applicants/new.xml
-  def new
-    @applicant = Applicant.new(:job_id => params[:job_id])
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @applicant }
-    end
-  end
-
   # GET /applicants/1/edit
   def edit
     @applicant = Applicant.find(params[:id])
@@ -85,6 +74,9 @@ class ApplicantsController < BaseAccountController
     @job = params[:job_title]
     @status = params[:apt_status]
     conditions = (@job == "0" ? {} : {:job_id => @job}).merge!((@status == "all" ? {} : {:status => @status}))
-    @applicants = Applicant.where(conditions)    
+    @applicants = Applicant.where(conditions)
+    respond_to do |format|
+      format.html { render :partial => 'applicants', :locals => {:applicants => @applicants} }
+    end
   end
 end

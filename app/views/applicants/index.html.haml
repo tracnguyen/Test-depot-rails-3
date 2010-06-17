@@ -1,27 +1,23 @@
-- content_for :head do
-  :javascript
-    $(function(){
-      $('#job_title, #apt_status').change(function(){
-        $('#job_filter').submit();
-      })
-    })
-    
 %h1 Listing applicants
 
 %br
 %h2 Filter options
 
-- form_tag(filter_applicants_path, :method => :get, :remote => true, :id => 'job_filter') do
-  %p 
-    Job title:
-    = select_tag :job_title, job_filter_collection
-  %p 
-    Status:
-    = select_tag :apt_status, apt_status_filter_collection
+<form id=job_filter>
+%p
+  = label_tag :job_title, "Position"
+  = select_tag :job_title, job_filter_collection
+%p
+  = label_tag :apt_status, "Status"
+  = select_tag :apt_status, apt_status_filter_collection
+</form>
 
 #applicants
-  = render :partial => 'applicants', :locals => { :applicants => @applicants}
+  = render :partial => 'applicants', :locals => { :applicants => @applicants }
 
-
-
-      
+:javascript
+  $(function() {
+  	$("#job_title, #apt_status").change(function() {
+  		$('#applicants').load('/applicants/filter?' + $("#job_filter").serialize())
+  	})
+  })
