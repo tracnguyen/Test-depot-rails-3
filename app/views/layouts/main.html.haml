@@ -17,8 +17,6 @@
           = link_to "Sign out", destroy_admin_session_path
         - else
           = link_to "Sign in", new_admin_session_path
-        %p#notice= notice
-        %p#alert= alert
       #sidebar
         %ul
           %li Something
@@ -27,6 +25,10 @@
           %li side
       #content
         %h1#title HiRing
+        - if notice || alert
+          #flashes
+            %p#notice= notice
+            %p#alert= alert
         = yield
       #footer
         @2010. Powered by <a href=http://www.techpropulsionlabs.com>Tech Propulsion Labs</a>.

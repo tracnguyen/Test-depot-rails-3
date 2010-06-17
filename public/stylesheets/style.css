@@ -67,10 +67,8 @@ body {
   width: 940px;
 }
 
-#header #links, #header #flashes { width: 940px; float: left; }
 #header #right { float: right; }
 #header #left { float: left; }
-#header #flashes { margin: 10px 0; padding: 5px 0; }
 
 #sidebar ul { margin-bottom: 20px }
 #sidebar ul li {
@@ -79,19 +77,30 @@ body {
   border-bottom: solid 1px #ccc;
 }
 
-h1 {
-  font: bold 2em/1.5 arial, san-serif;
-  color: #2f4f4f;
-}
-
 h1#title {
   color: navy;
   font: bold 3em/1 arial, san-serif;
   margin-bottom: 20px;
 }
 
+h1 {
+  font: bold 2em/1 arial, san-serif;
+  color: #2f4f4f;
+  margin-bottom: 15px;
+}
+
+#flashes { margin: 10px 0; padding: 5px 0; }
+
+h2 {
+  font: bold 1.5em/1 arial, san-serif;
+  color: #696969;
+  margin-bottom: 10px;
+}
+
 a { color: #4682b4; }
 a:visited { color: #5f9ea0; }
+
+#content p { margin-bottom: 10px; }
 
 pre {
   background-color: #eee;
