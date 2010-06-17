@@ -2,6 +2,9 @@ Hiringapp::Application.routes.draw do |map|
   constraints(:subdomain => /.+/) do 
     devise_for :users
     
+    resources :users, :only => :index
+    match "users/:id/confirm" => "users#confirm", :as => :confirm_user
+    
     resources :jobs
     resources :applicants
     

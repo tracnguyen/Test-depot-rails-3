@@ -1,0 +1,11 @@
+- if !@users.empty?
+  %h1 Listing unconfirmed users
+  
+  %table
+    - @users.each do |user|
+      %tr
+        %td= user.email
+        %td= button_to 'Confirm', confirm_user_path(user), :method => :PUT, :confirm => "Grant administrative rights to #{user.email}?"
+
+- else
+  %p There are no unconfirmed users.
