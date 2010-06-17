@@ -27,5 +27,6 @@ Hiringapp::Application.routes.draw do |map|
     :passwords => "main/passwords",
     :unlocks => "main/unlocks"
   }
+  
   root :to => "main/welcome#index"
 end
