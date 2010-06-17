@@ -35,7 +35,7 @@ abbr,acronym { border:0;
 body { background-color: #fff; color: #333; }
 
 body {
-  font-family: 16px/1.25 verdana, arial, helvetica, sans-serif;
+  font: 16px/1.25 serif "Times New Roman", serif;
   margin: 20px;
 }
 
@@ -79,12 +79,12 @@ body {
 
 h1#title {
   color: navy;
-  font: bold 3em/1 arial, san-serif;
+  font: bold 4em/1 Helvetica, Arial, sans-serif;
   margin-bottom: 20px;
 }
 
 h1 {
-  font: bold 2em/1 arial, san-serif;
+  font: bold 2em/1 "Times New Roman", serif;
   color: #2f4f4f;
   margin-bottom: 15px;
 }
@@ -92,7 +92,7 @@ h1 {
 #flashes { margin: 10px 0; padding: 5px 0; }
 
 h2 {
-  font: bold 1.5em/1 arial, san-serif;
+  font: bold 1.5em/1 "Times New Roman", serif;
   color: #696969;
   margin-bottom: 10px;
 }
