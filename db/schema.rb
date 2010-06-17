@@ -20,18 +20,18 @@ ActiveRecord::Schema.define(:version => 20100616103524) do
   end
 
   create_table "admins", :force => true do |t|
-    t.string   "email",                               :default => "", :null => false
-    t.string   "encrypted_password",   :limit => 128, :default => "", :null => false
-    t.string   "password_salt",                       :default => "", :null => false
+    t.string   "email",                :default => "", :null => false
+    t.string   "encrypted_password",   :default => "", :null => false
+    t.string   "password_salt",        :default => "", :null => false
     t.string   "reset_password_token"
     t.string   "remember_token"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                       :default => 0
+    t.integer  "sign_in_count",        :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.integer  "failed_attempts",                     :default => 0
+    t.integer  "failed_attempts",      :default => 0
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.datetime "created_at"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20100616103524) do
   end
 
   create_table "jobs", :force => true do |t|
+    t.integer  "account_id"
     t.string   "title"
     t.text     "description"
     t.string   "status"
@@ -66,13 +67,13 @@ ActiveRecord::Schema.define(:version => 20100616103524) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                               :default => "", :null => false
-    t.string   "encrypted_password",   :limit => 128, :default => "", :null => false
-    t.string   "password_salt",                       :default => "", :null => false
+    t.string   "email",                :default => "", :null => false
+    t.string   "encrypted_password",   :default => "", :null => false
+    t.string   "password_salt",        :default => "", :null => false
     t.string   "reset_password_token"
     t.string   "remember_token"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                       :default => 0
+    t.integer  "sign_in_count",        :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"

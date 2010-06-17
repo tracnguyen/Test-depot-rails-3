@@ -5,10 +5,6 @@ class AccountsController < ApplicationController
     @accounts = Account.all
   end
 
-  def show
-    @account = Account.find(params[:id])
-  end
-
   def new
     @account = Account.new
   end
@@ -17,16 +13,20 @@ class AccountsController < ApplicationController
     @account = Account.new(params[:account])
     @account.build_owner(params[:owner])
     if @account.save && @account.owner.unlock_access!
-      redirect_to @account, :notice => 'Account was successfully created.'
+      redirect_to accounts_path, :notice => 'Account was successfully created.'
     else
       render :action => "new"
     end
+  end
+  
+  def edit
+    @account = Account.find(params[:id])
   end
 
   def update
     @account = Account.find(params[:id])
     if @account.update_attributes(params[:account])
-      redirect_to(@account, :notice => 'Account was successfully updated.')
+      redirect_to accounts_path, :notice => 'Account was successfully updated.'
     else
       render :action => "edit"
     end
