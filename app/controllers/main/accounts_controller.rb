@@ -7,11 +7,12 @@ class Main::AccountsController < ApplicationController
 
   def new
     @account = Account.new
+    @account.build_owner
   end
 
   def create
     @account = Account.new(params[:account])
-    @account.build_owner(params[:owner])
+    # @account.build_owner(params[:owner])
     if @account.save && @account.owner.unlock_access!
       redirect_to main_accounts_path, :notice => 'Account was successfully created.'
     else

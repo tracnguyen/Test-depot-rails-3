@@ -1,29 +1,21 @@
 %h1 New account
 
-= form_for([:main, @account]) do |f|
+= semantic_form_for([:main, @account]) do |f|
   -if @account.errors.any?
     #errorExplanation
       %h2= "#{pluralize(@account.errors.count, "error")} prohibited this account from being saved:"
       %ul
         - @account.errors.full_messages.each do |msg|
-          %li= msg
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :subdomain
-    = f.text_field :subdomain
-  = fields_for :owner do |o|
-    .field
-      = o.label :email
-      = o.text_field :email
-    .field
-      = o.label :password
-      = o.password_field :password
-    .field
-      = o.label :password_confirmation
-      = o.password_field :password_confirmation
-  .actions
-    = f.submit 'Save'
+          %li= msg 
+    
+  = f.inputs do
+    = f.input :name, :label => "Account Name"
+    = f.input :subdomain, :label => "Subdomain"
+    = f.semantic_fields_for :owner do |o|
+      = o.input :email, :label => "Email"
+      = o.input :password, :as => :password, :label => "Password"
+      = o.input :password_confirmation, :as => :password, :label => "Password Confirmation"            
+  = f.buttons do
+    = f.commit_button 'Save'
 
 = link_to 'Back', main_accounts_path
