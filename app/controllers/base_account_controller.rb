@@ -14,7 +14,7 @@ protected
   def require_owner
     if current_user && (current_user != current_account.owner)
       flash[:alert] = "Account owner privilige is required to access the requested page."
-      redirect_to root_url
+      redirect_to dashboard_path
     end
   end
 end
