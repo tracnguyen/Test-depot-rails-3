@@ -1,4 +1,4 @@
-class ApplicantsController < ApplicationController
+class ApplicantsController < BaseAccountController
   # GET /applicants
   # GET /applicants.xml
   def index

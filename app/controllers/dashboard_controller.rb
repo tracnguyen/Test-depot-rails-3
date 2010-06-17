@@ -1,4 +1,4 @@
-class DashboardController < ApplicationController
+class DashboardController < BaseAccountController
   before_filter :authenticate_user!
   
   def index

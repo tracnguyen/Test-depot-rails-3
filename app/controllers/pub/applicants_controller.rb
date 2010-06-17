@@ -1,4 +1,4 @@
-class Pub::ApplicantsController < ApplicationController
+class Pub::ApplicantsController < BaseAccountController
   layout 'public'
   
   # GET /applicants

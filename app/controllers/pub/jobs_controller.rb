@@ -1,4 +1,4 @@
-class Pub::JobsController < ApplicationController
+class Pub::JobsController < BaseAccountController
   layout 'public'
   
   # GET /jobs

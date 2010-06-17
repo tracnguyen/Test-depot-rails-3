@@ -1,4 +1,4 @@
-class JobsController < ApplicationController
+class JobsController < BaseAccountController
   before_filter :authenticate_user!
   
   # GET /jobs
