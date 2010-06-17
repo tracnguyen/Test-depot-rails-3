@@ -17,6 +17,8 @@
           - if user_signed_in?
             = current_user.email
             |
+            = link_to "Dashboard", dashboard_path
+            |
             = link_to "Jobs", jobs_path
             |
             = link_to "Applications", applicants_path

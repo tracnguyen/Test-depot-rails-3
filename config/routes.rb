@@ -1,6 +1,7 @@
 Hiringapp::Application.routes.draw do |map|
   constraints(:subdomain => /.+/) do 
     devise_for :users
+    
     resources :jobs
     resources :applicants
     
@@ -10,7 +11,7 @@ Hiringapp::Application.routes.draw do |map|
       end
     end
     
-    root :to => "current_account#index"
+    root :to => "dashboard#index", :as => :dashboard
   end
   
   resources :accounts
