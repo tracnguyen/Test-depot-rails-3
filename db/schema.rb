@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20100616103524) do
     t.string   "email"
     t.string   "phone"
     t.integer  "job_id"
+    t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "attachment_file_name"

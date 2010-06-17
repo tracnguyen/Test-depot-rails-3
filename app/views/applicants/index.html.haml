@@ -6,8 +6,7 @@
     %th Last name
     %th Email
     %th Phone
-    %th
-    %th
+    %th Status
     %th
 
   - @applicants.each do |applicant|
@@ -16,5 +15,6 @@
       %td= applicant.last_name
       %td= applicant.email
       %td= applicant.phone
+      %td= applicant.status
       %td= link_to 'Show', applicant_path(applicant) 
 
