@@ -1,0 +1,151 @@
+/** YUI 2 reset **/
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td {
+	margin:0;
+	padding:0;
+}
+table {
+	border-collapse:collapse;
+	border-spacing:0;
+}
+fieldset,img {
+	border:0;
+}
+address,caption,cite,code,dfn,em,strong,th,var {
+	font-style:normal;
+	font-weight:normal;
+}
+ol,ul {
+	list-style:none;
+}
+caption,th {
+	text-align:left;
+}
+h1,h2,h3,h4,h5,h6 {
+	font-size:100%;
+	font-weight:normal;
+}
+q:before,q:after {
+	content:'';
+}
+abbr,acronym { border:0;
+}
+
+/** Site **/
+
+body { background-color: #fff; color: #333; }
+
+body {
+  font-family: 16px/1.25 verdana, arial, helvetica, sans-serif;
+  margin: 20px;
+}
+
+#container {
+  width: 960px;
+  margin: auto;
+}
+
+#header, #sidebar, #content, #footer {
+  display: inline;
+  float: right;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#header { width: 940px; margin-bottom: 20px; }
+
+#sidebar {
+  width: 300px;
+}
+
+#content {
+  width: 620px;
+  min-height: 600px;
+  margin-bottom: 40px;
+}
+
+#footer {
+  width: 940px;
+}
+
+#sidebar ul { margin-bottom: 20px }
+#sidebar ul li {
+  display: block;
+  margin-bottom: 5px;
+  border-bottom: solid 1px #ccc;
+}
+
+h1 {
+  font: bold 2em/1.5 arial, san-serif;
+  color: #2f4f4f;
+}
+
+h1#title {
+  color: navy;
+  font: bold 3em/1 arial, san-serif;
+  margin-bottom: 20px;
+}
+
+a { color: #4682b4; }
+a:visited { color: #5f9ea0; }
+
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-family: monospace;
+}
+
+table { width: 100%; }
+
+th { font-weight: bold; padding-bottom: 5px; }
+
+div.field, div.actions {
+  margin-bottom: 10px;
+}
+
+#notice {
+  color: green;
+}
+
+html form.formtastic fieldset { display: block; }
+html form.formtastic fieldset > ol > li { display: block; }
+
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#error_explanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  margin-bottom: 0px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#error_explanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+
+#footer {
+  font-size: 85%;
+  color: #aaa;
+  margin-bottom: 20px;
+}
+
+#footer a, #footer a:visited {
+  color: #666;
+}
