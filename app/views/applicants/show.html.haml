@@ -10,7 +10,10 @@
 %p
   %b Phone:
   = @applicant.phone
-
+%p
+  %b Resume:
+  = link_to @applicant.attachment_file_name, @applicant.attachment.url
+   
 = form_for(@applicant, :remote => true) do |f|
   = f.label "Status"
   = f.select :status, [["New", "new"], ["Screened", "screened"], ["Interviewed", "interviewed"], ["Offered", "offered"], ["Hired", "hired"], ["Rejected", "rejected"]]
