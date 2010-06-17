@@ -1,6 +1,6 @@
 %h1 New account
 
-= form_for @account do |f|
+= form_for([:main, @account]) do |f|
   -if @account.errors.any?
     #errorExplanation
       %h2= "#{pluralize(@account.errors.count, "error")} prohibited this account from being saved:"
@@ -26,4 +26,4 @@
   .actions
     = f.submit 'Save'
 
-= link_to 'Back', accounts_path
+= link_to 'Back', main_accounts_path

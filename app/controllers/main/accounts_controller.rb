@@ -1,4 +1,4 @@
-class AccountsController < ApplicationController
+class Main::AccountsController < ApplicationController
   layout 'main'
   
   def index
@@ -13,7 +13,7 @@ class AccountsController < ApplicationController
     @account = Account.new(params[:account])
     @account.build_owner(params[:owner])
     if @account.save && @account.owner.unlock_access!
-      redirect_to accounts_path, :notice => 'Account was successfully created.'
+      redirect_to main_accounts_path, :notice => 'Account was successfully created.'
     else
       render :action => "new"
     end
@@ -26,7 +26,7 @@ class AccountsController < ApplicationController
   def update
     @account = Account.find(params[:id])
     if @account.update_attributes(params[:account])
-      redirect_to accounts_path, :notice => 'Account was successfully updated.'
+      redirect_to main_accounts_path, :notice => 'Account was successfully updated.'
     else
       render :action => "edit"
     end
@@ -35,6 +35,6 @@ class AccountsController < ApplicationController
   def destroy
     @account = Account.find(params[:id])
     @account.destroy
-    redirect_to(accounts_url)
+    redirect_to(main_accounts_path)
   end
 end
