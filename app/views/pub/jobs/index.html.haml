@@ -9,14 +9,12 @@
   
   %table
     %tr
-      %th Title
-      %th Description
-      %th Status
-      %th
+      %th Position
+      %th Posted on
+      %th Closed on
   
     - @jobs.each do |job|
       %tr
-        %td= job.title
-        %td= job.description
-        %td= job.status
-        %td= link_to 'Show', pub_job_path(job)
+        %td= link_to job.title, pub_job_path(job)
+        %td= job.creation_date
+        %td= job.expiry_date

@@ -13,6 +13,7 @@ ActiveRecord::Schema.define(:version => 20100616103524) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
+    t.string   "description"
     t.string   "subdomain"
     t.integer  "user_id"
     t.datetime "created_at"
@@ -59,12 +60,12 @@ ActiveRecord::Schema.define(:version => 20100616103524) do
   end
 
   create_table "jobs", :force => true do |t|
-    t.integer  "account_id"
-    t.string   "title"
-    t.text     "description"
-    t.string   "status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "account_id"
+    t.string  "title"
+    t.text    "description"
+    t.string  "status"
+    t.date    "creation_date"
+    t.date    "expiry_date"
   end
 
   create_table "users", :force => true do |t|

@@ -5,8 +5,8 @@ class CreateJobs < ActiveRecord::Migration
       t.string :title
       t.text :description
       t.string :status
-
-      t.timestamps
+      t.date :creation_date
+      t.date :expiry_date
     end
   end
 
