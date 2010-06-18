@@ -2,7 +2,10 @@ class ApplicantsController < BaseAccountController
   # GET /applicants
   # GET /applicants.xml
   def index
-    @applicants = current_account.applicants
+    @job = params[:job_title]
+    @status = params[:apt_status]
+    conditions = (@job.to_s.empty? ? {} : {:job_id => @job}).merge!((@status.to_s.empty? ? {} : {:status => @status}))
+    @applicants = current_account.applicants.where(conditions)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -67,16 +70,6 @@ class ApplicantsController < BaseAccountController
     respond_to do |format|
       format.html { redirect_to(applicants_url) }
       format.xml  { head :ok }
-    end
-  end
-  
-  def filter
-    @job = params[:job_title]
-    @status = params[:apt_status]
-    conditions = (@job == "0" ? {} : {:job_id => @job}).merge!((@status == "all" ? {} : {:status => @status}))
-    @applicants = current_account.applicants.where(conditions)
-    respond_to do |format|
-      format.html { render :partial => 'applicants', :locals => {:applicants => @applicants} }
     end
   end
 end
