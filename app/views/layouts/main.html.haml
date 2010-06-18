@@ -16,9 +16,21 @@
           = current_admin.email
           |
           = link_to "Accounts management", main_accounts_path
+          |
+          = link_to "Register", new_main_account_path
+          |
           = link_to "Sign out", destroy_admin_session_path
         - else
           = link_to "Sign in", new_admin_session_path
+          |
+          = link_to "Register", new_main_account_path
+      #sidebar
+        %ul
+          %li Something
+          %li on
+          %li the
+          %li side
+      #content
         %h1#title HiRing
       #content-full
         - if notice || alert

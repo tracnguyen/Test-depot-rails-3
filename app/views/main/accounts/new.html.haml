@@ -1,4 +1,4 @@
-%h1 New account
+%h1 Registration for free!
 
 = semantic_form_for([:main, @account]) do |f|
   -if @account.errors.any?
@@ -18,4 +18,3 @@
   = f.buttons do
     = f.commit_button 'Save'
 
-= link_to 'Back', main_accounts_path
