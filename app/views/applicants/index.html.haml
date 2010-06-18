@@ -10,13 +10,12 @@
 = render :partial => 'applicants', :locals => { :applicants => @applicants}
 
 - content_for :sidebar do
-  %h2 Filter options  
-  - form_tag(applicants_path, :method => :get, :id => 'job_filter') do
-    %p 
-      Job title:
-      = select_tag :job_title, options_for_select(job_filter_collection, @job)
-    %p 
-      Status:
-      = select_tag :apt_status, options_for_select(apt_status_filter_collection, @status)
-
-  
+  %h2 Filters
+  %ul
+    - form_tag(applicants_path, :method => :get, :id => 'job_filter') do
+      %li
+        = label_tag :job_title, "Position"
+        = select_tag :job_title, options_for_select(job_filter_collection, @job)
+      %li
+        = label_tag :apt_status, "Status"
+        = select_tag :apt_status, options_for_select(apt_status_filter_collection, @status)

@@ -92,13 +92,6 @@ body {
 #header #right { float: right; }
 #header #left { float: left; }
 
-#sidebar ul { margin-bottom: 20px }
-#sidebar ul li {
-  display: block;
-  margin-bottom: 5px;
-  border-bottom: solid 1px #ccc;
-}
-
 h1 {
   font: bold 2em/1 "Times New Roman", serif;
   color: #2f4f4f;
@@ -134,6 +127,13 @@ th { font-weight: bold; padding-bottom: 5px; }
 
 div.field, div.actions {
   margin-bottom: 10px;
+}
+
+#sidebar h2 { border-bottom: solid 1px #ccc; }
+#sidebar ul { margin-bottom: 20px; }
+#sidebar ul li {
+  display: block;
+  padding: 5px 0;
 }
 
 #flashes { margin: 10px 0; padding: 5px 0; }
