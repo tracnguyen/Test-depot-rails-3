@@ -22,6 +22,7 @@ gem "haml", ">=3.0.4"
 gem "rails3-generators", :git => "git://github.com/indirect/rails3-generators.git"
 gem "state_machine"
 gem "paperclip"
+gem "rmagick"
 
 group :test do
   gem "rspec", ">=2.0.0.beta.8"
