@@ -31,6 +31,5 @@ Hiringapp::Application.routes.draw do |map|
     root :to => "welcome#index"
   end
 
-  match "/simple_captcha/:action", :to => "simple_captcha"
   root :to => "main/welcome#index"
 end
