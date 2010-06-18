@@ -14,7 +14,7 @@ class Main::AccountsController < ApplicationController
     @account = Account.new(params[:account])
     # @account.build_owner(params[:owner])
     if @account.save && @account.owner.unlock_access!
-      redirect_to account_root_url(:subdomain => @account.subdomain), :notice => 'Account was successfully created.'
+      redirect_to pub_jobs_url(:subdomain => @account.subdomain), :notice => 'Account was successfully created.'
     else
       render :action => "new"
     end
