@@ -19,14 +19,8 @@
           = link_to "Sign out", destroy_admin_session_path
         - else
           = link_to "Sign in", new_admin_session_path
-      #sidebar
-        %ul
-          %li Something
-          %li on
-          %li the
-          %li side
-      #content
         %h1#title HiRing
+      #content-full
         - if notice || alert
           #flashes
             %p#notice= notice

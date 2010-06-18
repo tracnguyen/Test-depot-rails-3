@@ -13,26 +13,28 @@
   %body
     #container
       #header
-        #left
-          = link_to "Public jobs board", pub_jobs_path
-        #right
-          - if user_signed_in?
-            = current_user.email
-            |
-            = link_to "Dashboard", dashboard_path
-            |
-            = link_to "Jobs", jobs_path
-            |
-            = link_to "Applications", applicants_path
-            |
-            - if current_user.owns?(current_account)
-              = link_to "Users", users_path
+        .links.clearfix
+          #left
+            = link_to "Public jobs board", pub_jobs_path
+          #right
+            - if user_signed_in?
+              = current_user.email
               |
-            = link_to "Sign out", destroy_user_session_path
-          - else
-            = link_to "Sign in", new_user_session_path
-            |
-            = link_to "Sign up", new_user_registration_path
+              = link_to "Dashboard", dashboard_path
+              |
+              = link_to "Jobs", jobs_path
+              |
+              = link_to "Applications", applicants_path
+              |
+              - if current_user.owns?(current_account)
+                = link_to "Users", users_path
+                |
+              = link_to "Sign out", destroy_user_session_path
+            - else
+              = link_to "Sign in", new_user_session_path
+              |
+              = link_to "Sign up", new_user_registration_path
+        %h1#title HiRing
       #sidebar
         %ul
           %li Something
@@ -40,7 +42,6 @@
           %li the
           %li side
       #content
-        %h1#title HiRing
         - if notice || alert
           #flashes
             %p#notice= notice
