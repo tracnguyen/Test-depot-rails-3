@@ -1,4 +1,4 @@
-%h1 Registration for free!
+%h1 Create an account
 
 = semantic_form_for([:main, @account]) do |f|
   -if @account.errors.any?
@@ -9,12 +9,12 @@
           %li= msg 
     
   = f.inputs do
-    = f.input :name, :label => "Account Name"
-    = f.input :subdomain, :label => "Subdomain"
+    = f.input :name, :label => "Company Name", :required => true
+    = f.input :subdomain, :label => "Subdomain", :required => true
     = f.semantic_fields_for :owner do |o|
-      = o.input :email, :label => "Email"
-      = o.input :password, :as => :password, :label => "Password"
-      = o.input :password_confirmation, :as => :password, :label => "Password Confirmation"            
+      = o.input :email, :label => "Email", :required => true
+      = o.input :password, :as => :password, :label => "Password", :required => true
+      = o.input :password_confirmation, :as => :password, :label => "Password Confirmation", :required => true
   = f.buttons do
-    = f.commit_button 'Save'
+    = f.commit_button 'Submit'
 
