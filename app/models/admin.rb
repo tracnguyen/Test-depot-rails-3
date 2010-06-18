@@ -12,4 +12,7 @@ class Admin < ActiveRecord::Base
     :unlock_strategy => :email
 
   attr_accessible :email, :password, :password_confirmation
+  
+  apply_simple_captcha
+  
 end
