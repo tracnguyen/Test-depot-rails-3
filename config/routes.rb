@@ -17,7 +17,7 @@ Hiringapp::Application.routes.draw do |map|
     match "dashboard" => "dashboard#index", :as => :dashboard
     match "dashboard" => "dashboard#index", :as => :user_root_path # for devise
     
-    root :to => "pub/jobs#index", :as => :account_root
+    root :to => redirect('/pub/jobs')
   end
   
   devise_for :admins, :controllers => {
