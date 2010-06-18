@@ -4,8 +4,10 @@ class ApplicantsController < BaseAccountController
   def index
     @job = params[:job_title]
     @status = params[:apt_status]
-    conditions = (@job.to_s.empty? ? {} : {:job_id => @job}).merge!((@status.to_s.empty? ? {} : {:status => @status}))
-    @applicants = current_account.applicants.where(conditions)
+    # This will result in only a single SQL query, thanks to ActiveRelation
+    @applicants = current_account.applicants
+    @applicants = @applicants.where({:job_id => @job}) unless @job.nil? || @job.empty?
+    @applicants = @applicants.where({:status => @status}) unless @job.nil? || @status.empty?
 
     respond_to do |format|
       format.html # index.html.erb
