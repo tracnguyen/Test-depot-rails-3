@@ -36,6 +36,7 @@
               = link_to "Sign up", new_user_registration_path
         %h1#title HiRing
       #sidebar
+        %ul
         = yield :sidebar
       #content
         - if notice || alert
