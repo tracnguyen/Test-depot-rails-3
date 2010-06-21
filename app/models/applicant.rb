@@ -6,7 +6,8 @@ class Applicant < ActiveRecord::Base
                     :path => ":rails_root/public/assets/attachments/:basename.:extension",
                     :url => "/assets/attachments/:basename.:extension"
 
-  validates_presence_of :first_name, :last_name, :email, :phone
+  validates_presence_of :first_name, :last_name, :email, :phone, :job
+  validates_associated :job
 
   state_machine :status, :initial => :new do
     event :change_status do
@@ -24,5 +25,11 @@ class Applicant < ActiveRecord::Base
       transition :rejected => :rejected
     end
   end
+
+  def after_validation
+    job_error = errors.on(:job)
+    errors.add(:job_id, job_error) if job_error
+  end
+
 end
 
