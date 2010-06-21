@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class JobFlowTest < ActionDispatch::IntegrationTest
+class JobStateTest < ActionDispatch::IntegrationTest
   fixtures :all
 
   # Replace this with your real tests.
