@@ -6,11 +6,7 @@ Hiringapp::Application.routes.draw do |map|
     match "users/:id/confirm" => "users#confirm", :as => :confirm_user
 
     resources :jobs
-    resources :applicants do
-      member do
-        post :remove_attachment
-      end
-    end
+    resources :applicants
 
     namespace :pub do
       resources :jobs do

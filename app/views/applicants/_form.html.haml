@@ -1,4 +1,4 @@
-- semantic_form_for @applicant, :html => {:multipart => true} do |f|
+- semantic_form_for @applicant, :html => {:multipart => true, :id => 'form'} do |f|
   -if @applicant.errors.any?
     #errorExplanation
       %h2= "#{pluralize(@applicant.errors.count, "error")} prohibited this applicant from being saved:"
@@ -19,7 +19,7 @@
       %li.string.optional
         = f.label 'Attachment'
         = f.label @applicant.attachment_file_name
-        = link_to 'Remove', remove_attachment_applicant_path(@applicant), :confirm => 'Are you sure?', :method => :post
+        = link_to 'Remove', 'javascript:void(0);', :id => 'rm-atm'
     - else
       = f.input :attachment, :as => :file
 
@@ -30,4 +30,14 @@
 
 - content_for :head do
   :javascript
+    $(function() {
+      $('#rm-atm').click(function() {
+        if (confirm('Are you sure?')) {
+          $('#form').append('<input type="hidden" name="remove_attachment" value="true">');
+          $('#form').submit();
+        } else {
+          return false;
+        }
+      });
+    });
 

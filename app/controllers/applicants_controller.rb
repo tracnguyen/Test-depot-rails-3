@@ -59,10 +59,16 @@ class ApplicantsController < BaseAccountController
   # PUT /applicants/1.xml
   def update
     @applicant = Applicant.find(params[:id])
+    remove_attachment = params[:remove_attachment] == "true"
+    @applicant.attachment = nil if remove_attachment
 
     respond_to do |format|
       if @applicant.update_attributes(params[:applicant])
-        format.html { redirect_to(@applicant, :notice => 'Applicant was successfully updated.') }
+        if remove_attachment
+          format.html { redirect_to(edit_applicant_url(@applicant), :notice => 'The attachment has been removed.') }
+        else
+          format.html { redirect_to(@applicant, :notice => 'Applicant was successfully updated.') }
+        end
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -83,19 +89,5 @@ class ApplicantsController < BaseAccountController
     end
   end
 
-  def remove_attachment
-    @applicant = Applicant.find(params[:id])
-    @applicant.attachment = nil
-
-    respond_to do |format|
-      if @applicant.save
-        format.html { redirect_to(edit_applicant_url(@applicant), :notice => 'The attachment has been removed.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @applicant.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
 end
 
