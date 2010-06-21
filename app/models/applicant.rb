@@ -21,5 +21,5 @@ class Applicant < ActiveRecord::Base
       transition :hired => :hired
       transition :rejected => :rejected
     end
-  end                    
+  end
 end

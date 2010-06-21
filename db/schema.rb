@@ -84,6 +84,11 @@ ActiveRecord::Schema.define(:version => 20100621034349) do
 
   add_index "simple_captcha_data", ["key"], :name => "idx_key"
 
+  create_table "user_views", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "applicant_id"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "email",                :default => "", :null => false
     t.string   "encrypted_password",   :default => "", :null => false

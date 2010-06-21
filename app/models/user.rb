@@ -18,4 +18,29 @@ class User < ActiveRecord::Base
   def owns?(account)
     account.owner == self
   end
+  
+  has_many :user_views
+  
+  def mark_as_read(applicant)
+    uv = self.user_views.where('applicant_id' => applicant.id)
+    if uv.empty?
+      self.user_views.create(:applicant_id => applicant.id)
+    end
+  end
+  
+  def mark_as_unread(applicant)
+    self.user_views.where('applicant_id' => applicant.id).delete_all
+  end
+
+  # Return this user's read statuses of the list of applicants as a hash of 
+  # { applicant_id => true } for those application which the user has viewed.
+  def read_statuses(applicants)
+    viewstat = {}
+    app_ids = applicants.map { |app| app.id }
+    viewed = self.user_views.where('applicant_id' => app_ids).joins(:applicant)
+    viewed.each do |uv|
+    	viewstat[uv.applicant_id] = true
+    end
+    viewstat
+  end
 end
