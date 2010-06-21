@@ -2,10 +2,10 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.0.0.beta4'
 
-gem "mongrel"
-gem "cgi_multipart_eof_fix"
-gem "fastthread"
-gem "mongrel_experimental"
+#gem "mongrel"
+#gem "cgi_multipart_eof_fix"
+#gem "fastthread"
+#gem "mongrel_experimental"
 
 gem 'sqlite3-ruby', :require => 'sqlite3'
 
@@ -35,3 +35,4 @@ group :cucumber do
   # gem "capybara", ">=0.3.6"
   gem "database_cleaner", ">=0.5.0"
 end
+

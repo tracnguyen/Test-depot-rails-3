@@ -9,6 +9,7 @@
 
 = render :partial => 'applicants', :locals => { :applicants => @applicants}
 
+= link_to 'Create new Applicant', new_applicant_path
 - content_for :sidebar do
   %h2 Filters
   %ul
@@ -19,3 +20,4 @@
       %li
         = label_tag :apt_status, "Status"
         = select_tag :apt_status, options_for_select(apt_status_filter_collection, @status)
+

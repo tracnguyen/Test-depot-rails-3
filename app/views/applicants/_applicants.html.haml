@@ -8,6 +8,7 @@
     %th Status
     %th
     %th
+    %th
   - applicants.each do |applicant|
     %tr
       %td= applicant.first_name
@@ -16,5 +17,7 @@
       %td= applicant.email
       %td= applicant.phone
       %td= applicant.status
-      %td= link_to 'Show', applicant_path(applicant) 
+      %td= link_to 'Show', applicant_path(applicant)
+      %td= link_to 'Edit', edit_applicant_path(applicant)
       %td= link_to 'Delete', applicant, :confirm => 'Are you sure?', :method => :delete
+
