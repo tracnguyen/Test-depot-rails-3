@@ -13,11 +13,17 @@ class Main::AccountsController < ApplicationController
   def create
     @account = Account.new(params[:account])
     # @account.build_owner(params[:owner])
-    if @account.save && @account.owner.unlock_access!
-      redirect_to pub_jobs_url(:subdomain => @account.subdomain), :notice => 'Account was successfully created.'
-    else
-      render :action => "new"
-    end
+
+#    if !simple_captcha_valid?
+#      flash[:notice] = "CAPTCHA confirmation failed!"
+#      render :action => 'new'
+#    else
+      if @account.save && @account.owner.unlock_access!
+        redirect_to pub_jobs_url(:subdomain => @account.subdomain), :notice => 'Account was successfully created.'
+      else
+        render :action => "new"
+      end
+#    end
   end
   
   def edit
