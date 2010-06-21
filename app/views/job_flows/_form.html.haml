@@ -1,0 +1,16 @@
+= form_for @job_flow do |f|
+  -if @job_flow.errors.any?
+    #errorExplanation
+      %h2= "#{pluralize(@job_flow.errors.count, "error")} prohibited this job_flow from being saved:"
+      %ul
+        - @job_flow.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :account_id
+    = f.text_field :account_id
+  .field
+    = f.label :job_status_id
+    = f.text_field :job_status_id
+  .actions
+    = f.submit 'Save'

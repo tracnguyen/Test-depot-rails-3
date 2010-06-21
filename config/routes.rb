@@ -1,4 +1,6 @@
 Hiringapp::Application.routes.draw do |map|
+  resources :job_flows
+
   constraints(:subdomain => /.+/) do 
     devise_for :users
     

@@ -1,0 +1,10 @@
+%p
+  %b Account:
+  = @job_flow.account_id
+%p
+  %b Job status:
+  = @job_flow.job_status_id
+
+= link_to 'Edit', edit_job_flow_path(@job_flow)
+\|
+= link_to 'Back', job_flows_path
