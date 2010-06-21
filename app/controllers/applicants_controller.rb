@@ -9,6 +9,8 @@ class ApplicantsController < BaseAccountController
     @applicants = @applicants.where({:job_id => @job}) unless @job.nil? || @job.empty?
     @applicants = @applicants.where({:status => @status}) unless @job.nil? || @status.empty?
 
+    @read_status = current_user.read_status(@applicants)
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @applicants }
@@ -19,6 +21,7 @@ class ApplicantsController < BaseAccountController
   # GET /applicants/1.xml
   def show
     @applicant = Applicant.find(params[:id])
+    current_user.mark_as_read(@applicant)
 
     respond_to do |format|
       format.html # show.html.erb

@@ -7,7 +7,7 @@
 
 %h1 Listing applicants
 
-= render :partial => 'applicants', :locals => { :applicants => @applicants}
+= render :partial => 'applicants', :locals => { :applicants => @applicants, :read_status => @read_status }
 
 - content_for :sidebar do
   %h2 Filters

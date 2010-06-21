@@ -1,20 +1,16 @@
-%table
+%table.applicants
   %tr
-    %th First name
-    %th Last name
+    %th Name
     %th Applied for
-    %th Email
     %th Phone
     %th Status
     %th
     %th
   - applicants.each do |applicant|
-    %tr
-      %td= applicant.first_name
-      %td= applicant.last_name
+    %tr{:class => read_status[applicant.id] ? "read" : "unread"}
+      %td= applicant.first_name + " " + applicant.last_name
       %td= applicant.job.title
-      %td= applicant.email
       %td= applicant.phone
       %td= applicant.status
-      %td= link_to 'Show', applicant_path(applicant) 
+      %td= link_to 'Show', applicant_path(applicant)
       %td= link_to 'Delete', applicant, :confirm => 'Are you sure?', :method => :delete

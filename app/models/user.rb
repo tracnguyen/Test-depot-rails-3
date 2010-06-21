@@ -32,9 +32,9 @@ class User < ActiveRecord::Base
     self.user_views.where('applicant_id' => applicant.id).delete_all
   end
 
-  # Return this user's read statuses of the list of applicants as a hash of 
+  # Return this user's read status of the list of applicants as a hash of
   # { applicant_id => true } for those application which the user has viewed.
-  def read_statuses(applicants)
+  def read_status(applicants)
     viewstat = {}
     app_ids = applicants.map { |app| app.id }
     viewed = self.user_views.where('applicant_id' => app_ids).joins(:applicant)
