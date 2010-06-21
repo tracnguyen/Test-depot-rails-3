@@ -34,14 +34,24 @@ class ApplicantsController < BaseAccountController
     @applicant = Applicant.find(params[:id])
   end
 
+  def new
+    @applicant = Applicant.new
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.xml  { render :xml => @applicant }
+    end
+  end
+
   # POST /applicants
   # POST /applicants.xml
   def create
     @applicant = Applicant.new(params[:applicant])
+    @applicant.account_id = current_account.id
 
     respond_to do |format|
       if @applicant.save
-        format.html { redirect_to(pub_jobs_path, :notice => 'Thank you for applying!') }
+        format.html { redirect_to(applicants_url, :notice => 'Applicant was successfully created.') }
         format.xml  { render :xml => @applicant, :status => :created, :location => @applicant }
       else
         format.html { render :action => "new" }
@@ -54,10 +64,16 @@ class ApplicantsController < BaseAccountController
   # PUT /applicants/1.xml
   def update
     @applicant = Applicant.find(params[:id])
+    remove_attachment = params[:remove_attachment] == "true"
+    @applicant.attachment = nil if remove_attachment
 
     respond_to do |format|
       if @applicant.update_attributes(params[:applicant])
-        format.html { redirect_to(@applicant, :notice => 'Applicant was successfully updated.') }
+        if remove_attachment
+          format.html { redirect_to(edit_applicant_url(@applicant), :notice => 'The attachment has been removed.') }
+        else
+          format.html { redirect_to(@applicant, :notice => 'Applicant was successfully updated.') }
+        end
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -77,4 +93,6 @@ class ApplicantsController < BaseAccountController
       format.xml  { head :ok }
     end
   end
+
 end
+

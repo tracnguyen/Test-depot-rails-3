@@ -1,21 +1,23 @@
 class Applicant < ActiveRecord::Base
   belongs_to :job
   belongs_to :account
-  
-  has_attached_file :attachment, 
-                    :path => ":rails_root/public/assets/attachments/:basename.:extension", 
+
+  has_attached_file :attachment,
+                    :path => ":rails_root/public/assets/attachments/:basename.:extension",
                     :url => "/assets/attachments/:basename.:extension"
-                    
+
+  validates_presence_of :first_name, :last_name, :email, :phone
+
   state_machine :status, :initial => :new do
     event :change_status do
       transition :new => :screened
       transition :screened => :interviewed
       transition :interviewed => :offered
-      transition :offered => :hired 
-      transition :hired => :hired 
+      transition :offered => :hired
+      transition :hired => :hired
       transition :rejected => :rejected
     end
-    
+
     event :rejecting do
       transition [:new, :screened, :interviewed, :offered] => :rejected
       transition :hired => :hired
@@ -23,3 +25,4 @@ class Applicant < ActiveRecord::Base
     end
   end
 end
+

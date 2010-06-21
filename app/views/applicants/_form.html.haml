@@ -1,4 +1,4 @@
-- semantic_form_for [:pub, :job, @applicant], :html => {:multipart => true} do |f|
+- semantic_form_for @applicant, :html => {:multipart => true, :id => 'form'} do |f|
   -if @applicant.errors.any?
     #errorExplanation
       %h2= "#{pluralize(@applicant.errors.count, "error")} prohibited this applicant from being saved:"
@@ -6,13 +6,38 @@
         - @applicant.errors.full_messages.each do |msg|
           %li= msg
 
-  - f.inputs do 
+  - f.inputs do
+    = f.input :job_id, :as => :select, :collection => Job.all.map { |job| [job.title, job.id] }
     = f.input :first_name, :label => "First name"
     = f.input :last_name, :label => "Last name"
     = f.input :email, :label => "Email"
     = f.input :phone, :label => "Phone"
     = f.input :status, :as => :select, :collection => application_status_collection
-    = f.input :attachment, :as => :file
-    
+    = hidden_field_tag :remove_attachment
+    - if @applicant.attachment?
+      /= link_to @applicant.attachment_file_name, @applicant.attachment.url
+      %li.string.optional
+        = f.label 'Attachment'
+        = f.label @applicant.attachment_file_name
+        = link_to 'Remove', 'javascript:void(0);', :id => 'rm-atm'
+    - else
+      = f.input :attachment, :as => :file
+
   - f.buttons do
     = f.commit_button 'Save'
+
+= link_to 'Back', applicants_path
+
+- content_for :head do
+  :javascript
+    $(function() {
+      $('#rm-atm').click(function() {
+        if (confirm('Are you sure?')) {
+          $('#form').append('<input type="hidden" name="remove_attachment" value="true">');
+          $('#form').submit();
+        } else {
+          return false;
+        }
+      });
+    });
+
