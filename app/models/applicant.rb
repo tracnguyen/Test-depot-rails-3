@@ -7,7 +7,6 @@ class Applicant < ActiveRecord::Base
                     :url => "/assets/attachments/:basename.:extension"
 
   validates_presence_of :first_name, :last_name, :email, :phone
-  validates_associated :job
 
   state_machine :status, :initial => :new do
     event :change_status do
