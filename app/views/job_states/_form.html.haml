@@ -1,16 +1,13 @@
-= form_for @job_state do |f|
+= semantic_form_for @job_state do |f|
   -if @job_state.errors.any?
     #errorExplanation
       %h2= "#{pluralize(@job_state.errors.count, "error")} prohibited this job_state from being saved:"
       %ul
         - @job_state.errors.full_messages.each do |msg|
           %li= msg
-
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :description
-    = f.text_field :description
-  .actions
-    = f.submit 'Save'
+  = f.inputs do
+    = f.input :name, :label => "Name"
+    = f.input :description, :label => "Description"
+  
+  = f.buttons do
+    = f.commit_button 'Save'

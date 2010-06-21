@@ -1,6 +1,6 @@
 class JobStatesController < ApplicationController
-  # GET /job_states
-  # GET /job_states.xml
+  before_filter :authenticate_user!
+
   def index
     @job_states = JobState.all
 
@@ -10,8 +10,6 @@ class JobStatesController < ApplicationController
     end
   end
 
-  # GET /job_states/1
-  # GET /job_states/1.xml
   def show
     @job_state = JobState.find(params[:id])
 
@@ -21,8 +19,6 @@ class JobStatesController < ApplicationController
     end
   end
 
-  # GET /job_states/new
-  # GET /job_states/new.xml
   def new
     @job_state = JobState.new
 
@@ -32,13 +28,10 @@ class JobStatesController < ApplicationController
     end
   end
 
-  # GET /job_states/1/edit
   def edit
     @job_state = JobState.find(params[:id])
   end
 
-  # POST /job_states
-  # POST /job_states.xml
   def create
     @job_state = JobState.new(params[:job_state])
 
@@ -53,8 +46,6 @@ class JobStatesController < ApplicationController
     end
   end
 
-  # PUT /job_states/1
-  # PUT /job_states/1.xml
   def update
     @job_state = JobState.find(params[:id])
 
@@ -69,8 +60,6 @@ class JobStatesController < ApplicationController
     end
   end
 
-  # DELETE /job_states/1
-  # DELETE /job_states/1.xml
   def destroy
     @job_state = JobState.find(params[:id])
     @job_state.destroy
