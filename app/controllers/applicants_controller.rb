@@ -5,7 +5,7 @@ class ApplicantsController < BaseAccountController
     @job = params[:job_title]
     @status = params[:apt_status]
     # This will result in only a single SQL query, thanks to ActiveRelation
-    @applicants = current_account.applicants
+    @applicants = current_account.applicants.order('created_at DESC')
     @applicants = @applicants.where({:job_id => @job}) unless @job.nil? || @job.empty?
     @applicants = @applicants.where({:status => @status}) unless @job.nil? || @status.empty?
 
