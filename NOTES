@@ -3,4 +3,6 @@ Install:
   gem install bundler
   bundle install
     
-  
+  For captcha:
+  == 
+    sudo apt-get install imagemagick --fix-missing 
