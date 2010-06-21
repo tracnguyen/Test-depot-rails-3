@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100621064826) do
+ActiveRecord::Schema.define(:version => 20100621101354) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -59,20 +59,8 @@ ActiveRecord::Schema.define(:version => 20100621064826) do
     t.datetime "attachment_updated_at"
   end
 
-  create_table "default_job_states", :force => true do |t|
-    t.integer  "job_state_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "job_flows", :force => true do |t|
+  create_table "job_stages", :force => true do |t|
     t.integer  "account_id"
-    t.integer  "job_state_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "job_states", :force => true do |t|
     t.string   "name"
     t.string   "description"
     t.datetime "created_at"

@@ -11,8 +11,8 @@ Hiringapp::Application.routes.draw do |map|
     match "applicants/:id/mark_as_unread" => "applicants#mark_as_unread", \
       :as => :mark_applicant_as_unread
     
-    resources :job_states
-    
+    resources :job_stages
+
     namespace :pub do
       resources :jobs do
         resources :applicants

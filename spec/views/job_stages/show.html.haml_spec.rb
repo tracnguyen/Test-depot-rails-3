@@ -1,8 +1,9 @@
 require 'spec_helper'
 
-describe "job_states/show.html.haml" do
+describe "job_stages/show.html.haml" do
   before(:each) do
-    assign(:job_state, @job_state = stub_model(JobState,
+    assign(:job_stage, @job_stage = stub_model(JobStage,
+      :account_id => 1,
       :name => "MyString",
       :description => "MyString"
     ))
@@ -10,6 +11,7 @@ describe "job_states/show.html.haml" do
 
   it "renders attributes in <p>" do
     render
+   rendered.should contain(1)
    rendered.should contain("MyString")
    rendered.should contain("MyString")
   end
