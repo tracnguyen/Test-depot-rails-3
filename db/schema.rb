@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100618094508) do
+ActiveRecord::Schema.define(:version => 20100621034349) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -59,6 +59,13 @@ ActiveRecord::Schema.define(:version => 20100618094508) do
     t.datetime "attachment_updated_at"
   end
 
+  create_table "job_states", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "jobs", :force => true do |t|
     t.integer "account_id"
     t.string  "title"
@@ -74,6 +81,8 @@ ActiveRecord::Schema.define(:version => 20100618094508) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "simple_captcha_data", ["key"], :name => "idx_key"
 
   create_table "users", :force => true do |t|
     t.string   "email",                :default => "", :null => false
