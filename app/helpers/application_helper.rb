@@ -4,7 +4,7 @@ module ApplicationHelper
   end
   
   def job_filter_collection
-    [["View All", ""]] + current_account.jobs.collect{|job| [job.title, job.id.to_s]}
+    [["All", ""]] + current_account.jobs.collect{|job| [job.title, job.id.to_s]}
   end
 
   def application_status_collection
@@ -12,6 +12,6 @@ module ApplicationHelper
   end
 
   def apt_status_filter_collection
-    [["View All", ""], ["New", "new"], ["Screened", "screened"], ["Interviewed", "interviewed"], ["Offered", "offered"], ["Hired", "hired"], ["Rejected", "rejected"]]
+    [["All", ""], ["New", "new"], ["Screened", "screened"], ["Interviewed", "interviewed"], ["Offered", "offered"], ["Hired", "hired"], ["Rejected", "rejected"]]
   end
 end

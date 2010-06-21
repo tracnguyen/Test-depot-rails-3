@@ -14,10 +14,20 @@
   %b Resume:
   = link_to @applicant.attachment_file_name, @applicant.attachment.url
    
-= form_for(@applicant, :remote => true) do |f|
-  = f.label "Status"
-  = f.select :status, application_status_collection
-  %br
-  = f.submit 'Save', :disable_with => "Please wait..."
+%p
+  = form_for(@applicant) do |f|
+    = f.label :status
+    = f.select :status, application_status_collection
 
-= link_to 'Back', applicants_path
+%p
+  = link_to 'Mark as unread', mark_applicant_as_unread_path(@applicant)
+
+%p
+  = link_to 'Back', applicants_path
+
+:javascript
+  $(function() {
+  	$("select#applicant_status").change(function() {
+  		$("form.edit_applicant").submit()
+  	})
+  })

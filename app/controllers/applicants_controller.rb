@@ -93,6 +93,14 @@ class ApplicantsController < BaseAccountController
       format.xml  { head :ok }
     end
   end
-
+  
+  def mark_as_unread
+    @applicant = Applicant.find(params[:id])
+    current_user.mark_as_unread(@applicant)
+    respond_to do |format|
+      format.xml  { head :ok }
+      format.html { redirect_to(applicants_path) }
+    end
+  end
 end
 

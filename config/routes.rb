@@ -6,7 +6,11 @@ Hiringapp::Application.routes.draw do |map|
     match "users/:id/confirm" => "users#confirm", :as => :confirm_user
     
     resources :jobs
+    
     resources :applicants
+    match "applicants/:id/mark_as_unread" => "applicants#mark_as_unread", \
+      :as => :mark_applicant_as_unread
+    
     resources :job_states
     
     namespace :pub do
