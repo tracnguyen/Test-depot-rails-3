@@ -7,7 +7,7 @@ class ApplicantsController < BaseAccountController
     # This will result in only a single SQL query, thanks to ActiveRelation
     @applicants = current_account.applicants.order('created_at DESC')
     @applicants = @applicants.where({:job_id => @job}) unless @job.nil? || @job.empty?
-    @applicants = @applicants.where({:status => @status}) unless @job.nil? || @status.empty?
+    @applicants = @applicants.where({:job_stage_id => @status}) unless @job.nil? || @status.empty?
 
     @read_status = current_user.read_status(@applicants)
     

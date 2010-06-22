@@ -12,6 +12,6 @@ module ApplicationHelper
   end
 
   def apt_status_filter_collection
-    [["All", ""], ["New", "new"], ["Screened", "screened"], ["Interviewed", "interviewed"], ["Offered", "offered"], ["Hired", "hired"], ["Rejected", "rejected"]]
+    [["All", ""]] + current_account.job_stages.collect{|s| [s.name, s.id.to_s]} 
   end
 end
