@@ -7,12 +7,12 @@
           %li= msg
 
   - f.inputs do
-    = f.input :job_id, :as => :select, :collection => Job.all.map { |job| [job.title, job.id] }
+    = f.input :job_id, :as => :select, :collection => current_account.jobs.map { |job| [job.title, job.id] }
     = f.input :first_name, :label => "First name"
     = f.input :last_name, :label => "Last name"
     = f.input :email, :label => "Email"
     = f.input :phone, :label => "Phone"
-    = f.input :status, :as => :select, :collection => application_status_collection
+    = f.input :job_stage_id, :as => :select, :collection => application_status_collection, :label => "Status"
     = hidden_field_tag :remove_attachment
     - if @applicant.attachment?
       /= link_to @applicant.attachment_file_name, @applicant.attachment.url

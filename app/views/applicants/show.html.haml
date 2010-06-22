@@ -17,9 +17,8 @@
   - else
     No resume attached
 %p
-  = form_for(@applicant) do |f|
-    = f.label :status
-    = f.select :status, application_status_collection
+  %b Status:
+  = @applicant.job_stage.name
 
 %p
   = link_to 'Mark as unread', mark_applicant_as_unread_path(@applicant)

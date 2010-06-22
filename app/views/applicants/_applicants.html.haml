@@ -12,7 +12,7 @@
       %td= applicant.first_name + " " + applicant.last_name
       %td= applicant.job.title
       %td= applicant.phone
-      %td= applicant.status
+      %td= applicant.job_stage.name
       %td= link_to 'Show', applicant_path(applicant)
       %td= link_to 'Edit', edit_applicant_path(applicant)
       %td= link_to 'Delete', applicant, :confirm => 'Are you sure?', :method => :delete

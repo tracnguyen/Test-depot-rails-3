@@ -2,7 +2,7 @@ class Pub::ApplicantsController < BaseAccountController
   layout 'public'
 
   def new
-    @applicant = Applicant.new(:job_id => params[:job_id])
+    @applicant = Applicant.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -11,8 +11,8 @@ class Pub::ApplicantsController < BaseAccountController
   end
 
   def create
-    params[:account_id] = current_account.id
-    params[:job_id] = params[:job_id]
+    params[:applicant][:job_id] = params[:job_id]
+    params[:applicant][:job_stage_id] = current_account.job_stages.first.id
     @applicant = current_account.applicants.build(params[:applicant])
 
     respond_to do |format|

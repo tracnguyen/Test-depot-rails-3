@@ -35,7 +35,7 @@ class ApplicantsController < BaseAccountController
   end
 
   def new
-    @applicant = Applicant.new
+    @applicant = Applicant.new(:job_stage_id => current_account.job_stages.first.id)
 
     respond_to do |format|
       format.html # new.html.erb

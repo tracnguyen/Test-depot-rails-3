@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(:version => 20100621101354) do
     t.string   "phone"
     t.integer  "job_id"
     t.integer  "account_id"
-    t.string   "status"
+    t.integer  "job_stage_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "attachment_file_name"
