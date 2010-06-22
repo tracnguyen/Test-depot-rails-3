@@ -7,6 +7,6 @@ class Account < ActiveRecord::Base
   has_one :owner, :class_name => "User"
   accepts_nested_attributes_for :owner
   
-  after_create lambda{ JobStage::DEFAULT_STAGES.each {|s| JobStage.create :account_id => self.id, :name => s}}
+  after_create lambda{ DefaultJobStage.all.each {|s| JobStage.create :account_id => self.id, :name => s.name}}
 end
 
