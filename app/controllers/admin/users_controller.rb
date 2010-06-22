@@ -1,4 +1,4 @@
-class UsersController < BaseAccountController
+class Admin::UsersController < BaseAccountController
   before_filter :require_owner
   
   def index

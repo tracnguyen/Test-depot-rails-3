@@ -2,21 +2,23 @@ Hiringapp::Application.routes.draw do |map|
   constraints(:subdomain => /.+/) do 
     devise_for :users
     
-    resources :users, :only => :index
-    match "users/:id/confirm" => "users#confirm", :as => :confirm_user
-    
     resources :jobs
     
     resources :applicants
     match "applicants/:id/mark_as_unread" => "applicants#mark_as_unread", \
       :as => :mark_applicant_as_unread
-    
-    resources :job_stages
 
     namespace :pub do
       resources :jobs do
         resources :applicants
       end
+    end
+    
+    namespace :admin do
+      resources :users, :only => :index
+      match "users/:id/confirm" => "users#confirm", :as => :confirm_user
+    
+      resources :job_stages
     end
     
     match "dashboard" => "dashboard#index", :as => :dashboard

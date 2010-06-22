@@ -1,4 +1,4 @@
-class JobStagesController < ApplicationController
+class Admin::JobStagesController < BaseAccountController
   # GET /job_stages
   # GET /job_stages.xml
   def index

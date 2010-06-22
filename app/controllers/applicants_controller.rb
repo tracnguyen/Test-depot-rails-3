@@ -1,4 +1,6 @@
 class ApplicantsController < BaseAccountController
+  before_filter :authenticate_user!
+  
   # GET /applicants
   # GET /applicants.xml
   def index

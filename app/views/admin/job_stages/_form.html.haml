@@ -1,4 +1,4 @@
-= semantic_form_for @job_stage do |f|
+= semantic_form_for [:admin, @job_stage] do |f|
   -if @job_stage.errors.any?
     #errorExplanation
       %h2= "#{pluralize(@job_stage.errors.count, "error")} prohibited this job_stage from being saved:"
