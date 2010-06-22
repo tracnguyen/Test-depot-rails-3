@@ -2,6 +2,8 @@ Hiringapp::Application.routes.draw do |map|
   constraints(:subdomain => /.+/) do 
     devise_for :users
     
+    resources :users, :only => [:new, :create, :update]
+    
     resources :jobs
     
     resources :applicants

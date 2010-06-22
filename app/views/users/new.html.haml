@@ -1,0 +1,10 @@
+%h1 New user registration
+
+= semantic_form_for @user do |f|
+  = hidden_field_tag :token, @invitation.token
+  = f.inputs do
+    = f.input :email
+    = f.input :password
+    = f.input :password_confirmation
+  = f.buttons do
+    = f.commit_button "Sign up"

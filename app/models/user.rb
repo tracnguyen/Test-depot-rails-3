@@ -1,20 +1,15 @@
 class User < ActiveRecord::Base
   devise \
-    :token_authenticatable,
     :database_authenticatable,
     :recoverable,
     :rememberable,
     :trackable,
     :validatable
   
-  devise :lockable, \
+  devise :lockable,
     :lock_strategy => :failed_attempts,
     :maximum_attempts => 5,
     :unlock_strategy => :email
-  
-  def after_token_authentication
-    reset_authentication_token!
-  end
   
   attr_accessible :email, :password, :password_confirmation
   

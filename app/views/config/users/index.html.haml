@@ -11,7 +11,7 @@
 %h1 Invite new user
 
 = semantic_form_for [:config, @user] do |f|
-  - f.inputs do
+  = f.inputs do
     = f.input :email
-  - f.buttons do
+  = f.buttons do
     = f.commit_button "Send invitation"
