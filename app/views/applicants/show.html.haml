@@ -12,8 +12,10 @@
   = @applicant.phone
 %p
   %b Resume:
-  = link_to @applicant.attachment_file_name, @applicant.attachment.url
-   
+  - if @applicant.attachment?
+    = link_to @applicant.attachment_file_name, @applicant.attachment.url
+  - else
+    No resume attached
 %p
   = form_for(@applicant) do |f|
     = f.label :status
@@ -31,3 +33,4 @@
   		$("form.edit_applicant").submit()
   	})
   })
+
