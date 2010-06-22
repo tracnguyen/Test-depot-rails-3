@@ -36,7 +36,6 @@
           %li= link_to "Public jobs board", pub_jobs_path
     #container.clearfix
       #sidebar
-        %ul
         = yield :sidebar
       #content
         - if notice || alert
