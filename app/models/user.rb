@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
   end
 
   # Return this user's read status of the list of applicants as a hash of
-  # { applicant_id => true } for those application which the user has viewed.
+  # { applicant_id => true } for those applications that the user has viewed.
   def read_status(applicants)
     viewstat = {}
     app_ids = applicants.map { |app| app.id }
