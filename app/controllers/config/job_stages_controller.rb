@@ -1,4 +1,7 @@
-class Admin::JobStagesController < BaseAccountController
+class Config::JobStagesController < BaseAccountController
+  before_filter :require_owner
+  layout 'config'
+  
   # GET /job_stages
   # GET /job_stages.xml
   def index

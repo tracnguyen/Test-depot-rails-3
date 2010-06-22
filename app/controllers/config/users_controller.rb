@@ -1,5 +1,6 @@
-class Admin::UsersController < BaseAccountController
+class Config::UsersController < BaseAccountController
   before_filter :require_owner
+  layout 'config'
   
   def index
     @users = User.unconfirmed

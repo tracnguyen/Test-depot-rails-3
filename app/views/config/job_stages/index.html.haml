@@ -1,0 +1,21 @@
+%h1 Job Stages
+
+%table
+  %tr
+    %th Name
+    %th Description
+    %th
+    %th
+    %th
+
+  - @job_stages.each do |job_stage|
+    %tr
+      %td= job_stage.name
+      %td= job_stage.description
+      %td= link_to 'Show', config_job_stage_path(job_stage)
+      %td= link_to 'Edit', edit_config_job_stage_path(job_stage)
+      %td= link_to 'Destroy', config_job_stage_path(job_stage), :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New job stage', new_config_job_stage_path

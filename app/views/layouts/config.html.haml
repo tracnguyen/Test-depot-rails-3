@@ -35,6 +35,11 @@
           %li= link_to "Public jobs board", pub_jobs_path
     #container.clearfix
       #sidebar
+        - if user_signed_in?
+          %ul
+            %li= link_to "Job Stages", config_job_stages_path
+            - if current_user.owns?(current_account)
+              %li= link_to "Users", config_users_path
         = yield :sidebar
       #content
         - if notice || alert
