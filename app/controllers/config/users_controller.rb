@@ -3,16 +3,22 @@ class Config::UsersController < BaseAccountController
   layout 'config'
   
   def index
-    @users = User.unconfirmed
+    @users = current_account.users
+    @user = User.new
   end
   
-  def confirm
-    @user = User.find(params[:id])
-    if @user.unlock_access!
-      flash[:notice] = "Administrative rights has been granted to #{@user.email}."
-      redirect_to users_path
-    else
-      render "index"
-    end
+  def create
+    @user = current_account.user.build(params[:user])
+    respond_to { |format|
+      format.html {
+        if @user.save && @user.ensure_authentication_token!
+         flash[:notice] = "Invitation has been sent."
+         redirect_to config_users_path
+       else
+         flash[:alert] = "There as an error creating the invitation."
+         render "index"
+       end
+     }
+   }
   end
 end

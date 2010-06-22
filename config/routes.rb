@@ -16,8 +16,7 @@ Hiringapp::Application.routes.draw do |map|
     
     namespace :config do
       resource :admin
-      resources :users, :only => :index
-      match "users/:id/confirm" => "users#confirm", :as => :confirm_user
+      resources :users, :only => [:index, :create]
     
       resources :job_stages
     end

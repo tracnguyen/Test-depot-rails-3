@@ -1,11 +1,17 @@
-- if !@users.empty?
-  %h1 Listing unconfirmed users
-  
-  %table
-    - @users.each do |user|
-      %tr
-        %td= user.email
-        %td= button_to 'Confirm', confirm_user_path(user), :method => :PUT, :confirm => "Grant administrative rights to #{user.email}?"
+%h1 Listing users
 
-- else
-  %p There are no unconfirmed users.
+%table
+  - @users.each do |user|
+    %tr
+      %td= user.email
+
+%br/
+%br/
+
+%h1 Invite new user
+
+= semantic_form_for [:config, @user] do |f|
+  - f.inputs do
+    = f.input :email
+  - f.buttons do
+    = f.commit_button "Send invitation"
