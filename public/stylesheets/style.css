@@ -32,45 +32,59 @@ abbr,acronym { border:0;
 
 /** Site **/
 
-body { background-color: #fff; color: #333; }
-
 body {
-  font: 16px/1.25 serif "Times New Roman", serif;
-  margin: 20px;
+  width: 100%;
+  font: 16px/1.25 Helvetica, Arial, sans-serif ;
+  background: #e5e5e5;
+}
+
+#header {
+  width: 100%
+  min-width: 840px;
+  padding: 0 3em 0 3em;
+  background: #4169e1;
+  color: #ddd;
 }
 
 #container {
-  width: 960px;
-  margin: auto;
+  min-width: 840px;
+  margin: 0 2em 1em 2em;
 }
 
-#header, #sidebar, #content, #content-full, #footer {
-  display: inline;
-  float: right;
-  margin-left: 10px;
-  margin-right: 10px;
+#sidebar, #content, #content-full {
+  background: #fff;
 }
 
-#header { width: 940px; margin-bottom: 20px; }
+#sidebar, #content, #content-full {
+  -moz-box-shadow: 0.25em 0.25em 0.75em #bbb;
+  -webkit-box-shadow: 0.25em 0.25em 0.75em #bbb;
+  box-shadow: 0.25em 0.25em 0.75em #bbb;
+  border-right: solid 1px #bbb;
+  border-bottom: solid 1px #bbb;
+}
 
 #sidebar {
-  width: 300px;
+  float: right;
+  width: 22%;
+  padding: 1em;
 }
 
 #content {
-  width: 620px;
-  min-height: 340px;
-  margin-bottom: 40px;
+  float: left;
+  width: 70%;
+  min-height: 480px;
+  padding: 1em;
 }
 
 #content-full {
-  width: 940px;
-  min-height: 340px;
-  margin-bottom: 40px;
+  min-height: 480px;
+  padding: 1em;
 }
 
 #footer {
-  width: 940px;
+  padding: 0 0 2em 2.5em;
+  font-size: 85%;
+  color: #aaa;
 }
 
 .clearfix:after {
@@ -89,23 +103,45 @@ body {
 	zoom: 1;
 }
 
-#header #right { float: right; }
-#header #left { float: left; }
+#header .right { float: right; }
+#header .left { float: left; }
+
+#header .links { padding-top: 5px; font-size: 92.5%; }
+#header .tabs { font-size: 92.5%; }
+
+#header .tabs li {
+  display: inline;
+  padding: 8px;
+  line-height: 1.85;
+  background: #fff;
+}
+
+#header .links a, #header .links a:visited { color: #ddd; }
+#header .tabs a, #header .tabs a:visited {
+  color: #444;
+  text-decoration: none;
+}
 
 h1 {
-  font: bold 2em/1 "Times New Roman", serif;
-  color: #2f4f4f;
-  margin-bottom: 25px;
+  font-size: 2em;
+  font-weight: bold;
+  line-height: 1;
+  color: #1f2f2f;
+  padding-bottom: 25px;
 }
 
 h1#title {
-  color: navy;
-  font: bold 4em/1 Helvetica, Arial, sans-serif;
-  margin-top: 20px;
+  color: #f5f5dc;
+  font-size: 2em;
+  line-height: 1;
+  padding-bottom: 20px;
+  display: block;
 }
 
 h2 {
-  font: bold 1.5em/1 "Times New Roman", serif;
+  font-size: 1.5em;
+  font-weight: bold;
+  line-height: 1;
   color: #696969;
   margin-bottom: 10px;
 }
@@ -178,12 +214,6 @@ html form.formtastic fieldset > ol > li { display: block; }
 #error_explanation ul li {
   font-size: 12px;
   list-style: square;
-}
-
-#footer {
-  font-size: 85%;
-  color: #aaa;
-  margin-bottom: 20px;
 }
 
 #footer a, #footer a:visited {

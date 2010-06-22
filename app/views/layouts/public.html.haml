@@ -10,17 +10,17 @@
     = javascript_include_tag :all
     = csrf_meta_tag
   %body
-    #container
-      #header
-        .links.clearfix
-          #right
-            = link_to "Admin Area", dashboard_path
-        %h1#title HiRing
+    #header
+      .links.clearfix
+        .right
+          = link_to "Admin Area", dashboard_path
+      %h1#title= current_account.name
+    #container.clearfix
       #content-full
         - if notice || alert
           #flashes
             %p#notice= notice
             %p#alert= alert
         = yield
-      #footer
-        @2010. Powered by <a href=http://www.techpropulsionlabs.com>Tech Propulsion Labs</a>.
+    #footer
+      Copyright 2010. Powered by <a href=http://www.techpropulsionlabs.com>HiringApp</a>.

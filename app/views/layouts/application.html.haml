@@ -11,32 +11,30 @@
     = csrf_meta_tag
     = yield :head
   %body
-    #container
-      #header
-        .links.clearfix
-          #left
-            = link_to "Public jobs board", pub_jobs_path
-          #right
-            - if user_signed_in?
-              = current_user.email
-              |
-              = link_to "Dashboard", dashboard_path
-              |
-              = link_to "Jobs", jobs_path
-              |
-              = link_to "Job Stages", job_stages_path
-              |
-              = link_to "Applications", applicants_path
-              |
-              - if current_user.owns?(current_account)
-                = link_to "Users", users_path
-                |
-              = link_to "Sign out", destroy_user_session_path
-            - else
-              = link_to "Sign in", new_user_session_path
-              |
-              = link_to "Sign up", new_user_registration_path
-        %h1#title HiRing
+    #header
+      .links.clearfix
+        .right
+          - if user_signed_in?
+            = current_user.email
+            |
+            = link_to "Sign out", destroy_user_session_path
+          - else
+            = link_to "Sign in", new_user_session_path
+            |
+            = link_to "Sign up", new_user_registration_path
+      %h1#title= current_account.name
+      .tabs.clearfix
+        %ol.left
+          - if user_signed_in?
+            %li= link_to "Dashboard", dashboard_path
+            %li= link_to "Jobs", jobs_path
+            %li= link_to "Job Stages", job_stages_path
+            %li= link_to "Applications", applicants_path
+            - if current_user.owns?(current_account)
+              %li= link_to "Users", users_path
+        %ol.right
+          %li= link_to "Public jobs board", pub_jobs_path
+    #container.clearfix
       #sidebar
         %ul
         = yield :sidebar
@@ -46,5 +44,5 @@
             %p#notice= notice
             %p#alert= alert
         = yield
-      #footer
-        @2010. Powered by <a href=http://www.techpropulsionlabs.com>Tech Propulsion Labs</a>.
+    #footer
+      Copyright 2010. Powered by <a href=http://www.techpropulsionlabs.com>HiringApp</a>.
