@@ -8,6 +8,6 @@ class DashboardController < BaseAccountController
   def index
     @n_jobs_open = current_account.jobs.open.count
     @n_applications = current_account.applicants.count
-    @n_applications_unread = current_user.unread_applications.count
+    @n_applications_unread = @n_applications - current_user.viewed_applications.count
   end
 end

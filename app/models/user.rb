@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   end
   
   has_many :user_views
-  has_many :unread_applications, :through =>  :user_views, :class_name => "Applicant", :source => "applicant"
+  has_many :viewed_applications, :through =>  :user_views, :class_name => "Applicant", :source => "applicant"
   
   def mark_as_read(applicant)
     uv = self.user_views.where('applicant_id' => applicant.id)
