@@ -1,4 +1,4 @@
-%h1 Listing applicants
+%h1 Listing applications
 
 %table.applicants
   %tr
@@ -9,7 +9,9 @@
     %tr{:class => @read_status[applicant.id] ? "read" : "unread"}
       %td= link_to applicant.first_name + " " + applicant.last_name, applicant_path(applicant)
       %td= applicant.job.title
-      %td= applicant.job_stage.name
+      %td
+        %div{:style => "background: #{applicant.job_stage.color}", :class => "statusbox"}
+        = applicant.job_stage.name
 
 %br/
 
@@ -18,7 +20,7 @@
 - content_for :sidebar do
   %h2 Filters
   %ul
-    - form_tag(applicants_path, :method => :get, :id => 'job_filter') do
+    = form_tag(applicants_path, :method => :get, :id => 'job_filter') do
       %li
         = label_tag :job_title, "Position"
         = select_tag :job_title, options_for_select(job_filter_collection, @job)

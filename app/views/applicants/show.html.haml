@@ -1,24 +1,32 @@
-%ul.actions
-  %li= link_to 'Edit', edit_applicant_path(@applicant)
-  %li= link_to 'Mark as unread', mark_applicant_as_unread_path(@applicant)
-
 %h1= @applicant.first_name + " " + @applicant.last_name
 
-%p
-  %b Email:
-  = @applicant.email
-%p
-  %b Phone:
-  = @applicant.phone
-%p
-  %b Resume:
-  - if @applicant.attachment?
-    = link_to @applicant.attachment_file_name, @applicant.attachment.url
-  - else
-    No resume attached
-%p
-  %b Status:
-  = @applicant.job_stage.name
+%table.details
+  %tr
+    %th
+    %th
+  %tr
+    %td
+      %strong Email
+    %td= @applicant.email
+  %tr
+    %td
+      %strong Phone
+    %td= @applicant.phone
+  %tr
+    %td
+      %strong Resume
+    - if @applicant.attachment?
+      %td= link_to @applicant.attachment_file_name, @applicant.attachment.url
+    - else
+      %td No resume attached
+  %tr
+    %td
+      %strong Status
+    %td{:style => "background: #{@applicant.job_stage.color}"}= @applicant.job_stage.name
+
+%ul.actions
+  %li= link_to 'Edit details', edit_applicant_path(@applicant)
+  %li= link_to 'Mark as unread', mark_applicant_as_unread_path(@applicant)
 
 %br/
 
