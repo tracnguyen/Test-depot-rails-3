@@ -83,5 +83,10 @@
           }
         });
       });
+      
+      $('.col12 > img').click(function(){
+        var e = $(this).parent().parent().children(":first"); 
+        e.click();
+      });
     })
   </script>
