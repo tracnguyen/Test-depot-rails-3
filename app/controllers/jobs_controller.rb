@@ -1,8 +1,6 @@
 class JobsController < BaseAccountController
   before_filter :authenticate_user!
   
-  # GET /jobs
-  # GET /jobs.xml
   def index
     @jobs = current_account.jobs
 
@@ -12,19 +10,6 @@ class JobsController < BaseAccountController
     end
   end
 
-  # GET /jobs/1
-  # GET /jobs/1.xml
-  def show
-    @job = Job.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @job }
-    end
-  end
-
-  # GET /jobs/new
-  # GET /jobs/new.xml
   def new
     @job = Job.new
 
@@ -34,19 +19,16 @@ class JobsController < BaseAccountController
     end
   end
 
-  # GET /jobs/1/edit
   def edit
     @job = Job.find(params[:id])
   end
 
-  # POST /jobs
-  # POST /jobs.xml
   def create
     @job = current_account.jobs.build(params[:job])
 
     respond_to do |format|
       if @job.save
-        format.html { redirect_to(@job, :notice => 'Job was successfully created.') }
+        format.html { redirect_to(jobs_url, :notice => 'Job was successfully created.') }
         format.xml  { render :xml => @job, :status => :created, :location => @job }
       else
         format.html { render :action => "new" }
@@ -55,14 +37,12 @@ class JobsController < BaseAccountController
     end
   end
 
-  # PUT /jobs/1
-  # PUT /jobs/1.xml
   def update
     @job = Job.find(params[:id])
 
     respond_to do |format|
       if @job.update_attributes(params[:job])
-        format.html { redirect_to(@job, :notice => 'Job was successfully updated.') }
+        format.html { redirect_to(jobs_url, :notice => 'Job was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -71,8 +51,6 @@ class JobsController < BaseAccountController
     end
   end
 
-  # DELETE /jobs/1
-  # DELETE /jobs/1.xml
   def destroy
     @job = Job.find(params[:id])
     @job.destroy

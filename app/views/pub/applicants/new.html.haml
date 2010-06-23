@@ -1,5 +1,14 @@
-%h1 New applicant
+%h1= "Apply for a \"#{@applicant.job.title}\" position"
 
-= render 'form'
+- semantic_form_for [:pub, :job, @applicant], :html => {:multipart => true} do |f|
+  - f.inputs do
+    = f.input :first_name, :label => "First name"
+    = f.input :last_name, :label => "Last name"
+    = f.input :email, :label => "Email"
+    = f.input :phone, :label => "Phone"
+    = f.input :attachment, :as => :file
+  
+  - f.buttons do
+    = f.commit_button 'Save'
 
-= link_to 'Back', pub_jobs_path
+= link_to 'Back to Job Description', pub_job_path(@applicant.job)

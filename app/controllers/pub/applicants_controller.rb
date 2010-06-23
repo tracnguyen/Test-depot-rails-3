@@ -2,7 +2,7 @@ class Pub::ApplicantsController < BaseAccountController
   layout 'public'
 
   def new
-    @applicant = Applicant.new
+    @applicant = Applicant.new(:job_id =>params[:job_id])
 
     respond_to do |format|
       format.html # new.html.erb

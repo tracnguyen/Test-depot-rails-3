@@ -3,7 +3,6 @@
 %table
   %tr
     %th Title
-    %th Description
     %th Status
     %th
     %th
@@ -11,10 +10,8 @@
 
   - @jobs.each do |job|
     %tr
-      %td= job.title
-      %td= job.description
+      %td= link_to job.title, pub_job_path(job)
       %td= job.status
-      %td= link_to 'Show', job
       %td= link_to 'Edit', edit_job_path(job)
       %td= link_to 'Destroy', job, :confirm => 'Are you sure?', :method => :delete
 

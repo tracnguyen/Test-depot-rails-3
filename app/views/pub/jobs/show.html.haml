@@ -1,12 +1,16 @@
-%p
-  %b Title:
-  = @job.title
-%p
-  %b Description:
-  = @job.description
+%h1= @job.title
+
 %p
   %b Status:
   = @job.status
 
-= link_to 'Apply', new_pub_job_applicant_path(@job)
+%p= link_to 'Click to Apply', new_pub_job_applicant_path(@job)
 
+%br/
+
+%p
+  = @job.description
+
+%br/
+
+= link_to 'Back to Job Board', pub_jobs_path

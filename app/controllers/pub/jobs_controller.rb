@@ -1,8 +1,6 @@
 class Pub::JobsController < BaseAccountController
   layout 'public'
   
-  # GET /jobs
-  # GET /jobs.xml
   def index
     @jobs = current_account.jobs
 
@@ -12,8 +10,6 @@ class Pub::JobsController < BaseAccountController
     end
   end
 
-  # GET /jobs/1
-  # GET /jobs/1.xml
   def show
     @job = Job.find(params[:id])
 
