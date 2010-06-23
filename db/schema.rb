@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(:version => 20100622093713) do
 
   create_table "default_job_stages", :force => true do |t|
     t.string   "name"
+    t.string   "color"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -77,6 +78,7 @@ ActiveRecord::Schema.define(:version => 20100622093713) do
     t.integer  "account_id"
     t.string   "name"
     t.integer  "position"
+    t.string   "color"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

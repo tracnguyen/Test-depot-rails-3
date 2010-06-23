@@ -9,7 +9,7 @@
       &nbsp;
     .col13
       .controlset
-        %input{:class => "color", :type => "text", :value => "#333399"}
+        %input{:class => "color", :type => "text", :value => @first_stage.color}
 
   .col2
     (default)
@@ -22,7 +22,7 @@
           = link_to image_tag("delete-icon.png"), config_job_stage_path(job_stage), :confirm => 'Are you sure?', :method => :delete
         .col13
           .controlset
-            %input{:class => "color", :type => "text", :value => "#333399"}
+            %input{:class => "color", :type => "text", :value => job_stage.color}
 
 .clearfix
 

@@ -4,6 +4,7 @@ class CreateJobStages < ActiveRecord::Migration
       t.integer :account_id
       t.string :name
       t.integer :position
+      t.string :color
 
       t.timestamps
     end
