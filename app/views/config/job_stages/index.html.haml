@@ -15,9 +15,9 @@
     .col14
       .controlset
         %input{:class => "color", :id => "color#{@first_stage.id}", :type => "text", :value => @first_stage.color}
-
   .col2
     (initial stage)
+    
   - @job_stages.each do |job_stage|
     %li{:id => "order_#{job_stage.id}"}
       .col1
@@ -33,11 +33,9 @@
         .col14
           .controlset
             %input{:class => "color", :id => "color#{job_stage.id}", :type => "text", :value => job_stage.color}
+  .clearfix
 
-.clearfix
-
-.button
-  = link_to 'New job stage', new_config_job_stage_path
+= link_to 'New job stage', new_config_job_stage_path
 
 
 :erb
@@ -64,11 +62,8 @@
           $.ajax({
             type: 'POST',
             url: '/config/job_stages/order',
-            data: order,
-            success: function(data){
-              alert('hello');
-            }
-          })
+            data: order
+          });
         }
       });
       

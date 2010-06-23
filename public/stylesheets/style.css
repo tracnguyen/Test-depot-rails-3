@@ -163,8 +163,16 @@ table { width: 100%; }
   padding-bottom: 1em;
 }
 
-#content .button {
-  padding-top: 25px;
+#content ul.actions { margin-bottom: 2em; }
+#content ul.actions li {
+  display: inline;
+  padding: 5px;
+  background: #fffacd;
+}
+#content ul.actions li a, #content ul.actions a:visited { color: #4682b4; }
+
+#content ul#sortable {
+  margin-bottom: 50px;
 }
 
 #content ul#sortable .col1{
@@ -179,6 +187,17 @@ table { width: 100%; }
   width: 80%;
 }
 
+#content ul#sortable .col2{
+  float: left;
+  display: block;
+  padding: 5px 20px;
+}
+
+#content ul#sortable li {
+  float: left;
+  width: 100%;
+}
+
 #content ul .editable {
   display: none;
 }
@@ -186,13 +205,6 @@ table { width: 100%; }
 #content ul#sortable .col12, .col13, .col14 {
   float: left;
   width: 30px;
-}
-
-#content ul#sortable .col2{
-//  background: url("/images/delete-icon.png") no-repeat;
-  float: left;
-  display: block;
-  padding: 5px 20px;
 }
 
 #header h1#title {

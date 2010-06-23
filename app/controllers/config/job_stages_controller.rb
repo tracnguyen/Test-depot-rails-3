@@ -79,9 +79,11 @@ class Config::JobStagesController < BaseAccountController
   end
   
   def order
-    orders = params[:order]  
-    current_account.job_stages.each {|stage| stage.update_attributes(:position => orders.index(stage.id.to_s) + 1)}
+    orders = params[:order] 
+    stages = current_account.job_stages
+    stages.slice!(0) 
+    stages.each {|stage| stage.update_attributes(:position => orders.index(stage.id.to_s) + 1)}
     
-    render :text => "hello"
+    render :text => "adsfa"
   end
 end
