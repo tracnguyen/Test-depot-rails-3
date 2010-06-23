@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(:version => 20100622093713) do
     t.string   "name"
     t.string   "description"
     t.string   "subdomain"
-    t.integer  "user_id"
+    t.integer  "owner_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

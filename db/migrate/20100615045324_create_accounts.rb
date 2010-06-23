@@ -4,7 +4,7 @@ class CreateAccounts < ActiveRecord::Migration
       t.string :name
       t.string :description
       t.string :subdomain
-      t.integer :user_id
+      t.integer :owner_id
 
       t.timestamps
     end
