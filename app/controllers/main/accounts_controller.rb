@@ -18,7 +18,7 @@ class Main::AccountsController < ApplicationController
       flash[:notice] = "CAPTCHA confirmation failed!"
       render :action => 'new'
     else
-      if @account.save && @account.owner.unlock_access!
+      if @account.save
         redirect_to pub_jobs_url(:subdomain => @account.subdomain), :notice => 'Account was successfully created.'
       else
         render :action => "new"
