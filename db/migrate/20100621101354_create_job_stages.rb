@@ -3,7 +3,7 @@ class CreateJobStages < ActiveRecord::Migration
     create_table :job_stages do |t|
       t.integer :account_id
       t.string :name
-      t.string :description
+      t.integer :order
 
       t.timestamps
     end

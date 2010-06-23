@@ -70,12 +70,13 @@ ActiveRecord::Schema.define(:version => 20100622093713) do
     t.string "token"
   end
 
+  add_index "invitations", ["email"], :name => "index_invitations_on_email", :unique => true
   add_index "invitations", ["token"], :name => "index_invitations_on_token", :unique => true
 
   create_table "job_stages", :force => true do |t|
     t.integer  "account_id"
     t.string   "name"
-    t.string   "description"
+    t.integer  "order"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

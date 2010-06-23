@@ -83,4 +83,8 @@ class Config::JobStagesController < BaseAccountController
       format.xml  { head :ok }
     end
   end
+  
+  def order
+    render :text => "hello"
+  end
 end

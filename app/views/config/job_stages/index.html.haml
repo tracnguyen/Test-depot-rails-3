@@ -1,20 +1,11 @@
 %h1 Job Stages
 
-%table
-  %tr
-    %th Name
-    %th Description
-    %th
-    %th
-    %th
-
+%ul{:id => 'sortable'}
   - @job_stages.each do |job_stage|
-    %tr
-      %td{:class => 'editable', :id => job_stage.id}= job_stage.name
-      %td= job_stage.description
-      %td= link_to 'Show', config_job_stage_path(job_stage)
-      %td= link_to 'Edit', edit_config_job_stage_path(job_stage)
-      %td= link_to 'Destroy', config_job_stage_path(job_stage), :confirm => 'Are you sure?', :method => :delete
+    %li{:id => "order_#{job_stage.id}"}
+      %span{:class => 'editable'}= job_stage.name
+      %span= link_to 'Edit', "#"
+      %span= link_to 'Destroy', config_job_stage_path(job_stage), :confirm => 'Are you sure?', :method => :delete
 
 %br
 
@@ -35,5 +26,18 @@
           })
         }
       })
+      
+      $('#sortable').sortable({
+        update: function(e, data) {
+          var order = $('#sortable').sortable('serialize');
+          $.ajax({
+            type: 'POST',
+            url: '/config/job_stages/order',
+            data: order,
+            success: function(data){
+            }
+          })
+        }
+      });
     })
   </script>
