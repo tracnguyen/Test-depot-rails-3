@@ -7,7 +7,23 @@
 
 %h1 Listing applicants
 
-= render :partial => 'applicants', :locals => { :applicants => @applicants, :read_status => @read_status }
+%table.applicants
+  %tr
+    %th Name
+    %th Applied for
+    %th Status
+    %th
+    %th
+    %th
+  - @applicants.each do |applicant|
+    %tr{:class => @read_status[applicant.id] ? "read" : "unread"}
+      %td= link_to applicant.first_name + " " + applicant.last_name, applicant_path(applicant)
+      %td= applicant.job.title
+      %td= applicant.job_stage.name
+      %td= link_to 'Edit', edit_applicant_path(applicant)
+      %td= link_to 'Delete', applicant, :confirm => 'Are you sure?', :method => :delete
+
+%br/
 
 = link_to 'Create new Applicant', new_applicant_path
 - content_for :sidebar do
