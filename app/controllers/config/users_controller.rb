@@ -8,9 +8,9 @@ class Config::UsersController < BaseAccountController
   end
   
   def create
-    @invitation = Invitation.create(params[:user])
-    if @invitation.save
-     flash[:notice] = "Invitation has been sent."
+    @invitation = current_user.invitations.build(params[:user])
+    if @invitation.save && InvitationMailer.welcome_email(@invitation).deliver
+     flash[:notice] = "The Invitation has been sent."
      redirect_to config_users_path
    else
      flash[:alert] = "There as an error creating the invitation."

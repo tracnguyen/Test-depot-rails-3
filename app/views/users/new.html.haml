@@ -1,4 +1,9 @@
-%h1 New user registration
+%h1 Welcome
+
+%p
+  Please register your login information below.
+
+%br/
 
 = semantic_form_for @user do |f|
   = hidden_field_tag :token, @invitation.token

@@ -43,4 +43,6 @@ class User < ActiveRecord::Base
     end
     viewstat
   end
+  
+  has_many :invitations, :foreign_key => "inviter_id"
 end

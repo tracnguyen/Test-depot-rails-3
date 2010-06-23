@@ -15,7 +15,7 @@ class UsersController < BaseAccountController
       return
     end
     @user = current_account.users.build(params[:user])
-    if @user.save && invitation.delete
+    if @user.save && @invitation.delete
       flash[:notice] = "Your registration is complete."
       redirect_to dashboard_path
     else

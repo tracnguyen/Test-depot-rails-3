@@ -66,8 +66,9 @@ ActiveRecord::Schema.define(:version => 20100622093713) do
   end
 
   create_table "invitations", :force => true do |t|
-    t.string "email"
-    t.string "token"
+    t.string  "email"
+    t.string  "token"
+    t.integer "inviter_id"
   end
 
   add_index "invitations", ["email"], :name => "index_invitations_on_email", :unique => true
