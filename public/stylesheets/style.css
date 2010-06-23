@@ -140,10 +140,10 @@ body {
 }
 
 #content ul#sortable li span.col2{
+//  background: url("/images/delete-icon.png") no-repeat;
   float: left;
   display: block;
   padding: 5px;
-  border-bottom: 1px solid #5f9ea0;
 }
 
 h1#title {

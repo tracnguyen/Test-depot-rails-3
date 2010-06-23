@@ -4,7 +4,7 @@
   - @job_stages.each do |job_stage|
     %li{:id => "order_#{job_stage.id}"}
       %span{:class => 'editable col1'}= job_stage.name
-      %span{:class => 'col2'}= link_to 'Destroy', config_job_stage_path(job_stage), :confirm => 'Are you sure?', :method => :delete
+      %span{:class => 'col2'}= link_to image_tag("delete-icon.png"), config_job_stage_path(job_stage), :confirm => 'Are you sure?', :method => :delete
 
 .clear
 
