@@ -6,23 +6,27 @@
     .editable.col11{:id => @first_stage.id}
       = @first_stage.name
     .col12
-      &nbsp;
+      = image_tag("edit-icon.png")
     .col13
+      &nbsp;
+    .col14
       .controlset
-        %input{:class => "color", :type => "text", :value => @first_stage.color}
+        %input{:class => "color", :id => "color#{@first_stage.id}", :type => "text", :value => @first_stage.color}
 
   .col2
-    (default)
+    (initial stage)
   - @job_stages.each do |job_stage|
     %li{:id => "order_#{job_stage.id}"}
       .col1
         .editable.col11{:id => job_stage.id}
           = job_stage.name
         .col12
-          = link_to image_tag("delete-icon.png"), config_job_stage_path(job_stage), :confirm => 'Are you sure?', :method => :delete
+          = image_tag("edit-icon.png")
         .col13
+          = link_to image_tag("delete-icon.png"), config_job_stage_path(job_stage), :confirm => 'Are you sure?', :method => :delete
+        .col14
           .controlset
-            %input{:class => "color", :type => "text", :value => job_stage.color}
+            %input{:class => "color", :id => "color#{job_stage.id}", :type => "text", :value => job_stage.color}
 
 .clearfix
 
@@ -65,5 +69,19 @@
       
       $('.color').colorPicker();
       
+      $('.color').change(function(e, data){
+        var stage_id = $(this).attr('id').slice(5);
+        
+        $.ajax({
+          type: 'PUT',
+          url: '/config/job_stages/' + stage_id,
+          data: {
+            'job_stage[color]' : $(this).val(),
+          }, 
+          success: function(){
+            $('#notice').text('Stage was successfully updated.')
+          }
+        });
+      });
     })
   </script>
