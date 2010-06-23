@@ -47,7 +47,7 @@ class Config::JobStagesController < BaseAccountController
 
     respond_to do |format|
       if @job_stage.save
-        format.html { redirect_to(@job_stage, :notice => 'Job stage was successfully created.') }
+        format.html { redirect_to(config_job_stages_path, :notice => 'Job stage was successfully created.') }
         format.xml  { render :xml => @job_stage, :status => :created, :location => @job_stage }
       else
         format.html { render :action => "new" }
@@ -79,7 +79,7 @@ class Config::JobStagesController < BaseAccountController
     @job_stage.destroy
 
     respond_to do |format|
-      format.html { redirect_to(job_stages_url) }
+      format.html { redirect_to(config_job_stages_url) }
       format.xml  { head :ok }
     end
   end
