@@ -116,12 +116,6 @@ body {
   background: #e5e5e5;
 }
 
-#header .links a, #header .links a:visited { color: #ddd; }
-#header .tabs a, #header .tabs a:visited {
-  color: #444;
-  text-decoration: none;
-}
-
 #content h1, #content-full h1 {
   font-size: 1.75em;
   line-height: 1;
@@ -146,6 +140,9 @@ h2 {
 
 a { color: #4682b4; }
 a:visited { color: #5f9ea0; }
+#header .links a, #header .links a:visited { color: #ddd; }
+#header .tabs a, #header .tabs a:visited { color: #444; text-decoration: none; }
+table.applicants tr.unread a:visited { color: #4682b4; }
 
 #content p, #content-full p { margin-bottom: 10px; }
 
@@ -177,7 +174,7 @@ div.field, div.actions {
 #alert { color: red; }
 
 table.applicants td { padding: 5px 0 }
-table.applicants tr.unread { font-size: 95%; font-weight: bold; background: #fffff0 }
+table.applicants tr.unread { font-size: 95%; font-weight: bold; background: #fffff0; }
 table.applicants tr.read { color: #808080; background: #fffafa; }
 
 html form.formtastic fieldset { display: block; }
