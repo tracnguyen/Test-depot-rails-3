@@ -19,10 +19,7 @@ Hiringapp::Application.routes.draw do |map|
     namespace :config do
       resource :admin
       resources :users, :only => [:index, :create]
-    
-      resources :job_stages do 
-        post :order, :on => :collection
-      end
+      resources :job_stages
     end
     
     match "dashboard" => "dashboard#index", :as => :dashboard

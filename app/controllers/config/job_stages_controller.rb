@@ -58,13 +58,25 @@ class Config::JobStagesController < BaseAccountController
   def update
     @job_stage = JobStage.find(params[:id])
 
-    respond_to do |format|
-      if @job_stage.update_attributes(params[:job_stage])
-        format.js { head:ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @job_stage.errors, :status => :unprocessable_entity }
-      end
+    case 
+      when params[:order]
+        orders = params[:order] 
+        stages = current_account.job_stages
+        stages.slice!(0) 
+        stages.each {|stage| stage.update_attributes(:position => orders.index(stage.id.to_s) + 1)}
+        render :nothing => true
+      when params[:stage][:name]
+        if @job_stage.update_attributes(params[:stage])
+          render :js => "$('##{params[:id]}').children('.editable').hide(); $('##{params[:id]}').children('.ineditable').text('#{params[:stage][:name]}'); $('##{params[:id]}').children('.ineditable').show();"
+        else 
+          render :js => "alert('update failed!);"
+        end
+      when params[:stage][:color]
+        if @job_stage.update_attributes(params[:stage])
+          render :nothing => true
+        else
+          render :js => "alert('update failed!);"
+        end
     end
   end
 
@@ -76,14 +88,5 @@ class Config::JobStagesController < BaseAccountController
       format.html { redirect_to(config_job_stages_url) }
       format.xml  { head :ok }
     end
-  end
-  
-  def order
-    orders = params[:order] 
-    stages = current_account.job_stages
-    stages.slice!(0) 
-    stages.each {|stage| stage.update_attributes(:position => orders.index(stage.id.to_s) + 1)}
-    
-    render :text => "adsfa"
   end
 end
