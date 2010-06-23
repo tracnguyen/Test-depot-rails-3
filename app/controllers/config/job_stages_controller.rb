@@ -3,7 +3,9 @@ class Config::JobStagesController < BaseAccountController
   layout 'config'
   
   def index
-    @job_stages = current_account.job_stages.order('position ASC')
+    @job_stages = current_account.job_stages
+    @first_stage = @job_stages.first
+    @job_stages.slice!(0)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -53,8 +55,8 @@ class Config::JobStagesController < BaseAccountController
 
     respond_to do |format|
       if @job_stage.update_attributes(params[:job_stage])
-        format.html { redirect_to(@job_stage, :notice => 'Job stage was successfully updated.') }
-        format.xml  { head :ok }
+        format.js {
+        }
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @job_stage.errors, :status => :unprocessable_entity }
@@ -74,7 +76,7 @@ class Config::JobStagesController < BaseAccountController
   
   def order
     orders = params[:order]  
-    current_account.job_stages.each {|stage| stage.update_attributes(:position => orders.index(stage.id.to_s))}
+    current_account.job_stages.each {|stage| stage.update_attributes(:position => orders.index(stage.id.to_s) + 1)}
     
     render :text => "hello"
   end

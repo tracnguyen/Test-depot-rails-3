@@ -95,10 +95,6 @@ body {
 	height: 0;
 }
 
-.clear {
-  clear: both;
-}
-
 * html .clearfix,
 *:first-child+html .clearfix {
 	zoom: 1;
@@ -131,19 +127,27 @@ body {
   padding-top: 25px;
 }
 
-#content ul#sortable li span.col1{
+#content ul#sortable .col1{
   float: left;
   width: 60%;
-  display: block;
   padding: 5px;
   border-bottom: 1px solid #5f9ea0;
 }
 
-#content ul#sortable li span.col2{
+#content ul#sortable .col11{
+  float: left;
+  width: 80%;
+}
+
+#content ul#sortable .col12{
+  float: left;
+}
+
+#content ul#sortable .col2{
 //  background: url("/images/delete-icon.png") no-repeat;
   float: left;
   display: block;
-  padding: 5px;
+  padding: 5px 20px;
 }
 
 h1#title {
