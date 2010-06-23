@@ -6,7 +6,9 @@ class JobsController < BaseAccountController
   end
   
   def index
-    @jobs = current_account.jobs
+    @jobs = current_account.jobs.order("id DESC")
+    @count = {}
+    @jobs.each { |job| @count[job] = job.applicants.count }
 
     respond_to do |format|
       format.html # index.html.erb

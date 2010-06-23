@@ -53,6 +53,8 @@ body {
 }
 
 #content, #content-full {
+  min-height: 480px;
+  padding: 2em 2em 4em 2em;
   background: #fff;
   -moz-box-shadow: 0px 2px 8px #bbb;
   -webkit-box-shadow: 0px 2px 8px #bbb;
@@ -61,22 +63,15 @@ body {
   border-bottom: solid 1px #bbb;
 }
 
+#content {
+  width: 64%;
+}
+
 #sidebar {
   float: right;
   width: 22%;
   padding: 2em 2em 2em 1em;
   background: #e5e5e5;
-}
-
-#content {
-  width: 64%;
-  padding: 2em;
-  min-height: 480px;
-}
-
-#content-full {
-  min-height: 480px;
-  padding: 2em;
 }
 
 #footer {
@@ -124,9 +119,7 @@ body {
   -webkit-box-shadow: 0px 0px 4px #fff;
   box-shadow: 0px 0px 4px #fff;
 }
-#header .tabs .right .current {
-  background: #e5e5e5;
-}
+#header .tabs .right .current { background: #e5e5e5; }
 
 #content h1, #content-full h1 {
   font-size: 1.75em;
@@ -188,6 +181,9 @@ table.applicants tr.unread a:visited { color: #4682b4; }
   max-width: 32em;
   margin-bottom: 10px;
 }
+
+em { font-variant: italic; }
+strong { font-weight: bold; }
 
 pre {
   background-color: #eee;

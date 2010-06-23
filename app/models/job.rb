@@ -2,10 +2,10 @@ class Job < ActiveRecord::Base
   belongs_to :account
   has_many :applicants
   
-  def after_create
+  after_create lambda {
     self.creation_date = Date.today
     self.save
-  end
+  }
   
   scope :open, where(:status => "open")
 

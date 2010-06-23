@@ -3,6 +3,15 @@
 %p
   %b Status:
   = @job.status
+  
+%p
+  %b Posted on:
+  = @job.creation_date
+
+- if @job.expiry_date
+  %p
+    %b Closed on:
+    = @job.expiry_date
 
 %p= link_to 'Click to Apply', new_pub_job_applicant_path(@job)
 

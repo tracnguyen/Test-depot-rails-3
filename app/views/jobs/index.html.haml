@@ -4,6 +4,7 @@
   %tr
     %th Title
     %th Status
+    %th Number of applications
     %th
     %th
     %th
@@ -12,6 +13,7 @@
     %tr
       %td= link_to job.title, pub_job_path(job)
       %td= job.status
+      %td= @count[job]
       %td= link_to 'Edit', edit_job_path(job)
       %td= link_to 'Destroy', job, :confirm => 'Are you sure?', :method => :delete
 
