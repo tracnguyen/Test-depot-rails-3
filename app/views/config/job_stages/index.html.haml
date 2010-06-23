@@ -3,8 +3,11 @@
 
 %ul{:id => 'sortable'}
   .col1
-    .editable.col11{:id => @first_stage.id}
-      = @first_stage.name
+    .col11{:id => @first_stage.id}
+      .editable
+        = @first_stage.name
+      .ineditable
+        = @first_stage.name
     .col12
       = image_tag("edit-icon.png")
     .col13
@@ -18,8 +21,11 @@
   - @job_stages.each do |job_stage|
     %li{:id => "order_#{job_stage.id}"}
       .col1
-        .editable.col11{:id => job_stage.id}
-          = job_stage.name
+        .col11{:id => job_stage.id}
+          .editable
+            = job_stage.name
+          .ineditable
+            = job_stage.name
         .col12
           = image_tag("edit-icon.png")
         .col13
@@ -41,12 +47,11 @@
         save: function(e, data) {
           $.ajax({
             type: 'PUT',
-            url: '/config/job_stages/' + e.currentTarget.id,
+            url: '/config/job_stages/' + $(this).parent().attr('id'),
             data: {
               'job_stage[name]' : data.value,
             }, 
             success: function(){
-              $('#notice').text('Stage was successfully updated.')
             }
           })
         }
@@ -85,8 +90,11 @@
       });
       
       $('.col12 > img').click(function(){
-        var e = $(this).parent().parent().children(":first"); 
-        e.click();
+        var stage = $(this).parent().parent();
+        var e = stage.children(":first-child"); 
+        e.children(".ineditable").hide();
+        e.children(".editable").show();
+        e.children(".editable").click();
       });
     })
   </script>

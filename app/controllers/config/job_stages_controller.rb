@@ -60,8 +60,7 @@ class Config::JobStagesController < BaseAccountController
 
     respond_to do |format|
       if @job_stage.update_attributes(params[:job_stage])
-        format.js {
-        }
+        format.js { head:ok }
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @job_stage.errors, :status => :unprocessable_entity }

@@ -179,6 +179,10 @@ th { font-weight: bold; padding-bottom: 5px; }
   width: 80%;
 }
 
+#content ul .editable {
+  display: none;
+}
+
 #content ul#sortable .col12, .col13, .col14 {
   float: left;
   width: 30px;
