@@ -7,6 +7,10 @@
       = @first_stage.name
     .col12
       &nbsp;
+    .col13
+      .controlset
+        %input{:class => "color", :type => "text", :value => "#333399"}
+
   .col2
     (default)
   - @job_stages.each do |job_stage|
@@ -16,11 +20,15 @@
           = job_stage.name
         .col12
           = link_to image_tag("delete-icon.png"), config_job_stage_path(job_stage), :confirm => 'Are you sure?', :method => :delete
+        .col13
+          .controlset
+            %input{:class => "color", :type => "text", :value => "#333399"}
 
 .clearfix
 
 .button
   = link_to 'New job stage', new_config_job_stage_path
+
 
 :erb
   <script type='text/javascript'>
@@ -49,9 +57,13 @@
             url: '/config/job_stages/order',
             data: order,
             success: function(data){
+              alert('hello');
             }
           })
         }
       });
+      
+      $('.color').colorPicker();
+      
     })
   </script>
