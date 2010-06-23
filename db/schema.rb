@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(:version => 20100622093713) do
     t.string  "status"
     t.date    "creation_date"
     t.date    "expiry_date"
+    t.integer "applicants_count"
   end
 
   create_table "simple_captcha_data", :force => true do |t|

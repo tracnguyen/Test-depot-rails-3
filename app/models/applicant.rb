@@ -1,11 +1,11 @@
 class Applicant < ActiveRecord::Base
-  belongs_to :job
+  belongs_to :job, :counter_cache => true
   belongs_to :account
   belongs_to :job_stage
 
   has_attached_file :attachment,
-                    :path => ":rails_root/public/assets/attachments/:basename.:extension",
-                    :url => "/assets/attachments/:basename.:extension"
+  	:path => ":rails_root/public/assets/attachments/:basename.:extension",
+  	:url => "/assets/attachments/:basename.:extension"
 
   validates_presence_of :first_name, :last_name, :email, :phone, :job, :job_stage
   validates_associated :job

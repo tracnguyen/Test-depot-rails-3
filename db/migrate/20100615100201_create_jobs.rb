@@ -7,6 +7,7 @@ class CreateJobs < ActiveRecord::Migration
       t.string :status
       t.date :creation_date
       t.date :expiry_date
+      t.integer :applicants_count
     end
   end
 
