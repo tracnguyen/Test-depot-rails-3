@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(:version => 20100622093713) do
   create_table "job_stages", :force => true do |t|
     t.integer  "account_id"
     t.string   "name"
-    t.integer  "order"
+    t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
