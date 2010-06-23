@@ -1,11 +1,14 @@
 class Main::AccountsController < ApplicationController
+  before_filter
   layout 'main'
   
   def index
+    @current_tab = ".tabs .left li:contains(Accounts management)"
     @accounts = Account.all
   end
 
   def new
+    @current_tab = ".tabs .left li:contains(Create an account)"
     @account = Account.new
     @account.build_owner
   end
@@ -27,10 +30,12 @@ class Main::AccountsController < ApplicationController
   end
   
   def edit
+    @current_tab = ".tabs .left li:contains(Accounts management)"
     @account = Account.find(params[:id])
   end
 
   def update
+    @current_tab = ".tabs .left li:contains(Accounts management)"
     @account = Account.find(params[:id])
     if @account.update_attributes(params[:account])
       redirect_to main_accounts_path, :notice => 'Account was successfully updated.'

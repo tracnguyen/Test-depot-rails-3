@@ -65,6 +65,7 @@ body {
   float: right;
   width: 22%;
   padding: 2em 2em 2em 1em;
+  background: #e5e5e5;
 }
 
 #content {
@@ -104,17 +105,31 @@ body {
 #header .left { float: left; }
 
 #header .links { padding-top: 10px; font-size: 92.5%; }
-#header .tabs { font-size: 92.5%; }
+
+#header .tabs { font-size: 92.5%; display: block; }
 #header .tabs li {
   display: inline;
+  margin: 0 2px 0 0;
   padding: .5em;
   line-height: 2em;
   background: #fff;
 }
+#header .tabs .right li { margin: 0 0 0 2px; background: #e5e5e5; }
 
-#header .tabs ol.right li {
-  background: #e5e5e5;
+#header .tabs .current {
+  background: #00bfff;
+  -moz-box-shadow: 0px 0px 4px #fff;
+  -webkit-box-shadow: 0px 0px 4px #fff;
+  box-shadow: 0px 0px 4px #fff;
+  border-top: solid 1px #fff;
+  border-left: solid 1px #fff;
+  border-right: solid 1px #fff;
 }
+#header .tabs .right .current {
+  background: #808080;
+}
+#header .tabs li.current a { color: #fff; }
+
 
 #content h1, #content-full h1 {
   font-size: 1.75em;
@@ -171,7 +186,10 @@ a:visited { color: #5f9ea0; }
 #header .tabs a, #header .tabs a:visited { color: #444; text-decoration: none; }
 table.applicants tr.unread a:visited { color: #4682b4; }
 
-#content p, #content-full p { margin-bottom: 10px; }
+#content p, #content-full p {
+  max-width: 32em;
+  margin-bottom: 10px;
+}
 
 pre {
   background-color: #eee;
@@ -200,7 +218,7 @@ div.field, div.actions {
 #notice { color: green; }
 #alert { color: red; }
 
-table.applicants td { padding: 5px 0 }
+#content td, #content-full td { padding: 5px 0; }
 table.applicants tr.unread { font-size: 95%; font-weight: bold; background: #fffff0; }
 table.applicants tr.read { color: #808080; background: #fffafa; }
 

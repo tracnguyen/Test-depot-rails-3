@@ -36,3 +36,10 @@
       Copyright 2010. Powered by
       :erb
         <a href=<%= root_url(:subdomain => false) %>>HiringApp</a>.
+
+:erb
+  <script>
+  $(function() {
+  	$("<%= @current_tab %>").addClass("current")
+  })
+  </script>

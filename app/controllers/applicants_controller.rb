@@ -1,8 +1,10 @@
 class ApplicantsController < BaseAccountController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :set_current_tab!
   
-  # GET /applicants
-  # GET /applicants.xml
+  def set_current_tab!
+    @current_tab = ".tabs .left li:contains(Applications)"
+  end
+  
   def index
     @job = params[:job_title]
     @status = params[:apt_status]
@@ -19,8 +21,6 @@ class ApplicantsController < BaseAccountController
     end
   end
 
-  # GET /applicants/1
-  # GET /applicants/1.xml
   def show
     @applicant = Applicant.find(params[:id])
     current_user.mark_as_read(@applicant)
@@ -31,7 +31,6 @@ class ApplicantsController < BaseAccountController
     end
   end
 
-  # GET /applicants/1/edit
   def edit
     @applicant = Applicant.find(params[:id])
   end
@@ -45,8 +44,6 @@ class ApplicantsController < BaseAccountController
     end
   end
 
-  # POST /applicants
-  # POST /applicants.xml
   def create
     @applicant = Applicant.new(params[:applicant])
     @applicant.account_id = current_account.id
@@ -84,8 +81,6 @@ class ApplicantsController < BaseAccountController
     end
   end
 
-  # DELETE /applicants/1
-  # DELETE /applicants/1.xml
   def destroy
     @applicant = Applicant.find(params[:id])
     @applicant.destroy

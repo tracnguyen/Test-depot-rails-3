@@ -1,5 +1,9 @@
 class JobsController < BaseAccountController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :set_current_tab!
+  
+  def set_current_tab!
+    @current_tab = ".tabs .left li:contains(Jobs)"
+  end
   
   def index
     @jobs = current_account.jobs

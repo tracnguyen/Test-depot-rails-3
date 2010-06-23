@@ -1,6 +1,10 @@
 class Config::JobStagesController < BaseAccountController
-  before_filter :require_owner
+  before_filter :require_owner, :set_current_tab!
   layout 'config'
+  
+  def set_current_tab!
+    @current_tab = ".tabs .right li:contains(Configuration)"
+  end
   
   def index
     @job_stages = current_account.job_stages
