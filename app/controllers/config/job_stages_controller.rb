@@ -2,10 +2,8 @@ class Config::JobStagesController < BaseAccountController
   before_filter :require_owner
   layout 'config'
   
-  # GET /job_stages
-  # GET /job_stages.xml
   def index
-    @job_stages = JobStage.all
+    @job_stages = current_account.job_stages.order('position ASC')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,8 +11,6 @@ class Config::JobStagesController < BaseAccountController
     end
   end
 
-  # GET /job_stages/1
-  # GET /job_stages/1.xml
   def show
     @job_stage = JobStage.find(params[:id])
 
@@ -24,8 +20,6 @@ class Config::JobStagesController < BaseAccountController
     end
   end
 
-  # GET /job_stages/new
-  # GET /job_stages/new.xml
   def new
     @job_stage = JobStage.new
 
@@ -35,13 +29,10 @@ class Config::JobStagesController < BaseAccountController
     end
   end
 
-  # GET /job_stages/1/edit
   def edit
     @job_stage = JobStage.find(params[:id])
   end
 
-  # POST /job_stages
-  # POST /job_stages.xml
   def create
     params[:job_stage][:position] = current_account.job_stages.size
     @job_stage = current_account.job_stages.build(params[:job_stage])
@@ -57,8 +48,6 @@ class Config::JobStagesController < BaseAccountController
     end
   end
 
-  # PUT /job_stages/1
-  # PUT /job_stages/1.xml
   def update
     @job_stage = JobStage.find(params[:id])
 
@@ -73,8 +62,6 @@ class Config::JobStagesController < BaseAccountController
     end
   end
 
-  # DELETE /job_stages/1
-  # DELETE /job_stages/1.xml
   def destroy
     @job_stage = JobStage.find(params[:id])
     @job_stage.destroy
