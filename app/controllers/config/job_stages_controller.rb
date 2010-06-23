@@ -43,6 +43,7 @@ class Config::JobStagesController < BaseAccountController
   # POST /job_stages
   # POST /job_stages.xml
   def create
+    params[:job_stage][:position] = current_account.job_stages.size
     @job_stage = current_account.job_stages.build(params[:job_stage])
 
     respond_to do |format|

@@ -95,6 +95,10 @@ body {
 	height: 0;
 }
 
+.clear {
+  clear: both;
+}
+
 * html .clearfix,
 *:first-child+html .clearfix {
 	zoom: 1;
@@ -121,6 +125,25 @@ body {
   line-height: 1;
   color: #1f2f2f;
   padding-bottom: 1em;
+}
+
+#content .button {
+  padding-top: 25px;
+}
+
+#content ul#sortable li span.col1{
+  float: left;
+  width: 60%;
+  display: block;
+  padding: 5px;
+  border-bottom: 1px solid #5f9ea0;
+}
+
+#content ul#sortable li span.col2{
+  float: left;
+  display: block;
+  padding: 5px;
+  border-bottom: 1px solid #5f9ea0;
 }
 
 h1#title {
