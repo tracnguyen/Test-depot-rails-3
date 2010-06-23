@@ -5,16 +5,11 @@
     %th Name
     %th Applied for
     %th Status
-    %th
-    %th
-    %th
   - @applicants.each do |applicant|
     %tr{:class => @read_status[applicant.id] ? "read" : "unread"}
       %td= link_to applicant.first_name + " " + applicant.last_name, applicant_path(applicant)
       %td= applicant.job.title
       %td= applicant.job_stage.name
-      %td= link_to 'Edit', edit_applicant_path(applicant)
-      %td= link_to 'Delete', applicant, :confirm => 'Are you sure?', :method => :delete
 
 %br/
 

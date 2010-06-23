@@ -11,11 +11,12 @@
 
   - @jobs.each do |job|
     %tr
-      %td= link_to job.title, pub_job_path(job)
+      %td= job.title
       %td= job.status
       %td= job.applicants_count
+      %td= link_to 'Public View', pub_job_path(job)
       %td= link_to 'Edit', edit_job_path(job)
-      %td= link_to 'Destroy', job, :confirm => 'Are you sure?', :method => :delete
+      %td= link_to 'Delete', job, :confirm => 'Are you sure?', :method => :delete
 
 %br
 

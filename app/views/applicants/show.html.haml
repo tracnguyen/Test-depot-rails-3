@@ -1,9 +1,9 @@
-%p
-  %b First name:
-  = @applicant.first_name
-%p
-  %b Last name:
-  = @applicant.last_name
+%ul.actions
+  %li= link_to 'Edit', edit_applicant_path(@applicant)
+  %li= link_to 'Mark as unread', mark_applicant_as_unread_path(@applicant)
+
+%h1= @applicant.first_name + " " + @applicant.last_name
+
 %p
   %b Email:
   = @applicant.email
@@ -20,11 +20,9 @@
   %b Status:
   = @applicant.job_stage.name
 
-%p
-  = link_to 'Mark as unread', mark_applicant_as_unread_path(@applicant)
+%br/
 
-%p
-  = link_to 'Back', applicants_path
+= link_to 'Back to Applicant List', applicants_path
 
 :javascript
   $(function() {
@@ -32,4 +30,3 @@
   		$("form.edit_applicant").submit()
   	})
   })
-
