@@ -3,6 +3,7 @@
 %table
   %tr
     %th Name
+    %th Owner
     %th Subdomain
     %th
     %th
@@ -10,9 +11,7 @@
   - @accounts.each do |account|
     %tr
       %td= account.name
+      %td= account.owner.email
       %td= link_to account.subdomain, root_url(:subdomain => account.subdomain)
       %td= link_to 'Edit', edit_main_account_path(account)
       %td= link_to 'Destroy', main_account_path(account), :confirm => 'Are you sure?', :method => :delete
-
-%br
-
