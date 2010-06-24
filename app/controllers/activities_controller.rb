@@ -3,7 +3,7 @@ class ActivitiesController < BaseAccountController
   
   def create
     @applicant = Applicant.find(params[:applicant_id])
-    next_stage = current_account.job_stages.where(:name => params[:activity][:next_stage]).first
+    next_stage = JobStage.find(params[:activity][:next_stage])
     state_changed = (next_stage != @applicant.job_stage)
     @activity = @applicant.activities.build \
     	:actor => current_user,

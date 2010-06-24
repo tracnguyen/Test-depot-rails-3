@@ -41,9 +41,9 @@
   %fieldset.status
     %legend Status:
     %ol
-      - @statuses.each do |status|
+      - application_status_collection.each do |status, id|
         %li
-          = f.radio_button :next_stage, status, :checked => @applicant.job_stage.name == status
+          = f.radio_button :next_stage, id, :checked => @applicant.job_stage.name == status
           = status
     = f.submit "Submit"
 
