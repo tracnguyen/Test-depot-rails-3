@@ -57,6 +57,7 @@
       
       $('#sortable').sortable({
         items: 'li',
+        cursor: 'move',
         update: function(e, data) {
           var order = $('#sortable').sortable('serialize');
           $.ajax({
