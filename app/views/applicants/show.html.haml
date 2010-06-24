@@ -6,6 +6,10 @@
     %th
   %tr
     %td
+      %strong Position
+    %td= @applicant.job.title
+  %tr
+    %td
       %strong Email
     %td= @applicant.email
   %tr
@@ -30,9 +34,17 @@
 
 %ol.activities
   - @activities.each do |activity|
-    %li
-      %p.activity
-        = activity.comment
+    - if !activity.new_record?
+      %li
+        %p.comment= activity.comment
+        .actor= activity.actor.email
+        .time= activity.created_at
+        - if activity.next_stage
+          .status_change
+            status changed from
+            %span{:style => "background: #{activity.prev_stage.color}"}= activity.prev_stage.name
+            to
+            %span{:style => "background: #{activity.next_stage.color}"}= activity.next_stage.name
 
 = form_for @activity, :url => applicant_activities_path(@applicant), :html => { :class => "clearfix" } do |f|
   %fieldset.comment
@@ -46,10 +58,6 @@
           = f.radio_button :next_stage, id, :checked => @applicant.job_stage.name == status
           = status
     = f.submit "Submit"
-
-%br/
-
-= link_to 'Back to Application List', applicants_path
 
 :javascript
   $(function() {

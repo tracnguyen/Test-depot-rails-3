@@ -25,9 +25,8 @@ class ApplicantsController < BaseAccountController
     @applicant = Applicant.find(params[:id])
     current_user.mark_as_read(@applicant)
     
-    @activities = @applicant.activities
+    @activities = @applicant.activities.all
     @activity = @applicant.activities.build
-    @statuses = current_account.job_stages.map { |s| s.name }
 
     respond_to do |format|
       format.html # show.html.erb

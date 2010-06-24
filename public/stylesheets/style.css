@@ -52,6 +52,11 @@ a:visited { color: #5f9ea0; }
 em { font-variant: italic; }
 strong { font-weight: bold; }
 
+p {
+  max-width: 32em;
+  margin-bottom: 10px;
+}
+
 pre {
   background-color: #eee;
   padding: 10px;
@@ -217,11 +222,6 @@ table { width: 100%; }
 
 #content table.applicants tr.unread a:visited { color: #4682b4; }
 
-#content p, #content-full p {
-  max-width: 32em;
-  margin-bottom: 10px;
-}
-
 #content ul.actions { margin: 2em 0; }
 #content ul.actions li {
   display: inline;
@@ -260,6 +260,14 @@ form#new_activity fieldset { float: left; }
 form#new_activity fieldset.status { margin-left: 2em; padding: 5px; }
 form#new_activity fieldset.status li { margin-bottom: .5em; }
 form#new_activity fieldset.status input[type=submit] { margin: .5em; padding: .5em; }
+
+ol.activities { margin: 2em 0; }
+ol.activities li { max-width: 30em; margin-bottom: 1em; }
+ol.activities li .actor, ol.activities li .time { display: inline; }
+ol.activities li .actor { color: #4682b4; }
+ol.activities li .time { float: right; font-size: 75%; }
+ol.activities li .status_change { font-size: 85%; }
+ol.activities li p.comment { margin: 0; }
 
 #flashes { margin: 10px 0; padding: 5px 0; }
 #flashes p { max-width: 28em; }
