@@ -14,10 +14,10 @@
       %td= job.title
       %td= job.status
       %td= job.applicants_count
-      %td= link_to 'Public View', pub_job_path(job)
+      %td= link_to 'View', pub_job_path(job)
       %td= link_to 'Edit', edit_job_path(job)
       %td= link_to 'Delete', job, :confirm => 'Are you sure?', :method => :delete
 
 %br
 
-= link_to 'New job', new_job_path
+= link_to 'Post a new Job', new_job_path
