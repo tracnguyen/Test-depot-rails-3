@@ -2,6 +2,8 @@ class Applicant < ActiveRecord::Base
   belongs_to :job, :counter_cache => true
   belongs_to :account
   belongs_to :job_stage
+  
+  has_many :activities
 
   has_attached_file :attachment,
   	:path => ":rails_root/public/assets/attachments/:basename.:extension",

@@ -9,13 +9,30 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100622093713) do
+ActiveRecord::Schema.define(:version => 20100624081315) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
     t.string   "description"
     t.string   "subdomain"
     t.integer  "owner_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "activities", :force => true do |t|
+    t.integer  "account_id"
+    t.integer  "applicant_id"
+    t.integer  "job_id"
+    t.integer  "actor_id"
+    t.string   "action"
+    t.integer  "subject_id"
+    t.string   "subject_type"
+    t.integer  "subject2_id"
+    t.string   "subject2_type"
+    t.integer  "prev_stage_id"
+    t.integer  "next_stage_id"
+    t.text     "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

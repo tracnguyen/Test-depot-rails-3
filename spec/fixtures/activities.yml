@@ -1,0 +1,27 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  applicant_id: 1
+  job_id: 1
+  actor_id: 1
+  action: MyString
+  subject_id: 1
+  subject_type: MyString
+  subject2_id: 1
+  subject2_type: MyString
+  prev_stage_id: 1
+  next_stage_id: 1
+  comment: MyText
+
+two:
+  applicant_id: 1
+  job_id: 1
+  actor_id: 1
+  action: MyString
+  subject_id: 1
+  subject_type: MyString
+  subject2_id: 1
+  subject2_type: MyString
+  prev_stage_id: 1
+  next_stage_id: 1
+  comment: MyText

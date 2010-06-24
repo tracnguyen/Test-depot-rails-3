@@ -28,6 +28,25 @@
   %li= link_to 'Edit details', edit_applicant_path(@applicant)
   %li= link_to 'Mark as unread', mark_applicant_as_unread_path(@applicant)
 
+%ol.activities
+  - @activities.each do |activity|
+    %li
+      %p.activity
+        = activity.comment
+
+= form_for @activity, :url => applicant_activities_path(@applicant), :html => { :class => "clearfix" } do |f|
+  %fieldset.comment
+    %legend Comment:
+    = f.text_area :comment, :rows => 14, :cols => 64
+  %fieldset.status
+    %legend Status:
+    %ol
+      - @statuses.each do |status|
+        %li
+          = f.radio_button :next_stage, status, :checked => @applicant.job_stage.name == status
+          = status
+    = f.submit "Submit"
+
 %br/
 
 = link_to 'Back to Application List', applicants_path

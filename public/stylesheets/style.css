@@ -255,6 +255,12 @@ table { width: 100%; }
   margin-right: 5px;
 }
 
+form#new_activity legend { font-size: 90%; font-weight: bold; margin-bottom: 5px; }
+form#new_activity fieldset { float: left; }
+form#new_activity fieldset.status { margin-left: 2em; padding: 5px; }
+form#new_activity fieldset.status li { margin-bottom: .5em; }
+form#new_activity fieldset.status input[type=submit] { margin: .5em; padding: .5em; }
+
 #flashes { margin: 10px 0; padding: 5px 0; }
 #flashes p { max-width: 28em; }
 
