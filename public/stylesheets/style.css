@@ -64,6 +64,8 @@ pre {
 }
 
 table { width: 100%; }
+td { padding: 5px; }
+th { font-weight: bold; padding: 5px; }
 
 .clearfix:after {
 	clear: both;
@@ -231,23 +233,20 @@ table { width: 100%; }
 }
 #content ul.actions li a, #content ul.actions a:visited { color: #4682b4; }
 
-#content td { padding: 5px; }
-#content th { font-weight: bold; padding: 5px; }
-
 #content-full th { font-weight: bold; padding: 5px 0; }
 #content-full td { padding: 5px 0; }
 
-#content table.details { width: 50%; min-width: 340px; }
-#content table.details th:nth-child(1) { width: 7.5em; }
-#content table.details tr { border-bottom: solid 1px #c0c0c0; }
+table.details { width: 50%; min-width: 340px; }
+table.details th:nth-child(1) { width: 7.5em; }
+table.details tr { border-bottom: solid 1px #c0c0c0; }
 
-#content table.applicants td { font-size: 92%; }
-#content table.applicants tr.unread { font-weight: bold; background: #ffffe0; }
-#content table.applicants tr.read { color: #808080; background: #fffafa; }
-#content table.applicants th:nth-child(3) { padding-left: 10px; }
-#content table.applicants td:nth-child(3) { padding-left: 10px; }
+table.applicants td { font-size: 92%; }
+table.applicants tr.unread { font-weight: bold; background: #ffffe0; }
+table.applicants tr.read { color: #808080; background: #fffafa; }
+table.applicants th:nth-child(3) { padding-left: 10px; }
+table.applicants td:nth-child(3) { padding-left: 10px; }
 
-#content .statusbox {
+table.applicants .statusbox {
   display: inline-block;
   vertical-align: middle;
   height: 2em;
@@ -262,12 +261,19 @@ form#new_activity fieldset.status li { margin-bottom: .5em; }
 form#new_activity fieldset.status input[type=submit] { margin: .5em; padding: .5em; }
 
 ol.activities { margin: 2em 0; }
-ol.activities li { max-width: 30em; margin-bottom: 1em; }
-ol.activities li .actor, ol.activities li .time { display: inline; }
-ol.activities li .actor { color: #4682b4; }
-ol.activities li .time { float: right; font-size: 75%; }
-ol.activities li .status_change { font-size: 85%; }
-ol.activities li p.comment { margin: 0; }
+ol.activities li { max-width: 41em; margin-bottom: 2em; }
+ol.activities li p.comment { max-width: 41em; margin-bottom: .5em; }
+ol.activities li td { padding: 0; }
+ol.activities li td.actor { width: 33%; color: #4682b4; }
+ol.activities li td.time { width: 33%; font-size: 80%; text-align: right; }
+ol.activities li span.status { font-size: 80%; font-weight: bold; }
+ol.activities li span.arrow { font-weight: bold; margin: 0 10px; }
+ol.activities li .statusbox {
+  display: inline-block;
+  vertical-align: middle;
+  height: 1.25em;
+  width: 1.25em;
+}
 
 #flashes { margin: 10px 0; padding: 5px 0; }
 #flashes p { max-width: 28em; }
