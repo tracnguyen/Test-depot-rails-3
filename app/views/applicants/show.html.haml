@@ -49,7 +49,7 @@
                 %div{:style => "background: #{activity.next_stage.color}", :class => "statusbox"}
                 %span.status= activity.next_stage.name
             %td
-              %span.time= activity.created_at
+              %span.time.right= activity.created_at
 
 = form_for @activity, :url => applicant_activities_path(@applicant), :html => { :class => "clearfix" } do |f|
   %fieldset.comment

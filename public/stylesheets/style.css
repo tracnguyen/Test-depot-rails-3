@@ -128,8 +128,8 @@ th { font-weight: bold; padding: 5px; }
 
 /** Rest **/
 
-#header .right { float: right; }
-#header .left { float: left; }
+.right { float: right; }
+.left { float: left; }
 
 #header .links { padding-top: 10px; font-size: 92.5%; }
 
@@ -261,13 +261,12 @@ form#new_activity fieldset.status input[type=submit] { margin: .5em; padding: .5
 
 ol.activities { margin: 2em 0; }
 ol.activities li { max-width: 41em; margin-bottom: 2em; }
-ol.activities li p.comment { max-width: 41em; margin-bottom: .5em; }
+ol.activities li p.comment { max-width: 41em; margin: .5em 0; }
 ol.activities li td { padding: 0; }
-ol.activities li table.threecol td { width: 33%; }
-ol.activities li table.twocol td { width: 33%; padding-bottom: .25em; }
+ol.activities li table.threecol td:first-child { width: 33%; }
+ol.activities li table.twocol td { width: 33%; }
 ol.activities li td span.actor { color: #4682b4; }
-ol.activities li td span.time { font-size: 80%; float: right; }
-ol.activities li table.twocol td span.time { float: left; }
+ol.activities li td span.time { font-size: 80%; }
 ol.activities li span.status { font-size: 80%; font-weight: bold; }
 ol.activities li span.arrow { font-weight: bold; margin: 0 10px; }
 ol.activities li .statusbox {

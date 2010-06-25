@@ -9,11 +9,9 @@
             != "<a href=#{applicant_path(activity.applicant)}>#{activity.applicant.display_name}</a>"
           - if activity.next_stage
             %td
-              %div{:style => "background: #{activity.prev_stage.color}", :class => "statusbox"}
-              %span.status= activity.prev_stage.name
-              %span.arrow →
-              %div{:style => "background: #{activity.next_stage.color}", :class => "statusbox"}
-              %span.status= activity.next_stage.name
+              %div.right
+                %div{:style => "background: #{activity.next_stage.color}", :class => "statusbox"}
+                %span.status= activity.next_stage.name
       %p.comment= activity.comment
       %table.twocol
         %tr
