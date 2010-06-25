@@ -48,16 +48,23 @@
             var $this = $(event.target);
 
             if ($this.is('button')) {
-                var hash = {
-                    value: $input = $this.siblings('input').val()
-                };
+                if ($this.hasClass('save')) {
+                  var hash = {
+                      value: $input = $this.siblings('input').val()
+                  };
 
-                if (($.isFunction(options.save) && options.save.call(self, event, hash)) !== false || !options.save) {
-                    self.value(hash.value);
+                  if (($.isFunction(options.save) && options.save.call(self, hash)) !== false || !options.save) {
+                      self.value(hash.value);
+                  }
+                }
+                else if ($this.hasClass('cancel')) {
+                  if ($.isFunction(options.cancel)) {
+                    options.cancel.call(self);
+                  }
                 }
             } else if ($this.is(self[0].tagName) || $this.hasClass('inlineEdit-placeholder')) {
                 self
-                    .html('<input type="text" value="'+ self.value() +'"> <button>'+ options.buttonText +'</button> <button>'+ options.cancelText +'</button>')
+                    .html('<input type="text" value="'+ self.value() +'"> <button class="save">'+ options.buttonText +'</button> <button class="cancel">'+ options.cancelText +'</button>')
                     .find('input')
                         .bind('blur', function() {
                             if (self.timer) {

@@ -42,7 +42,7 @@
   <script type='text/javascript'>
     $(document).ready(function() {
       $('.editable').inlineEdit({
-        save: function(e, data) {
+        save: function(data) {
           $.ajax({
             type: 'PUT',
             url: '/config/job_stages/' + $(this).parent().attr('id'),
@@ -50,6 +50,11 @@
               'stage[name]' : data.value,
             }
           })
+        },
+        cancel: function() {
+          $(this).val($(this).next());
+          $(this).hide();
+          $(this).next().show();
         }
       });
       
