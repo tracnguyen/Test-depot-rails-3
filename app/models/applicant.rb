@@ -9,6 +9,8 @@ class Applicant < ActiveRecord::Base
   	:path => ":rails_root/public/assets/attachments/:basename.:extension",
   	:url => "/assets/attachments/:basename.:extension"
 
+  has_many :attachments, :as => :attachable
+  
   validates_presence_of :first_name, :last_name, :email, :phone, :job, :job_stage
   validates_associated :job
 

@@ -64,6 +64,18 @@
           = status
     = f.submit "Submit"
 
+%p
+  Extra attachments 
+  - @applicant.attachments.each do |a|
+    = a.attachment_file_name
+              
+= form_for [@applicant, Attachment.new], :url => applicant_attachments_path(@applicant), :html => {:multipart => true} do |f|          
+  %fieldset.attachment
+    %legend Attachments:
+    %ol
+    = f.file_field :attachment, :as => :file
+    = f.submit "Submit"
+
 :javascript
   $(function() {
   	$("select#applicant_status").change(function() {
