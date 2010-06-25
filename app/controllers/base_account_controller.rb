@@ -1,5 +1,5 @@
 class BaseAccountController < ApplicationController
-  before_filter :require_account
+  before_filter :require_account, :set_n_unread
   helper_method :require_owner
 
 protected
@@ -15,6 +15,14 @@ protected
     if current_user && (current_user != current_account.owner)
       flash[:alert] = "You do not have sufficient privilige."
       redirect_to dashboard_path
+    end
+  end
+  
+  def set_n_unread
+    if current_user
+      @n_unread_applications = current_account.applicants.count - current_user.viewed_applications.count
+    else
+      @n_unread_applications = 0
     end
   end
 end
