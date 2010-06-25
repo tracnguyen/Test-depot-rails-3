@@ -1,1 +1,21 @@
-%h1 Dashboard
+%ol.activities
+  - @activities.each do |activity|
+    %li
+      %table.twocol
+        %tr
+          %td
+            %span.actor= activity.actor.email
+            on
+            != "<a href=#{applicant_path(activity.applicant)}>#{activity.applicant.display_name}</a>"
+          - if activity.next_stage
+            %td
+              %div{:style => "background: #{activity.prev_stage.color}", :class => "statusbox"}
+              %span.status= activity.prev_stage.name
+              %span.arrow →
+              %div{:style => "background: #{activity.next_stage.color}", :class => "statusbox"}
+              %span.status= activity.next_stage.name
+      %p.comment= activity.comment
+      %table.twocol
+        %tr
+          %td
+            %span.time= activity.created_at

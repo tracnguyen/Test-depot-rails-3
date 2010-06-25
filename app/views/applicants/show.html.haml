@@ -37,17 +37,19 @@
     - if !activity.new_record?
       %li
         %p.comment= activity.comment
-        %table
+        %table.threecol
           %tr
-            %td.actor= activity.actor.email
-            %td.status_change
+            %td
+              %span.actor= activity.actor.email
+            %td
               - if activity.next_stage
                 %div{:style => "background: #{activity.prev_stage.color}", :class => "statusbox"}
                 %span.status= activity.prev_stage.name
                 %span.arrow →
                 %div{:style => "background: #{activity.next_stage.color}", :class => "statusbox"}
                 %span.status= activity.next_stage.name
-            %td.time= activity.created_at
+            %td
+              %span.time= activity.created_at
 
 = form_for @activity, :url => applicant_activities_path(@applicant), :html => { :class => "clearfix" } do |f|
   %fieldset.comment

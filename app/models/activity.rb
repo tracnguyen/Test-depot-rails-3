@@ -10,6 +10,4 @@ class Activity < ActiveRecord::Base
   
   belongs_to :prev_stage, :class_name => "JobStage"
   belongs_to :next_stage, :class_name => "JobStage"
-  
-  default_scope order("created_at ASC")
 end

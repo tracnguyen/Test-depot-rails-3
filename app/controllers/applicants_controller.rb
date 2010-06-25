@@ -25,7 +25,7 @@ class ApplicantsController < BaseAccountController
     @applicant = Applicant.find(params[:id])
     current_user.mark_as_read(@applicant)
     
-    @activities = @applicant.activities.all
+    @activities = @applicant.activities.order("created_at ASC").all
     @activity = @applicant.activities.build
 
     respond_to do |format|

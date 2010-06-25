@@ -3,6 +3,7 @@ class Account < ActiveRecord::Base
   has_many :jobs
   has_many :job_stages
   has_many :applicants
+  has_many :activities
   
   has_one :owner, :class_name => "User"
   accepts_nested_attributes_for :owner

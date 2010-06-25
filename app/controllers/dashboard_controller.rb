@@ -6,5 +6,6 @@ class DashboardController < BaseAccountController
   end
 
   def index
+    @activities = current_account.activities.order("created_at DESC").limit(25)
   end
 end

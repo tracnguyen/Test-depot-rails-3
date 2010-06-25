@@ -245,7 +245,6 @@ table.applicants tr.unread { font-weight: bold; background: #ffffe0; }
 table.applicants tr.read { color: #808080; background: #fffafa; }
 table.applicants th:nth-child(3) { padding-left: 10px; }
 table.applicants td:nth-child(3) { padding-left: 10px; }
-
 table.applicants .statusbox {
   display: inline-block;
   vertical-align: middle;
@@ -264,8 +263,11 @@ ol.activities { margin: 2em 0; }
 ol.activities li { max-width: 41em; margin-bottom: 2em; }
 ol.activities li p.comment { max-width: 41em; margin-bottom: .5em; }
 ol.activities li td { padding: 0; }
-ol.activities li td.actor { width: 33%; color: #4682b4; }
-ol.activities li td.time { width: 33%; font-size: 80%; text-align: right; }
+ol.activities li table.threecol td { width: 33%; }
+ol.activities li table.twocol td { width: 33%; padding-bottom: .25em; }
+ol.activities li td span.actor { color: #4682b4; }
+ol.activities li td span.time { font-size: 80%; float: right; }
+ol.activities li table.twocol td span.time { float: left; }
 ol.activities li span.status { font-size: 80%; font-weight: bold; }
 ol.activities li span.arrow { font-weight: bold; margin: 0 10px; }
 ol.activities li .statusbox {

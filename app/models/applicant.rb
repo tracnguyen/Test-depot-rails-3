@@ -16,5 +16,9 @@ class Applicant < ActiveRecord::Base
     job_error = errors.on(:job)
     errors.add(:job_id, job_error) if job_error
   }
+  
+  def display_name
+    first_name + " " + last_name
+  end
 end
 
