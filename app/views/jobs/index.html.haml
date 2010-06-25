@@ -13,7 +13,7 @@
     %tr
       %td= job.title
       %td= job.status
-      %td= job.applicants_count
+      %td= job.applicants_count ? job.applicants_count : 0
       %td= link_to 'View', pub_job_path(job)
       %td= link_to 'Edit', edit_job_path(job)
       %td= link_to 'Delete', job, :confirm => 'Are you sure?', :method => :delete
