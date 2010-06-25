@@ -21,6 +21,8 @@
             value: '',
             save: '',
             buttonText: 'Save',
+            cancel: '',
+            cancelText: 'Cancel',
             placeholder: 'Click to edit'
         }, options);
 
@@ -53,10 +55,9 @@
                 if (($.isFunction(options.save) && options.save.call(self, event, hash)) !== false || !options.save) {
                     self.value(hash.value);
                 }
-
             } else if ($this.is(self[0].tagName) || $this.hasClass('inlineEdit-placeholder')) {
                 self
-                    .html('<input type="text" value="'+ self.value() +'"> <button>'+ options.buttonText +'</button>')
+                    .html('<input type="text" value="'+ self.value() +'"> <button>'+ options.buttonText +'</button> <button>'+ options.cancelText +'</button>')
                     .find('input')
                         .bind('blur', function() {
                             if (self.timer) {
