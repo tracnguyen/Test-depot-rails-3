@@ -240,6 +240,7 @@ table.details { width: 50%; min-width: 340px; }
 table.details th:nth-child(1) { width: 7.5em; }
 table.details tr { border-bottom: solid 1px #c0c0c0; }
 table.attachments td:first-child { width: 40%; }
+table.attachments a { text-decoration: none; }
 
 table.applicants td { font-size: 92%; }
 table.applicants tr.unread { font-weight: bold; background: #ffffe0; }
@@ -267,6 +268,7 @@ ol.activities li td { padding: 0; }
 ol.activities li table.threecol td:first-child { width: 33%; }
 ol.activities li table.twocol td { width: 33%; }
 ol.activities li td span.actor { color: #4682b4; }
+ol.activities li td span.attachment a { text-decoration: none; }
 ol.activities li td span.time { font-size: 80%; }
 ol.activities li span.status { font-size: 80%; font-weight: bold; }
 ol.activities li span.arrow { font-weight: bold; margin: 0 10px; }

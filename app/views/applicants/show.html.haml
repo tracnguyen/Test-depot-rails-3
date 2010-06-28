@@ -44,9 +44,9 @@
               %td
                 %span.action=activity.action
                 - if activity.action == 'attached'
-                  - res = Attachment.find(activity.subject_id)
-                  %span.resource
-                    = link_to res.attachment_file_name, res.attachment.url
+                  - a = Attachment.find(activity.subject_id)
+                  %span.attachment
+                    = link_to a.attachment_file_name, a.attachment.url
               %td
                 %span.time.right= activity.created_at
       - else
