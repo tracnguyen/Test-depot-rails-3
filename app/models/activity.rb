@@ -5,7 +5,7 @@ class Activity < ActiveRecord::Base
   
   belongs_to :actor, :class_name => "User"
   
-  belongs_to :subject, :polymorphic => true   # link to object 
+  belongs_to :subject, :polymorphic => true  
   belongs_to :subject2, :polymorphic => true  
   
   belongs_to :prev_stage, :class_name => "JobStage"

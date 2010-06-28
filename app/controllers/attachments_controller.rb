@@ -44,7 +44,16 @@ class AttachmentsController < ApplicationController
     @attachment = @applicant.attachments.build(params[:attachment])
 
     respond_to do |format|
-      if @attachment.save
+      if @attachment.save!
+        @activity = Activity.create \
+	        :actor => current_user,
+	        :job_id => @applicant.job_id,
+	        :account_id => @applicant.account_id,
+	        :applicant_id => @applicant.id,
+          :action => 'attached',
+          :subject_id => @attachment.id,
+          :subject_type => 'Attachment'
+        
         format.html { redirect_to(applicant_path(@applicant), :notice => 'Attachment was successfully created.') }
         format.xml  { render :xml => @attachment, :status => :created, :location => @attachment }
       else

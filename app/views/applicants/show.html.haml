@@ -35,21 +35,36 @@
 %ol.activities
   - @activities.each do |activity|
     - if !activity.new_record?
-      %li
-        %p.comment= activity.comment
-        %table.threecol
-          %tr
-            %td
-              %span.actor= activity.actor.email
-            %td
-              - if activity.next_stage
-                %div{:style => "background: #{activity.prev_stage.color}", :class => "statusbox"}
-                %span.status= activity.prev_stage.name
-                %span.arrow →
-                %div{:style => "background: #{activity.next_stage.color}", :class => "statusbox"}
-                %span.status= activity.next_stage.name
-            %td
-              %span.time.right= activity.created_at
+      - if activity.action
+        %li
+          %table.threecol
+            %tr
+              %td
+                %span.actor= activity.actor.email
+              %td
+                %span.action=activity.action
+                - if activity.action == 'attached'
+                  - res = Attachment.find(activity.subject_id)
+                  %span.resource
+                    = link_to res.attachment_file_name, res.attachment.url
+              %td
+                %span.time.right= activity.created_at
+      - else
+        %li
+          %p.comment= activity.comment
+          %table.threecol
+            %tr
+              %td
+                %span.actor= activity.actor.email
+              %td
+                - if activity.next_stage
+                  %div{:style => "background: #{activity.prev_stage.color}", :class => "statusbox"}
+                  %span.status= activity.prev_stage.name
+                  %span.arrow →
+                  %div{:style => "background: #{activity.next_stage.color}", :class => "statusbox"}
+                  %span.status= activity.next_stage.name
+              %td
+                %span.time.right= activity.created_at
 
 = form_for @activity, :url => applicant_activities_path(@applicant), :html => { :class => "clearfix" } do |f|
   %fieldset.comment
@@ -64,15 +79,17 @@
           = status
     = f.submit "Submit"
 
-%p
-  Extra attachments 
-  - @applicant.attachments.each do |a|
-    = a.attachment_file_name
+%fieldset.extra-attachments
+  %legend 
+    Extra Attachments:
+  %ol
+    - @applicant.attachments.each do |a|
+      %li
+        = link_to a.attachment_file_name, a.attachment.url
               
 = form_for [@applicant, Attachment.new], :url => applicant_attachments_path(@applicant), :html => {:multipart => true} do |f|          
   %fieldset.attachment
     %legend Attachments:
-    %ol
     = f.file_field :attachment, :as => :file
     = f.submit "Submit"
 
