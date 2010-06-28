@@ -9,9 +9,13 @@ class ApplicantsController < BaseAccountController
     @job = params[:job_title]
     @status = params[:apt_status]
     # This will result in only a single SQL query, thanks to ActiveRelation
-    @applicants = current_account.applicants.order('created_at DESC').includes(:job_stage)
-    @applicants = @applicants.where({:job_id => @job}) unless @job.nil? || @job.empty?
+    if @job.nil? || @job.empty?
+      @applicants = current_account.applicants
+    else
+      @applicants = Applicant.where({:job_id => @job})
+    end
     @applicants = @applicants.where({:job_stage_id => @status}) unless @job.nil? || @status.empty?
+    @applicants = @applicants.order('created_at DESC').includes(:job, :job_stage)
 
     @read_status = current_user.read_status(@applicants)
     

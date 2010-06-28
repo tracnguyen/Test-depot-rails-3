@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100625093937) do
+ActiveRecord::Schema.define(:version => 20100628033755) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -76,6 +76,9 @@ ActiveRecord::Schema.define(:version => 20100625093937) do
     t.datetime "attachment_updated_at"
   end
 
+  add_index "applicants", ["account_id", "job_stage_id"], :name => "index_applicants_on_account_and_stage"
+  add_index "applicants", ["job_id", "job_stage_id"], :name => "index_applicants_on_job_and_stage"
+
   create_table "attachments", :force => true do |t|
     t.string   "caption"
     t.integer  "attachable_id"
@@ -130,6 +133,9 @@ ActiveRecord::Schema.define(:version => 20100625093937) do
   end
 
   add_index "simple_captcha_data", ["key"], :name => "idx_key"
+
+# Could not dump table "sqlite_stat1" because of following StandardError
+#   Unknown type '' for column 'tbl'
 
   create_table "user_views", :id => false, :force => true do |t|
     t.integer "user_id"
