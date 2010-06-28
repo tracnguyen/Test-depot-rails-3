@@ -26,10 +26,10 @@ class ApplicantsController < BaseAccountController
   end
 
   def show
-    @applicant = Applicant.find(params[:id])
+    @applicant = Applicant.where(:id => params[:id]).includes(:job).first
     current_user.mark_as_read(@applicant)
     
-    @activities = @applicant.activities.order("created_at ASC").all
+    @activities = @applicant.activities.order("created_at ASC").includes(:actor, :prev_stage, :next_stage).all
     @activity = @applicant.activities.build
 
     respond_to do |format|

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100628033755) do
+ActiveRecord::Schema.define(:version => 20100628041905) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(:version => 20100628033755) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "accounts", ["subdomain"], :name => "index_accounts_on_subdomain", :unique => true
 
   create_table "activities", :force => true do |t|
     t.integer  "account_id"
@@ -36,6 +38,9 @@ ActiveRecord::Schema.define(:version => 20100628033755) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "activities", ["account_id"], :name => "index_activities_on_account"
+  add_index "activities", ["applicant_id"], :name => "index_activities_on_applicant"
 
   create_table "admins", :force => true do |t|
     t.string   "email",                :default => "", :null => false
@@ -115,6 +120,8 @@ ActiveRecord::Schema.define(:version => 20100628033755) do
     t.datetime "updated_at"
   end
 
+  add_index "job_stages", ["account_id"], :name => "index_job_stages_on_account"
+
   create_table "jobs", :force => true do |t|
     t.integer "account_id"
     t.string  "title"
@@ -124,6 +131,8 @@ ActiveRecord::Schema.define(:version => 20100628033755) do
     t.date    "expiry_date"
     t.integer "applicants_count"
   end
+
+  add_index "jobs", ["account_id"], :name => "index_jobs_on_account"
 
   create_table "simple_captcha_data", :force => true do |t|
     t.string   "key",        :limit => 40
