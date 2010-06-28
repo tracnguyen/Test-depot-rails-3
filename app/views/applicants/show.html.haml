@@ -79,19 +79,29 @@
           = status
     = f.submit "Submit"
 
-%fieldset.extra-attachments
-  %legend 
+- unless @applicant.attachments.empty?
+  %fieldset.extra-attachments
+    %legend 
     Extra Attachments:
-  %ol
-    - @applicant.attachments.each do |a|
-      %li
-        = link_to a.attachment_file_name, a.attachment.url
+    %table
+      - @applicant.attachments.each do |a|
+        %tr
+          %td
+            = a.description
+          %td
+            = link_to a.attachment_file_name, a.attachment.url
               
-= form_for [@applicant, Attachment.new], :url => applicant_attachments_path(@applicant), :html => {:multipart => true} do |f|          
-  %fieldset.attachment
-    %legend Attachments:
-    = f.file_field :attachment, :as => :file
-    = f.submit "Submit"
+%fieldset.add-attachments
+  %legend 
+    Add more attachments:
+    = form_for [@applicant, Attachment.new], :url => applicant_attachments_path(@applicant), :html => {:multipart => true} do |f|          
+      = f.label "Description"
+      = f.text_field :description
+      %br
+      %br
+      = f.label "Attachment"
+      = f.file_field :attachment, :as => :file
+      = f.submit "Submit"
 
 :javascript
   $(function() {

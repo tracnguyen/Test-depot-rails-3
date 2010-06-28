@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(:version => 20100625093937) do
   end
 
   create_table "attachments", :force => true do |t|
+    t.string   "description"
     t.integer  "attachable_id"
     t.string   "attachable_type"
     t.string   "attachment_file_name"
