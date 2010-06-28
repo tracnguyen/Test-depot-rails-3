@@ -5,6 +5,9 @@ class Account < ActiveRecord::Base
   has_many :applicants
   has_many :activities
   
+  validates_presence_of :name, :subdomain
+  validates_uniqueness_of :subdomain
+  
   has_one :owner, :class_name => "User"
   accepts_nested_attributes_for :owner
   

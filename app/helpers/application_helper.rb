@@ -1,6 +1,6 @@
 module ApplicationHelper
   def job_status_collection
-    [['Draft', 'draft'],['Open', 'open'],['Close', 'close']]
+    [['Draft', 'draft'],['Open', 'open'],['Closed', 'closed']]
   end
   
   def job_filter_collection
