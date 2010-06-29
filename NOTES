@@ -6,3 +6,4 @@ Install:
   For captcha:
   == 
     sudo apt-get install imagemagick --fix-missing 
+abc
