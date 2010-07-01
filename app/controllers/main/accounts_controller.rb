@@ -6,6 +6,15 @@ class Main::AccountsController < ApplicationController
     @current_tab = ".tabs .left li:contains(Accounts management)"
     @accounts = Account.all
   end
+  
+  def show
+    @account = Account.find(params[:id])
+    
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @applicant }
+    end
+  end
 
   def new
     @current_tab = ".tabs .left li:contains(Create an account)"

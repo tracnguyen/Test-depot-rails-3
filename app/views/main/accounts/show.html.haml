@@ -1,0 +1,15 @@
+%h1
+  Your account information
+
+%table 
+  %tr
+    %td
+      %b= "Name:"
+    %td= @account.name
+  %tr
+    %td
+      %b= "Email:"
+    %td= @account.owner.email
+%br
+%br
+= link_to "Go to your site", root_url(:subdomain => @account.subdomain)
