@@ -1,33 +1,70 @@
 %h1= @applicant.first_name + " " + @applicant.last_name
 
-%table.details
-  %tr
-    %th
-    %th
-  %tr
-    %td
-      %strong Position
-    %td= @applicant.job.title
-  %tr
-    %td
-      %strong Email
-    %td= @applicant.email
-  %tr
-    %td
-      %strong Phone
-    %td= @applicant.phone
-  %tr
-    %td
-      %strong Resume
-    - if @applicant.attachment?
-      %td= link_to @applicant.attachment_file_name, @applicant.attachment.url
-    - else
-      %td No resume attached
-  %tr
-    %td
-      %strong Status
-    %td{:style => "background: #{@applicant.job_stage.color}"}= @applicant.job_stage.name
+.profile
+  .details
+    %table
+      %tr
+        %th
+        %th
+      %tr
+        %td
+          %strong Position
+        %td= @applicant.job.title
+      %tr
+        %td
+          %strong Email
+        %td= @applicant.email
+      %tr
+        %td
+          %strong Phone
+        %td= @applicant.phone
+      %tr
+        %td
+          %strong Resume
+        - if @applicant.attachment?
+          %td= link_to @applicant.attachment_file_name, @applicant.attachment.url
+        - else
+          %td No resume attached
+      %tr
+        %td
+          %strong Status
+        %td{:style => "background: #{@applicant.job_stage.color}"}= @applicant.job_stage.name
 
+  .attachments
+    - unless @applicant.attachments.empty?
+      Attachments:
+      %ul
+        - @applicant.attachments.each do |a|
+          %li
+            - if a.caption.empty?
+              = link_to a.attachment_file_name, a.attachment.url
+            - else 
+              = link_to a.caption, a.attachment.url
+      %a{:href => "#", :onclick => "$('#add_attachment').dialog({modal: true, title: 'Add attachment', width: 700, height: 200});"}= "Add attachment"
+              
+  .clearfix
+
+#add_attachment              
+  = form_for [@applicant, Attachment.new], :url => applicant_attachments_path(@applicant), :html => {:multipart => true} do |f|          
+    %table{:class => "attachments"}
+      %tr
+        %td
+          = f.label "Caption"
+        %td
+          = f.text_field :caption
+      %tr
+        %td
+          = f.label "Attachment"
+        %td
+          = f.file_field :attachment, :as => :file
+      %tr
+        %td
+          = f.submit "Submit"              
+
+#dialog
+  %p
+    This is a dialog
+  
 %ul.actions
   %li= link_to 'Edit details', edit_applicant_path(@applicant)
   %li= link_to 'Mark as unread', mark_applicant_as_unread_path(@applicant)
@@ -79,40 +116,11 @@
           = status
     = f.submit "Submit"
 
-%br
-- unless @applicant.attachments.empty?
-  %table{:class => "attachments"}
-    %th
-      Extra Attachments:
-    - @applicant.attachments.each do |a|
-      %tr
-        %td
-          = a.caption
-        %td
-          = link_to a.attachment_file_name, a.attachment.url
-              
-%br
-= form_for [@applicant, Attachment.new], :url => applicant_attachments_path(@applicant), :html => {:multipart => true} do |f|          
-  %table{:class => "attachments"}
-    %th
-      Add more attachments:
-    %tr
-      %td
-        = f.label "Caption"
-      %td
-        = f.text_field :caption
-    %tr
-      %td
-        = f.label "Attachment"
-      %td
-        = f.file_field :attachment, :as => :file
-    %tr
-      %td
-        = f.submit "Submit"
-
 :javascript
   $(function() {
   	$("select#applicant_status").change(function() {
   		$("form.edit_applicant").submit()
-  	})
+  	});
+  	
+  	$('#add_attachment').hide();
   })

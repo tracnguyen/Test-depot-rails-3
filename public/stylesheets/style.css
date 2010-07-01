@@ -236,11 +236,12 @@ th { font-weight: bold; padding: 5px; }
 #content-full th { font-weight: bold; padding: 5px 0; }
 #content-full td { padding: 5px 0; }
 
-table.details { width: 50%; min-width: 340px; }
-table.details th:nth-child(1) { width: 7.5em; }
-table.details tr { border-bottom: solid 1px #c0c0c0; }
-table.attachments td:first-child { width: 40%; }
-table.attachments a { text-decoration: none; }
+#content .profile .details { float: left; width: 50%; }
+#content .profile .details table th:nth-child(1) { width: 7.5em; }
+#content .profile .details table tr { border-bottom: solid 1px #c0c0c0; }
+#content .profile .attachments { float: left; padding-left: 40px; }
+#content .profile .attachments ul { list-style-type: square; list-style-position: inside; }
+#content .profile .attachments ul a { text-decoration: none; }
 
 table.applicants td { font-size: 92%; }
 table.applicants tr.unread { font-weight: bold; background: #ffffe0; }
@@ -256,7 +257,7 @@ table.applicants .statusbox {
 }
 
 form#new_activity legend { font-size: 90%; font-weight: bold; margin-bottom: 5px; }
-form#new_activity fieldset { float: left; }
+form#new_activity fieldset de{ float: left; }
 form#new_activity fieldset.status { margin-left: 2em; padding: 5px; }
 form#new_activity fieldset.status li { margin-bottom: .5em; }
 form#new_activity fieldset.status input[type=submit] { margin: .5em; padding: .5em; }
