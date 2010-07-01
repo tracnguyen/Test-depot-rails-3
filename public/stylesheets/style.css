@@ -260,23 +260,26 @@ form#new_activity .statusbox {
   margin: 0 2px;
 }
 
-ol.activities { margin: 2em 0; }
-ol.activities li { max-width: 41em; margin-bottom: 2em; }
-ol.activities li p.comment { max-width: 41em; margin: .5em 0; }
-ol.activities li td { padding: 0; }
-ol.activities li table.threecol td:first-child { width: 33%; }
-ol.activities li table.twocol td { width: 33%; }
-ol.activities li td span.actor { color: #4682b4; }
-ol.activities li td span.attachment a { text-decoration: none; }
-ol.activities li td span.time { font-size: 80%; }
-ol.activities li span.status { font-size: 80%; font-weight: bold; }
-ol.activities li span.arrow { font-weight: bold; margin: 0 10px; }
-ol.activities li .statusbox {
+#content .activities { padding-top: 30px; margin-bottom: 30px;}
+#content .activities .row { width: 100%; padding:10px 0;}
+#content .activities .row .col1 { width: 18%; float:left;}
+#content .activities .row .col1 img { border:1px solid #ccc;}
+#content .activities .row .col2 { width: 75%; min-height: 100px; float: left; border: 1px solid #ccc;}
+#content .activities .row .col2 .even { background-color: #ccffff; padding: 10px;}
+#content .activities .row .col2 .odd { background-color: #ccffcc; padding: 10px;}
+#content .activities .row .col2 .actor { float: left;}
+#content .activities .row .col2 .time { float: right;}
+#content .activities .row .col2 .row2 { padding: 10px;}
+#content .activities .row .col2 .row2 .statusbox {
   display: inline-block;
   vertical-align: middle;
   height: 1.25em;
   width: 1.25em;
+  margin-left: 4px;
 }
+#content .activities .row .col2 .row2 .status { color: #aaa; }
+#content .activities .row .col2 .row2 .caption { font-weight:bold;}
+#content .activities .row .col2 .row2 .action, .arrow { font-style:italic;
 
 #flashes { margin: 10px 0; padding: 5px 0; }
 #flashes p { max-width: 28em; }

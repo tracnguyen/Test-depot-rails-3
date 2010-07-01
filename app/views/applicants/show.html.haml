@@ -68,17 +68,22 @@
       %tr
         %td
           = f.submit "Submit"              
-  
-%ol.activities
-  - @activities.each do |activity|
-    - if !activity.new_record?
-      - if activity.action
-        %li
-          %table.threecol
-            %tr
-              %td
-                %span.actor= activity.actor.email
-              %td
+
+- unless @activities.empty?  
+  .activities
+    %b= "Activity"
+    - @activities.each_with_index do |activity, i|
+      - if !activity.new_record?
+        - if activity.action
+          .row
+            .col1
+              = image_tag "no-picture.png"
+            .col2
+              %div{:class => "#{i.even? ? 'even' : 'odd'}"}
+                .actor= activity.actor.email
+                .time= activity.created_at
+                .clearfix  
+              .row2
                 %span.action=activity.action
                 - if activity.action == 'attached'
                   - a = Attachment.find(activity.subject_id)
@@ -87,24 +92,28 @@
                       = link_to a.attachment_file_name, a.attachment.url
                     - else 
                       = link_to a.caption, a.attachment.url
-              %td
-                %span.time.right= activity.created_at
-      - else
-        %li
-          %p.comment= activity.comment
-          %table.threecol
-            %tr
-              %td
-                %span.actor= activity.actor.email
-              %td
+        - else
+          .row
+            .col1
+              = image_tag "no-picture.png"
+            .col2
+              %div{:class => "#{i.even? ? 'even' : 'odd'}"}
+                .actor= activity.actor.email
+                .time= activity.created_at
+                .clearfix  
+              .row2
+                %p.comment= activity.comment
                 - if activity.next_stage
+                  %span.caption= "Status"
+                  %span.action= "changed"
+                  %span= "from"
                   %div{:style => "background: #{activity.prev_stage.color}", :class => "statusbox"}
                   %span.status= activity.prev_stage.name
-                  %span.arrow →
+                  %span.arrow= "to"
                   %div{:style => "background: #{activity.next_stage.color}", :class => "statusbox"}
                   %span.status= activity.next_stage.name
-              %td
-                %span.time.right= activity.created_at
+      .clearfix              
+                  
 = form_for @activity, :url => applicant_activities_path(@applicant), :html => { :class => "clearfix" } do |f|
   %table
     %tr
