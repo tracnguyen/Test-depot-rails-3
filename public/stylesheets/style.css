@@ -250,6 +250,8 @@ form#new_activity fieldset de{ float: left; }
 form#new_activity fieldset.status { margin-left: 2em; padding: 5px; }
 form#new_activity fieldset.status li { margin-bottom: .5em; }
 form#new_activity fieldset.status input[type=submit] { margin: .5em; padding: .5em; }
+form#new_activity table th, td { vertical-align: top;}
+form#new_activity table td:first-child { width: 75%;}
 
 ol.activities { margin: 2em 0; }
 ol.activities li { max-width: 41em; margin-bottom: 2em; }

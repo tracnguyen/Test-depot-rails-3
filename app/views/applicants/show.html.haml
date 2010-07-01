@@ -105,19 +105,25 @@
                   %span.status= activity.next_stage.name
               %td
                 %span.time.right= activity.created_at
-
 = form_for @activity, :url => applicant_activities_path(@applicant), :html => { :class => "clearfix" } do |f|
-  %fieldset.comment
-    %legend Comment:
-    = f.text_area :comment, :rows => 14, :cols => 64
-  %fieldset.status
-    %legend Status:
-    %ol
-      - application_status_collection.each do |status, id|
-        %li
-          = f.radio_button :next_stage, id, :checked => @applicant.job_stage.name == status
-          = status
-    = f.submit "Submit"
+  %table
+    %tr
+      %th
+        Comment:
+      %th
+        Status:
+    %tr
+      %td
+        = f.text_area :comment, :rows => 10, :cols => 64
+      %td
+        %ol
+          - application_status_collection.each do |status, id|
+            %li
+              = f.radio_button :next_stage, id, :checked => @applicant.job_stage.name == status
+              = status
+    %tr
+      %td
+        = f.submit "Submit"
 
 :javascript
   $(function() {
