@@ -31,8 +31,8 @@
         %td{:style => "background: #{@applicant.job_stage.color}"}= @applicant.job_stage.name
 
   .attachments
+    Attachments:
     - unless @applicant.attachments.empty?
-      Attachments:
       %ul
         - @applicant.attachments.each do |a|
           %li
@@ -40,7 +40,11 @@
               = link_to a.attachment_file_name, a.attachment.url
             - else 
               = link_to a.caption, a.attachment.url
-      %a{:href => "#", :onclick => "$('#add_attachment').dialog({modal: true, title: 'Add attachment', width: 700, height: 200});"}= "Add attachment"
+    - else 
+      %p
+        (There's no attachment on this application now)
+    %br              
+    %a{:href => "#", :onclick => "$('#add_attachment').dialog({modal: true, title: 'Add attachment', width: 700, height: 200});"}= "Add attachment"
               
   .clearfix
 
@@ -60,10 +64,6 @@
       %tr
         %td
           = f.submit "Submit"              
-
-#dialog
-  %p
-    This is a dialog
   
 %ul.actions
   %li= link_to 'Edit details', edit_applicant_path(@applicant)
