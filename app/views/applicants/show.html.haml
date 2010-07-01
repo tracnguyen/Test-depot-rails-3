@@ -1,5 +1,9 @@
 %h1= @applicant.first_name + " " + @applicant.last_name
 
+%ul.actions
+  %li= link_to 'Edit details', edit_applicant_path(@applicant)
+  %li= link_to 'Mark as unread', mark_applicant_as_unread_path(@applicant)
+
 .profile
   .details
     %table
@@ -65,10 +69,6 @@
         %td
           = f.submit "Submit"              
   
-%ul.actions
-  %li= link_to 'Edit details', edit_applicant_path(@applicant)
-  %li= link_to 'Mark as unread', mark_applicant_as_unread_path(@applicant)
-
 %ol.activities
   - @activities.each do |activity|
     - if !activity.new_record?

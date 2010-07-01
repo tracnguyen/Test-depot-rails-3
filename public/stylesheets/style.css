@@ -170,7 +170,7 @@ th { font-weight: bold; padding: 5px; }
   padding-bottom: 1em;
 }
 
-#content ul.actions { margin-bottom: 2em; }
+#content ul.actions { margin-bottom: 1em; }
 #content ul.actions li {
   display: inline;
   padding: 5px;
@@ -221,17 +221,6 @@ th { font-weight: bold; padding: 5px; }
   padding: .25em 0 .5em 0;
   display: block;
 }
-
-#content table.applicants tr.unread a:visited { color: #4682b4; }
-
-#content ul.actions { margin: 2em 0; }
-#content ul.actions li {
-  display: inline;
-  padding: 4px;
-  margin-right: 2px;
-  background: #fffacd;
-}
-#content ul.actions li a, #content ul.actions a:visited { color: #4682b4; }
 
 #content-full th { font-weight: bold; padding: 5px 0; }
 #content-full td { padding: 5px 0; }
