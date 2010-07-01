@@ -31,7 +31,7 @@ class Main::AccountsController < ApplicationController
       render :action => 'new'
     else
       if @account.save
-        redirect_to main_accounts_path, :notice => 'Account was successfully created.'
+        redirect_to main_account_path(@account), :notice => 'Account was successfully created.'
       else
         render :action => "new"
       end
