@@ -252,6 +252,13 @@ form#new_activity fieldset.status li { margin-bottom: .5em; }
 form#new_activity fieldset.status input[type=submit] { margin: .5em; padding: .5em; }
 form#new_activity table th, td { vertical-align: top;}
 form#new_activity table td:first-child { width: 75%;}
+form#new_activity .statusbox {
+  display: inline-block;
+  vertical-align: middle;
+  height: 1.25em;
+  width: 1.25em;
+  margin: 0 2px;
+}
 
 ol.activities { margin: 2em 0; }
 ol.activities li { max-width: 41em; margin-bottom: 2em; }

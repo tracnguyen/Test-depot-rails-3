@@ -117,10 +117,11 @@
         = f.text_area :comment, :rows => 10, :cols => 64
       %td
         %ol
-          - application_status_collection.each do |status, id|
+          - current_account.job_stages.each do |stage|
             %li
-              = f.radio_button :next_stage, id, :checked => @applicant.job_stage.name == status
-              = status
+              = f.radio_button :next_stage, id, :checked => @applicant.job_stage == stage
+              %div{:style => "background: #{stage.color}", :class => "statusbox"}
+              = stage.name
     %tr
       %td
         = f.submit "Submit"
