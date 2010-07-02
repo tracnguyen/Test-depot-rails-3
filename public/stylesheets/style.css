@@ -296,7 +296,7 @@ form#new_activity .statusbox {
 }
 #content .activities .row .col2 .row2 .status { color: #aaa; }
 #content .activities .row .col2 .row2 .caption { font-weight:bold;}
-#content .activities .row .col2 .row2 .action, .arrow { font-style:italic;
+#content .activities .row .col2 .row2 .action, .arrow { font-style:italic; }
 
 #flashes { margin: 10px 0; padding: 5px 0; }
 #flashes p { max-width: 28em; }
