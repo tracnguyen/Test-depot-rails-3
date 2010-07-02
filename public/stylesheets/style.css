@@ -232,6 +232,23 @@ th { font-weight: bold; padding: 5px; }
 #content .profile .attachments ul { list-style-type: square; list-style-position: inside; }
 #content .profile .attachments ul a { text-decoration: none; }
 
+ol.activities { margin: 2em 0; }
+ol.activities li { maxwidth: 41em; margin-bottom: 2em; }
+ol.activities li p.comment { maxwidth: 41em; margin: .5em 0; }
+ol.activities li td { padding: 0; }
+ol.activities li table.threecol td:firstchild { width: 33%; }
+ol.activities li table.twocol td { width: 33%; }
+ol.activities li td span.actor { color: #4682b4; }
+ol.activities li td span.time { fontsize: 80%; }
+ol.activities li span.status { fontsize: 80%; fontweight: bold; }
+ol.activities li span.arrow { fontweight: bold; margin: 0 10px; }
+ol.activities li .statusbox {
+  display: inline-block;
+  vertical-align: middle;
+  height: 1.25em;
+  width: 1.25em;
+}
+
 table.applicants td { font-size: 92%; }
 table.applicants tr.unread { font-weight: bold; background: #ffffe0; }
 table.applicants tr.read { color: #808080; background: #fffafa; }
