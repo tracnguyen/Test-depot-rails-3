@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(:version => 20100628041905) do
     t.string   "last_name"
     t.string   "email"
     t.string   "phone"
+    t.text     "cv"
     t.integer  "job_id"
     t.integer  "account_id"
     t.integer  "job_stage_id"
