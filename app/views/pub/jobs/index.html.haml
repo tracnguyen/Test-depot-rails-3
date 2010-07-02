@@ -17,4 +17,4 @@
       %tr
         %td= link_to job.title, pub_job_path(job)
         %td= job.creation_date.to_formatted_s(:long)
-        %td= job.expiry_date.to_formatted_s(:long)
+        %td= job.expiry_date.to_formatted_s(:long) unless job.expiry_date.nil?
