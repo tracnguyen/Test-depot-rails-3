@@ -17,26 +17,27 @@ module ApplicationHelper
   
   def humanize_time(t)
     t0 = Time.now
-    d = (t0 - t).to_i
+    d = (t0 - t).to_f
     if d < 60
       "just now"
     elsif d < 3600
-      "minutes ago"
+      m = d/60
+      "#{m.to_i} minute#{m >=2 ? 's' : ''} ago"
     elsif d < 86400
       h = d/3600
-      "#{h} hour#{h > 1 ? 's' : ''} ago"
+      "#{h.to_i} hour#{h >=2 ? 's' : ''} ago"
     elsif d < 2073600
       dy = d/86400
-      "#{dy} day#{dy > 1 ? 's' : ''} ago"
+      "#{dy.to_i} day#{dy >=2 ? 's' : ''} ago"
     elsif d < 14515200
       w = d/2073600
-      w == 1 ? "last week" : "#{w} weeks ago"
+      w <=2 ? "last week" : "#{w.to_i} weeks ago"
     elsif d < 756864000
        m = d/14515200
-       m == 1 ? "last month" : "#{m} months ago"
+       m <= 2 ? "last month" : "#{m.to_i} months ago"
     else
       y = d/756864000
-      y == 1 ? "last year" : "#{y} years ago"
+      y <= 2 ? "last year" : "#{y.to_i} years ago"
     end
   end
 end
