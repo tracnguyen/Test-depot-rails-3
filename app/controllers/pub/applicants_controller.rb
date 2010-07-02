@@ -12,7 +12,6 @@ class Pub::ApplicantsController < BaseAccountController
 
   def create
     params[:applicant][:job_id] = params[:job_id]
-    params[:applicant][:job_stage_id] = current_account.job_stages.first.id
     @applicant = current_account.applicants.build(params[:applicant])
 
     respond_to do |format|

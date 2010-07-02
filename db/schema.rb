@@ -143,9 +143,6 @@ ActiveRecord::Schema.define(:version => 20100628041905) do
 
   add_index "simple_captcha_data", ["key"], :name => "idx_key"
 
-# Could not dump table "sqlite_stat1" because of following StandardError
-#   Unknown type '' for column 'tbl'
-
   create_table "user_views", :id => false, :force => true do |t|
     t.integer "user_id"
     t.integer "applicant_id"

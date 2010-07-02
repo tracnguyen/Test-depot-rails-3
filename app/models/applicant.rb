@@ -11,9 +11,11 @@ class Applicant < ActiveRecord::Base
 
   has_many :attachments, :as => :attachable
   
-  validates_presence_of :first_name, :last_name, :email, :phone, :job, :job_stage
+  validates_presence_of :first_name, :last_name, :email, :phone, :job, :account
   validates_associated :job
 
+  before_create lambda { self.job_stage_id = DefaultJobStage.first.id }
+  
   after_validation lambda {
     job_error = errors.on(:job)
     errors.add(:job_id, job_error) if job_error
