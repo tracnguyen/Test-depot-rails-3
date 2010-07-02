@@ -16,13 +16,14 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'ruby-debug'
 
 gem "subdomain-fu", :git => "git://github.com/nhowell/subdomain-fu.git"
-gem "devise", :git => "git://github.com/plataformatec/devise.git"
+gem "devise", "1.1.rc2"
 gem "haml", ">=3.0.4"
 # gem "will_paginate", ">=3.0.pre"
 gem "rails3-generators", :git => "git://github.com/indirect/rails3-generators.git"
 gem "state_machine"
 gem "paperclip"
 gem "rmagick"
+gem 'ckeditor', :git => 'git://github.com/galetahub/rails-ckeditor.git', :branch => 'rails3'
 
 group :test do
   gem "rspec", ">=2.0.0.beta.8"
