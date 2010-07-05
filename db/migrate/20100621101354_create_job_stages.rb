@@ -5,7 +5,8 @@ class CreateJobStages < ActiveRecord::Migration
       t.string :name
       t.integer :position
       t.string :color
-
+      t.boolean :is_achieved, :default => false
+      
       t.timestamps
     end
   end
