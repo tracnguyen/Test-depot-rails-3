@@ -135,6 +135,7 @@ ActiveRecord::Schema.define(:version => 20100704192241) do
     t.string   "name"
     t.integer  "position"
     t.string   "color"
+    t.boolean  "is_archived", :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
