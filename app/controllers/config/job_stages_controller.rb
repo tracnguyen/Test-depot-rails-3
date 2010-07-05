@@ -10,6 +10,7 @@ class Config::JobStagesController < BaseAccountController
     @job_stages = current_account.job_stages
     @first_stage = @job_stages.first
     @job_stages.slice!(0)
+    @job_stage = JobStage.new
 
     respond_to do |format|
       format.html # index.html.erb

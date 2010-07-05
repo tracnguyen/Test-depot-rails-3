@@ -35,7 +35,16 @@
             %input{:class => "color", :id => "color#{job_stage.id}", :type => "text", :value => job_stage.color}
   .clearfix
 
-= link_to 'New job stage', new_config_job_stage_path
+%button{:id => 'new_stage_button', :onclick => "$('#new_stage_form').show(); $(this).hide();"}
+  New job stage
+#new_stage_form
+  Add a new Stage
+  = form_for [:config, @job_stage] do |f|
+    = f.text_field :name
+    = submit_tag 'Add'
+    or 
+    %a{:href => "#", :onclick => "$('#new_stage_form').hide(); $('#new_stage_button').show();"}
+      Cancel
 
 
 :erb
@@ -92,5 +101,7 @@
         e.children(".editable").show();
         e.children(".editable").click();
       });
+      
+      $('#new_stage_form').hide();
     })
   </script>
