@@ -18,6 +18,7 @@ CKEDITOR.editorConfig = function( config )
   //config.resize_enabled = false;
   //config.resize_maxHeight = 2000;
   //config.resize_maxWidth = 750;
+  config.resize_minWidth = '100%';
   
   //config.startupFocus = true;
   
