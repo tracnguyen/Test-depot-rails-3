@@ -8,7 +8,7 @@
   = f.inputs do
     = f.input :title, :label => "Position"
     = f.input :expiry_date
-    = f.input :description, :as => :text, :label => "Description"
+    = f.input :description, :as => :ckeditor, :label => "Description"
     = f.input :status, :as => :select, :collection => job_status_collection
             
   = f.buttons do

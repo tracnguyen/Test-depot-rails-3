@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100628041905) do
+ActiveRecord::Schema.define(:version => 20100704192241) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -43,18 +43,18 @@ ActiveRecord::Schema.define(:version => 20100628041905) do
   add_index "activities", ["applicant_id"], :name => "index_activities_on_applicant"
 
   create_table "admins", :force => true do |t|
-    t.string   "email",                :default => "", :null => false
-    t.string   "encrypted_password",   :default => "", :null => false
-    t.string   "password_salt",        :default => "", :null => false
+    t.string   "email",                               :default => "", :null => false
+    t.string   "encrypted_password",   :limit => 128, :default => "", :null => false
+    t.string   "password_salt",                       :default => "", :null => false
     t.string   "reset_password_token"
     t.string   "remember_token"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",        :default => 0
+    t.integer  "sign_in_count",                       :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.integer  "failed_attempts",      :default => 0
+    t.integer  "failed_attempts",                     :default => 0
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.datetime "created_at"
@@ -96,6 +96,24 @@ ActiveRecord::Schema.define(:version => 20100628041905) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "ckeditor_assets", :force => true do |t|
+    t.string   "data_file_name",                                 :null => false
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.integer  "assetable_id"
+    t.string   "assetable_type",    :limit => 30
+    t.string   "type",              :limit => 25
+    t.string   "guid",              :limit => 10
+    t.integer  "locale",            :limit => 1,  :default => 0
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], :name => "fk_assetable"
+  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_assetable_type"
+  add_index "ckeditor_assets", ["user_id"], :name => "fk_user"
 
   create_table "default_job_stages", :force => true do |t|
     t.string   "name"
@@ -150,18 +168,18 @@ ActiveRecord::Schema.define(:version => 20100628041905) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                :default => "", :null => false
-    t.string   "encrypted_password",   :default => "", :null => false
-    t.string   "password_salt",        :default => "", :null => false
+    t.string   "email",                               :default => "", :null => false
+    t.string   "encrypted_password",   :limit => 128, :default => "", :null => false
+    t.string   "password_salt",                       :default => "", :null => false
     t.string   "reset_password_token"
     t.string   "remember_token"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",        :default => 0
+    t.integer  "sign_in_count",                       :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.integer  "failed_attempts",      :default => 0
+    t.integer  "failed_attempts",                     :default => 0
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.integer  "account_id"
