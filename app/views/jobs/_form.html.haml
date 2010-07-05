@@ -1,15 +1,33 @@
-= semantic_form_for @job do |f|
+= form_for @job do |f|
   - if @job.errors.any?
     #errorExplanation
       %h2= "#{pluralize(@job.errors.count, "error")} prohibited this job from being saved:"
       %ul
         - @job.errors.full_messages.each do |msg|
           %li= msg
-  = f.inputs do
-    = f.input :title, :label => "Position"
-    = f.input :expiry_date
-    = f.input :description, :as => :ckeditor, :label => "Description"
-    = f.input :status, :as => :select, :collection => job_status_collection
-            
-  = f.buttons do
-    = f.commit_button 'Save'
+  %table
+    %tr
+      %td
+        Position          
+      %td
+        = f.text_field :title
+    %tr
+      %td
+        Expiry date
+      %td
+        = date_select(@job, :expiry_date)
+    %tr
+      %td
+        Description
+      %td
+        = f.cktext_area :description
+    %tr
+      %td
+        Status
+      %td
+        = select(:job, :status, job_status_collection)
+    %tr
+      %td
+        = submit_tag 'Save'
+    
+
