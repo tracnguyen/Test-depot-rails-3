@@ -1,24 +1,29 @@
 %h1= @job.title
 
-%p
-  %b Status:
-  = @job.status
-  
-%p
-  %b Posted on:
-  = @job.creation_date
-
-- if @job.expiry_date
-  %p
-    %b Closed on:
-    = @job.expiry_date
+%table{:class => 'jobs'}
+  %tr
+    %td{:class => 'col1'}
+      Status
+    %td
+      = @job.status
+  %tr
+    %td{:class => 'col1'}
+      Posted on
+    %td
+      = @job.creation_date
+    %tr
+      %td{:class => 'col1'}
+        Closed on
+      - if @job.expiry_date
+        %td
+          = @job.expiry_date
+    %tr
+      %td{:class => 'col1'}
+        Description
+      %td
+        = render :inline => @job.description
 
 %p= link_to 'Click to Apply', new_pub_job_applicant_path(@job)
-
-%br/
-
-%p
-  = @job.description
 
 %br/
 
