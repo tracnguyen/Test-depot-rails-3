@@ -162,6 +162,7 @@ th { font-weight: bold; padding: 5px; }
   display: block;
   padding: 5px 0;
 }
+#sidebar ul form#job_filter li span { display:block; width:30%; float:left; padding:2px;}
 
 #content h1, #content-full h1 {
   font-size: 1.75em;
