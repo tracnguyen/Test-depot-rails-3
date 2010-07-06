@@ -126,7 +126,7 @@
         = f.text_area :comment, :rows => 10, :cols => 64
       %td
         %ol
-          - current_account.job_stages.unarchived.each do |stage|
+          - current_account.job_stages.undeleted.each do |stage|
             %li
               = f.radio_button :next_stage, stage.id, :checked => @applicant.job_stage.id == stage.id
               %div{:style => "background: #{stage.color}", :class => "statusbox"}
