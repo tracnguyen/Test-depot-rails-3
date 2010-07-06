@@ -21,7 +21,7 @@
       %td{:class => 'col1'}
         Description
       %td
-        = render :inline => @job.description
+        != @job.description
 
 %p= link_to 'Click to Apply', new_pub_job_applicant_path(@job)
 

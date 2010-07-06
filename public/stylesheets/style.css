@@ -226,13 +226,6 @@ th { font-weight: bold; padding: 5px; }
 #content-full th { font-weight: bold; padding: 5px 0; }
 #content-full td { padding: 5px 0; }
 
-#content .profile .details { float: left; width: 50%; }
-#content .profile .details table th:nth-child(1) { width: 7.5em; }
-#content .profile .details table tr { border-bottom: solid 1px #c0c0c0; }
-#content .profile .attachments { float: left; padding-left: 40px; }
-#content .profile .attachments ul { list-style-type: square; list-style-position: inside; }
-#content .profile .attachments ul a { text-decoration: none; }
-
 ol.activities { margin: 2em 0; }
 ol.activities li { maxwidth: 41em; margin-bottom: 2em; }
 ol.activities li p.comment { maxwidth: 41em; margin: .5em 0; }
@@ -270,13 +263,40 @@ table.applicants td.checkbox, .star {width:10px;}
 table.applicants td.name a {text-decoration:none;}
 
 
-form#new_activity legend { font-size: 90%; font-weight: bold; margin-bottom: 5px; }
-form#new_activity fieldset de{ float: left; }
-form#new_activity fieldset.status { margin-left: 2em; padding: 5px; }
-form#new_activity fieldset.status li { margin-bottom: .5em; }
-form#new_activity fieldset.status input[type=submit] { margin: .5em; padding: .5em; }
-form#new_activity table th, td { vertical-align: top;}
-form#new_activity table td:first-child { width: 75%;}
+table.details { width: 50%; clear: right; }
+table.details  th:nth-child(1) { width: 7.5em; }
+table.details  tr { border-bottom: solid 1px #c0c0c0; }
+
+#jstabs.ui-widget {
+  margin-top: 30px;
+  font: 16px/1.25 Helvetica, Arial, sans-serif;
+  min-height: 240px;
+}
+
+.jstab .activities { margin-bottom: 20px; }
+.jstab .activities .row { width: 100%; padding: 10px 0 15px 0; }
+.jstab .activities .row .col1 { margin-right: 20px; float:left; }
+.jstab .activities .row .col1 img { border:1px solid #ccc; }
+.jstab .activities .row .col2 { min-height: 100px; float: left; border: 1px solid #ccc; }
+.jstab .activities .row .col2 .even { background-color: #cdcdcd; padding: 5px 10px; }
+.jstab .activities .row .col2 .odd { background-color: #cdcdcd; padding: 5px 10px; }
+.jstab .activities .row .col2 .actor { float: left; }
+.jstab .activities .row .col2 .time { float: right; }
+.jstab .activities .row .col2 .row2 { padding: 10px; }
+.jstab .activities .row .col2 .row2 .statusbox {
+  display: inline-block;
+  vertical-align: middle;
+  height: 1.25em;
+  width: 1.25em;
+  margin-left: 4px;
+}
+.jstab .activities .row .col2 .row2 .status { font-weight: bold; font-size: 85%; }
+
+form#new_activity label { font-size: 90%; font-weight: bold; display: block; margin-bottom: 5px; }
+form#new_activity li { margin-bottom: .25em; }
+form#new_activity table th, td { vertical-align: top; }
+form#new_activity table td { overflow: hidden; }
+form#new_activity input[type=submit] { margin-top: 20px; padding: 5px 10px; }
 form#new_activity .statusbox {
   display: inline-block;
   vertical-align: middle;
@@ -285,24 +305,9 @@ form#new_activity .statusbox {
   margin: 0 2px;
 }
 
-#content .activities { padding-top: 30px; margin-bottom: 30px; }
-#content .activities .row { width: 100%; padding: 10px 0 15px 0; }
-#content .activities .row .col1 { margin-right: 20px; float:left; }
-#content .activities .row .col1 img { border:1px solid #ccc; }
-#content .activities .row .col2 { min-height: 100px; float: left; border: 1px solid #ccc; }
-#content .activities .row .col2 .even { background-color: #cdcdcd; padding: 5px 10px; }
-#content .activities .row .col2 .odd { background-color: #cdcdcd; padding: 5px 10px; }
-#content .activities .row .col2 .actor { float: left; }
-#content .activities .row .col2 .time { float: right; }
-#content .activities .row .col2 .row2 { padding: 10px; }
-#content .activities .row .col2 .row2 .statusbox {
-  display: inline-block;
-  vertical-align: middle;
-  height: 1.25em;
-  width: 1.25em;
-  margin-left: 4px;
-}
-#content .activities .row .col2 .row2 .status { font-weight: bold; font-size: 85%; }
+.jstab .attachments { float: left; padding-left: 40px; }
+.jstab .attachments ul { list-style-type: square; list-style-position: inside; }
+.jstab .attachments ul a { text-decoration: none; }
 
 table.jobs .col1 { width: 20%; font-weight: bold;}
 
