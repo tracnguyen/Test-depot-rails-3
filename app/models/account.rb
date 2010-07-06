@@ -8,7 +8,7 @@ class Account < ActiveRecord::Base
   validates_presence_of :name, :subdomain
   validates_uniqueness_of :subdomain
   
-  has_one :owner, :class_name => "User"
+  belongs_to :owner, :class_name => "User"
   accepts_nested_attributes_for :owner
   
   after_create lambda {
