@@ -74,6 +74,8 @@ ActiveRecord::Schema.define(:version => 20100706095738) do
     t.integer  "job_id"
     t.integer  "account_id"
     t.integer  "job_stage_id"
+    t.boolean  "is_archived",             :default => false
+    t.boolean  "is_starred",              :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "attachment_file_name"

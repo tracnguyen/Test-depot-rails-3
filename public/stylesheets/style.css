@@ -250,6 +250,8 @@ ol.activities li .statusbox {
   width: 1.25em;
 }
 
+a.button { display:block; background-color:#eee; border:1px solid #ccc; text-decoration:none; padding:3px 10px; float:left;}
+
 table.applicants td { font-size: 92%; }
 table.applicants tr.unread { font-weight: bold; background: #ffffe0; }
 table.applicants tr.read { color: #808080; background: #fffafa; }
@@ -258,10 +260,15 @@ table.applicants td:nth-child(3) { padding-left: 10px; }
 table.applicants .statusbox {
   display: inline-block;
   vertical-align: middle;
-  height: 2em;
-  width: 2em;
+  height: 1em;
+  width: 1em;
   margin-right: 5px;
 }
+table.applicants tr {border:1px solid #ccc;}
+table.applicants tr.title {background-color:#ddd;}
+table.applicants td.checkbox, .star {width:10px;}
+table.applicants td.name a {text-decoration:none;}
+
 
 form#new_activity legend { font-size: 90%; font-weight: bold; margin-bottom: 5px; }
 form#new_activity fieldset de{ float: left; }
