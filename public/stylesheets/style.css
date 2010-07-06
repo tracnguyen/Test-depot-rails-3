@@ -171,14 +171,6 @@ th { font-weight: bold; padding: 5px; }
   padding-bottom: 1em;
 }
 
-#content ul.actions { margin-bottom: 1em; }
-#content ul.actions li {
-  display: inline;
-  padding: 5px;
-  background: #fffacd;
-}
-#content ul.actions li a, #content ul.actions a:visited { color: #4682b4; }
-
 #content ul#sortable {
   margin-bottom: 50px;
 }
@@ -262,10 +254,14 @@ table.applicants tr.title {background-color:#ddd;}
 table.applicants td.checkbox, .star {width:10px;}
 table.applicants td.name a {text-decoration:none;}
 
+#content ul.actions li { display: inline;  padding: 5px; }
+#content ul.actions span.ui-button-text { font: 16px/1.25 Helvetica, Arial, sans-serif; }
+ a.ui-button { color: #000; }
 
-table.details { width: 50%; clear: right; }
-table.details  th:nth-child(1) { width: 7.5em; }
-table.details  tr { border-bottom: solid 1px #c0c0c0; }
+table.details { width: 50%; clear: right; margin-bottom: 25px; }
+table.details th { font-weight: bold; }
+table.details th:nth-child(1) { width: 7.5em; }
+table.details tr { border-bottom: solid 1px #c0c0c0; }
 
 #jstabs.ui-widget {
   margin-top: 30px;
