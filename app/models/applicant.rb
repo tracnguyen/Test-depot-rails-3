@@ -20,7 +20,7 @@ class Applicant < ActiveRecord::Base
     end
   end
 
-  before_create lambda { self.job_stage_id = DefaultJobStage.first.id }
+  before_create lambda { self.job_stage_id = self.account.job_stages.first.id }
   
   after_validation lambda {
     job_error = errors.on(:job)
