@@ -46,7 +46,7 @@
               = link_to a.caption, a.attachment.url
     - else 
       %p
-        (There's no attachment on this application now)
+        (No attachment)
     %br              
     %a{:href => "#", :onclick => "$('#add_attachment').dialog({modal: true, title: 'Add attachment', width: 700, height: 200});"}= "Add attachment"
               
@@ -71,7 +71,6 @@
 
 - unless @activities.empty?  
   .activities
-    %b= "Activity"
     - @activities.each_with_index do |activity, i|
       - if !activity.new_record?
         - if activity.action
@@ -82,9 +81,9 @@
               %div{:class => "#{i.even? ? 'even' : 'odd'}"}
                 .actor= activity.actor.email
                 .time= humanize_time(activity.created_at)
-                .clearfix  
+                .clearfix
               .row2
-                %span.action=activity.action
+                %span.action= activity.action
                 - if activity.action == 'attached'
                   - a = Attachment.find(activity.subject_id)
                   %span.attachment
@@ -104,15 +103,13 @@
               .row2
                 %p.comment= activity.comment
                 - if activity.next_stage
-                  %span.action= "Changed"
-                  %span.caption= "status"
-                  %span= "from"
+                  changed status from
                   %div{:style => "background: #{activity.prev_stage.color}", :class => "statusbox"}
                   %span.status= activity.prev_stage.name
-                  %span.arrow= "to"
+                  to
                   %div{:style => "background: #{activity.next_stage.color}", :class => "statusbox"}
                   %span.status= activity.next_stage.name
-      .clearfix              
+      .clearfix
                   
 = form_for @activity, :url => applicant_activities_path(@applicant), :html => { :class => "clearfix" } do |f|
   %table
@@ -137,9 +134,5 @@
 
 :javascript
   $(function() {
-  	$("select#applicant_status").change(function() {
-  		$("form.edit_applicant").submit()
-  	});
-  	
   	$('#add_attachment').hide();
   })
