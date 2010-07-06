@@ -70,22 +70,29 @@ class ApplicantsController < BaseAccountController
   # PUT /applicants/1.xml
   def update
     @applicant = Applicant.find(params[:id])
-    remove_attachment = params[:remove_attachment] == "true"
+    remove_attachment = (params[:remove_attachment] == "true")
     @applicant.attachment = nil if remove_attachment
 
-    respond_to do |format|
-      if @applicant.update_attributes(params[:applicant])
-        if remove_attachment
-          format.html { redirect_to(edit_applicant_url(@applicant), :notice => 'The attachment has been removed.') }
-        else
-          format.html { redirect_to(@applicant, :notice => 'Applicant was successfully updated.') }
+    case
+      when params[:starring]
+        if @applicant.update_attribute(:is_starred, !@applicant.is_starred)
+          render :js => "$('##{@applicant.id}').children('.star-icon').toggle();"
+        else 
+          render :nothing => true 
         end
-        format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @applicant.errors, :status => :unprocessable_entity }
-      end
-    end
+        if @applicant.update_attributes(params[:applicant])
+          if remove_attachment
+            format.html { redirect_to(edit_applicant_url(@applicant), :notice => 'The attachment has been removed.') }
+          else
+            format.html { redirect_to(@applicant, :notice => 'Applicant was successfully updated.') }
+          end
+          format.xml  { head :ok }
+        else
+          format.html { render :action => "edit" }
+          format.xml  { render :xml => @applicant.errors, :status => :unprocessable_entity }
+        end
+    end 
   end
 
   def destroy
