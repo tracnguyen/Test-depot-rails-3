@@ -7,7 +7,7 @@ class Config::JobStagesController < BaseAccountController
   end
   
   def index
-    @job_stages = current_account.job_stages.unarchived
+    @job_stages = current_account.job_stages.undeleted
     @first_stage = @job_stages.first
     @job_stages.slice!(0)
     @job_stage = JobStage.new
@@ -85,7 +85,7 @@ class Config::JobStagesController < BaseAccountController
     @job_stage = JobStage.find(params[:id])
 
     respond_to do |format|
-      message = @job_stage.update_attributes({:is_archived => true, :name => @job_stage.name + ' (archived)'}) ? 'Job stage was successfully deleted.' : 'Job stage deletion failed.'
+      message = @job_stage.update_attributes({:is_deleted => true, :name => @job_stage.name + ' (deleted)'}) ? 'Job stage was successfully deleted.' : 'Job stage deletion failed.'
         
       format.html { redirect_to(config_job_stages_url, :notice => message) }
       format.xml  { head :ok }
