@@ -1,28 +1,20 @@
 %h1= @applicant.first_name + " " + @applicant.last_name
 
-%ul.actions
-  %li= link_to 'Edit details', edit_applicant_path(@applicant)
-  %li= link_to 'Mark as unread', mark_applicant_as_unread_path(@applicant)
-
 %table.details
   %tr
     %th
     %th
   %tr
-    %td
-      %strong Position
+    %th Position
     %td= @applicant.job.title
   %tr
-    %td
-      %strong Email
+    %th Email
     %td= @applicant.email
   %tr
-    %td
-      %strong Phone
+    %th Phone
     %td= @applicant.phone
   %tr
-    %td
-      %strong Resume
+    %th Resume
     - if @applicant.attachment?
       %td= link_to @applicant.attachment_file_name, @applicant.attachment.url
     - else
@@ -31,6 +23,10 @@
     %td
       %strong Status
     %td{:style => "background: #{@applicant.job_stage.color}"}= @applicant.job_stage.name
+
+%ul.actions
+  %li= link_to 'Edit details', edit_applicant_path(@applicant)
+  %li= link_to 'Mark as unread', mark_applicant_as_unread_path(@applicant)
 
 <div id=jstabs>
 %ul
@@ -136,6 +132,7 @@
 
 :javascript
   $(function() {
-  	$('#jstabs').tabs()
+  	$("#jstabs").tabs()
+  	$("ul.actions a").button()
   	$('#add_attachment').hide()
   })
