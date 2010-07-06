@@ -104,8 +104,8 @@
               .row2
                 %p.comment= activity.comment
                 - if activity.next_stage
-                  %span.caption= "Status"
-                  %span.action= "changed"
+                  %span.action= "Changed"
+                  %span.caption= "status"
                   %span= "from"
                   %div{:style => "background: #{activity.prev_stage.color}", :class => "statusbox"}
                   %span.status= activity.prev_stage.name
