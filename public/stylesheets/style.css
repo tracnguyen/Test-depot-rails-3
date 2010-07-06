@@ -282,7 +282,7 @@ form#new_activity .statusbox {
 #content .activities .row { width: 100%; padding: 10px 0 15px 0; }
 #content .activities .row .col1 { margin-right: 20px; float:left; }
 #content .activities .row .col1 img { border:1px solid #ccc; }
-#content .activities .row .col2 { width: 75%; min-height: 100px; float: left; border: 1px solid #ccc; }
+#content .activities .row .col2 { min-height: 100px; float: left; border: 1px solid #ccc; }
 #content .activities .row .col2 .even { background-color: #cdcdcd; padding: 5px 10px; }
 #content .activities .row .col2 .odd { background-color: #cdcdcd; padding: 5px 10px; }
 #content .activities .row .col2 .actor { float: left; }
