@@ -70,7 +70,7 @@ class Config::JobStagesController < BaseAccountController
         if @job_stage.update_attributes(params[:stage])
           render :js => "$('##{params[:id]}').children('.editable').hide(); $('##{params[:id]}').children('.ineditable').text('#{params[:stage][:name]}'); $('##{params[:id]}').children('.ineditable').show();"
         else 
-          render :js => "alert('update failed!);"
+          render :js => "alert('update failed!');"
         end
       when params[:stage][:color]
         if @job_stage.update_attributes(params[:stage])

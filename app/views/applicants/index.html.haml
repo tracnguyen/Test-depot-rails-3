@@ -22,10 +22,12 @@
     %tr{:class => @read_status[applicant.id] ? "read" : "unread"}
       %td.checkbox
         %input{:type => "checkbox"}
-      %td.star
+      %td{:class => "star", :id => "#{applicant.id}"}
         - if applicant.is_starred
           %img{:src => "/images/yellow-star.png", :class => "yellow-star star-icon"}
+          %img{:src => "/images/white-star.png", :class => "white-star star-icon", :style => "display:none"}
         - else
+          %img{:src => "/images/yellow-star.png", :class => "yellow-star star-icon", :style => "display:none"}
           %img{:src => "/images/white-star.png", :class => "white-star star-icon"}
       %td.name
         = link_to applicant.first_name + " " + applicant.last_name, applicant_path(applicant)
@@ -56,5 +58,12 @@
   	})
   	
   	$('.star-icon').click(function(){
+      $.ajax({
+        type: 'PUT',
+        url: '/applicants/' + $(this).parent().attr('id'),
+        data: {
+          'starring' : 1
+        }
+      });
   	});
   })
