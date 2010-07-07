@@ -33,15 +33,20 @@
           - if user_signed_in?
             %li= link_to "Configuration", config_admin_path
           %li= link_to "Public jobs board", pub_jobs_path
-    #container.clearfix
-      #sidebar
+    %table#container
+      <tr>
+      %td#maincol
+        #heading
+          = yield :heading
+        #content
+          - if notice || alert
+            #flashes
+              %p#notice= notice
+              %p#alert= alert
+          = yield
+      %td#sidebar
         = yield :sidebar
-      #content
-        - if notice || alert
-          #flashes
-            %p#notice= notice
-            %p#alert= alert
-        = yield
+      </tr>
     #footer
       Copyright 2010. Powered by
       :erb

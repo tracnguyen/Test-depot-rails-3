@@ -1,3 +1,6 @@
+= content_for :heading do
+  %h1 Recent activities
+
 %ol.activities
   - @activities.each do |activity|
     %li

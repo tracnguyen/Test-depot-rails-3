@@ -18,28 +18,6 @@ class Config::JobStagesController < BaseAccountController
     end
   end
 
-  def show
-    @job_stage = JobStage.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @job_stage }
-    end
-  end
-
-  def new
-    @job_stage = JobStage.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @job_stage }
-    end
-  end
-
-  def edit
-    @job_stage = JobStage.find(params[:id])
-  end
-
   def create
     params[:job_stage][:position] = current_account.job_stages.size
     params[:job_stage][:color] = "#000000"

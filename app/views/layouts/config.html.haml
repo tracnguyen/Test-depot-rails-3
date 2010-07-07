@@ -35,21 +35,25 @@
           - if user_signed_in?
             %li= link_to "Configuration", config_admin_path
           %li= link_to "Public jobs board", pub_jobs_path
-    #container.clearfix
-      #sidebar
-        - if user_signed_in?
-          %ul
-            %li= link_to "Job Stages", config_job_stages_path
-            - if current_user.owns?(current_account)
-              %li= link_to "Users", config_users_path
-              %li= link_to "Email Setting", config_email_settings_path
+    %table#container
+      <tr>
+      %td#maincol
+        #heading
+          = yield :heading
+        #content
+          - if notice || alert
+            #flashes
+              %p#notice= notice
+              %p#alert= alert
+          = yield
+      %td#sidebar
+        %ul
+          %li= link_to "Job Stages", config_job_stages_path
+          - if current_user.owns?(current_account)
+            %li= link_to "Users", config_users_path
+            %li= link_to "Email Setting", config_email_settings_path
         = yield :sidebar
-      #content
-        - if notice || alert
-          #flashes
-            %p#notice= notice
-            %p#alert= alert
-        = yield
+      </tr>
     #footer
       Copyright 2010. Powered by
       :erb
