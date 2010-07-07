@@ -3,17 +3,14 @@
 
 %table.details
   %tr
-    %th
-      %b= "Name"
+    %th Name
     %td= @account.name
   %tr
-    %th
-      %b= "Subdomain"
-    %td= @account.subdomain
-  %tr
-    %th
-      %b= "Email"
+    %th Onwer's email
     %td= @account.owner.email
-%br/
-%br/
-= link_to "Go to your site", dashboard_url(:subdomain => @account.subdomain)
+  %tr
+    %th Dashboard
+    %td= link_to dashboard_url(:subdomain => @account.subdomain), dashboard_url(:subdomain => @account.subdomain)
+  %tr
+    %th Public job board
+    %td= link_to pub_jobs_url(:subdomain => @account.subdomain), pub_jobs_url(:subdomain => @account.subdomain)

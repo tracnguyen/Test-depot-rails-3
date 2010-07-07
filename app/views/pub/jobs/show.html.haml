@@ -6,17 +6,13 @@
     %td
   %tr
     %th Status
-    %td
-      = @job.status
+    %td= @job.status
   %tr
     %th Posted on
-    %td
-      = @job.creation_date
+    %td= @job.creation_date.to_formatted_s(:long)
     %tr
       %th Closed on
-      - if @job.expiry_date
-        %td
-          = @job.expiry_date
+      %td= @job.expiry_date.to_formatted_s(:long) if @job.expiry_date
 
 != @job.description
 
