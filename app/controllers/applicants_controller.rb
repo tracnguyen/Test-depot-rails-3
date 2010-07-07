@@ -76,7 +76,7 @@ class ApplicantsController < BaseAccountController
     case
       when params[:starring]
         if @applicant.update_attribute(:is_starred, !@applicant.is_starred)
-          render :js => "$('##{@applicant.id}').children('.star-icon').toggle(); $('##{@applicant.id}').parent().toggleClass('unstarred'); $('##{@applicant.id}').parent().toggleClass('starred');"
+          render :js => "$('##{@applicant.id}').children('.star').children('.star-icon').toggle(); $('##{@applicant.id}').toggleClass('unstarred'); $('##{@applicant.id}').toggleClass('starred');"
         else 
           render :nothing => true 
         end
@@ -112,6 +112,21 @@ class ApplicantsController < BaseAccountController
       format.xml  { head :ok }
       format.html { redirect_to(applicants_path) }
     end
+  end
+  
+  def batch_process
+    case
+      when params[:commit] == "Archive" && params[:selection]
+        params[:selection].each do |t|
+          Applicant.find(t).update_attribute(:is_archived, true)
+        end
+        
+      when params[:commit] == "Delete" && params[:selection]
+        params[:selection].each do |t|
+          Applicant.find(t).destroy
+        end
+    end 
+    redirect_to(applicants_url)
   end
 end
 
