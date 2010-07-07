@@ -1,0 +1,21 @@
+!!! XML
+!!!
+%html
+  %head
+    %title Hiring application
+    = stylesheet_link_tag "style.css"
+  %body
+    #header
+      .links.clearfix
+      %h1#title= current_account ? current_account.name : "HiringApp"
+    #container.clearfix
+      #content-full
+        - if notice || alert
+          #flashes
+            %p#notice= notice
+            %p#alert= alert
+        = yield
+    #footer
+      Copyright 2010. Powered by
+      :erb
+        <a href=<%= root_url(:subdomain => false) %>>HiringApp</a>.

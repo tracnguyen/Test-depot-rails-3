@@ -6,8 +6,8 @@ protected
 
   def require_account
     if !current_account
-      flash[:alert] = "The subdomain #{current_subdomain} is not associated with any account."
-      render "main/welcome/index"
+      flash[:alert] = "The subdomain '#{current_subdomain}' is not associated with any account."
+      render "main/welcome/index", :layout => 'error'
     end
   end
   
