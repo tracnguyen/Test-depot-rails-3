@@ -76,7 +76,7 @@ class ApplicantsController < BaseAccountController
     case
       when params[:starring]
         if @applicant.update_attribute(:is_starred, !@applicant.is_starred)
-          render :js => "$('##{@applicant.id}').children('.star-icon').toggle();"
+          render :js => "$('##{@applicant.id}').children('.star-icon').toggle(); $('##{@applicant.id}').parent().toggleClass('unstarred'); $('##{@applicant.id}').parent().toggleClass('starred');"
         else 
           render :nothing => true 
         end
