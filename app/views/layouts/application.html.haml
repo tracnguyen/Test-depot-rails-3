@@ -34,19 +34,22 @@
             %li= link_to "Configuration", config_admin_path
           %li= link_to "Public jobs board", pub_jobs_path
     %table#container
-      <tr>
-      %td#maincol
-        #heading
-          = yield :heading
-        #content
+      %tr
+        %td
           - if notice || alert
             #flashes
-              %p#notice= notice
-              %p#alert= alert
-          = yield
-      %td#sidebar
-        = yield :sidebar
-      </tr>
+              - if notice
+                #notice= notice
+              - if alert
+                #alert= alert
+      %tr
+        %td#maincol
+          #heading
+            = yield :heading
+          #content
+            = yield
+        %td#sidebar
+          = yield :sidebar
     #footer
       Copyright 2010. Powered by
       :erb

@@ -36,7 +36,7 @@ body {
   min-width: 760px;
   margin: 0 2em;
   background: #e5e5e5;
-  font: 16px/1.25 Helvetica, Arial, sans-serif;
+  font: 16px/1.25 Arial, Helvetica, sans-serif;
 }
 
 h1 {
@@ -96,13 +96,14 @@ th { font-weight: bold; padding: 5px; }
 }
 
 .ui-widget  {
-  font: 16px/1.25 Helvetica, Arial, sans-serif;
+  font: 16px/1.25 Arial, Helvetica, sans-serif;
 }
 
 /** Sections definitions **/
 
 #header {
   margin-top: 1em;
+  margin-bottom: .75em;
   padding: 0 2em;
   background: #4169e1;
   color: #ddd;
@@ -111,7 +112,6 @@ th { font-weight: bold; padding: 5px; }
 
 table#container {
   width: 100%;
-  margin: .75em 0 1em 0;
 }
 table#container > tbody > tr > td { padding: 0; }
 
@@ -140,10 +140,29 @@ table#container td#sidebar {
 }
 
 #footer {
+  margin-top: 1em;
   padding: 0 0 1.5em .5em;
   font-size: 85%;
   color: #aaa;
 }
+
+#flashes {
+  text-align: center;
+  width: 100%;
+  margin-bottom: .75em;
+}
+
+#notice, #alert {
+  display: inline-block;
+  font-size: 92.5%;
+  padding: 2px 10px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border--radius: 5px;
+}
+
+#notice { color: #444; background: #ffffe0; }
+#alert { color: white; background: red; }
 
 /** Rest **/
 
@@ -282,7 +301,7 @@ table.details tr { border-bottom: solid 1px #c0c0c0; }
 
 #jstabs.ui-widget {
   margin-top: 30px;
-  font: 16px/1.25 Helvetica, Arial, sans-serif;
+  font: 16px/1.25 Arial, Helvetica, sans-serif;
   min-height: 240px;
   border: none;
 }
@@ -332,12 +351,6 @@ form#new_activity .statusbox {
 .jstab ul.attachments a { text-decoration: none; }
 
 table.jobs .col1 { width: 20%; font-weight: bold;}
-
-#flashes { margin: 10px 0; padding: 5px 0; }
-#flashes p { max-width: 28em; }
-
-#notice { color: green; }
-#alert { color: red; }
 
 html form.formtastic fieldset { display: block; }
 html form.formtastic fieldset > ol > li { display: block; }
