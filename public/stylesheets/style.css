@@ -39,9 +39,14 @@ body {
   font: 16px/1.25 Helvetica, Arial, sans-serif;
 }
 
-h2 {
+h1 {
   font-size: 1.5em;
-  line-height: 1;
+  color: #1f2f2f;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 1.35em;
   color: #696969;
   margin-bottom: 15px;
 }
@@ -95,34 +100,36 @@ th { font-weight: bold; padding: 5px; }
   padding: 0 2em;
   background: #4169e1;
   color: #ddd;
+  overflow: hidden;
 }
 
-#container {
-  float: left;
+table#container {
   width: 100%;
-  margin-bottom: 1em;
+  margin: .75em 0 1em 0;
+}
+table#container > tbody > tr > td { padding: 0; }
+
+table#container td#maincol {
+  width: 64%;
+  -moz-box-shadow: 2px 2px 12px #bbb;
+  -webkit-box-shadow: 2px 2px 12px #bbb;
+  box-shadow: 2px 2px 12px #bbb;
+}
+
+#heading {
+  padding: 0.65em 2em .45em 2em;
+  background: #faf0e6;
+  color: #000;
 }
 
 #content {
   min-height: 480px;
-  padding: 2em 2em 4em 2em;
+  padding: 1.5em 2em 4em 2em;
   background: #fff;
-  -moz-box-shadow: 0px 2px 8px #bbb;
-  -webkit-box-shadow: 0px 2px 8px #bbb;
-  box-shadow: 0px 2px 8px #bbb;
-  border-right: solid 1px #bbb;
-  border-bottom: solid 1px #bbb;
 }
 
-#content {
-  width: 64%;
-}
-
-#sidebar {
-  float: right;
-  width: 22%;
-  padding: 2em 2em 2em 1em;
-  background: #e5e5e5;
+table#container td#sidebar {
+  padding: 2em 2em 2em 4em;
 }
 
 #footer {
@@ -151,15 +158,19 @@ th { font-weight: bold; padding: 5px; }
 #header .tabs .current {
   font-weight: bold;
   font-size: 95%;
-  background: #fff;
+  background: #e5e5e5;
   -moz-box-shadow: 0px 0px 4px #fff;
   -webkit-box-shadow: 0px 0px 4px #fff;
   box-shadow: 0px 0px 4px #fff;
 }
-#header .tabs .right .current { background: #e5e5e5; }
 
 #header .links a, #header .links a:visited { color: #ddd; }
 #header .tabs a, #header .tabs a:visited { color: #444; text-decoration: none; }
+
+#heading h1 {
+  font-size: 1.15em;
+  margin: 0;
+}
 
 #sidebar h2 { border-bottom: solid 1px #ccc; }
 #sidebar ul { margin-bottom: 20px; }
@@ -168,13 +179,6 @@ th { font-weight: bold; padding: 5px; }
   padding: 5px 0;
 }
 #sidebar ul form#job_filter li span { display:block; width:30%; float:left; padding:2px;}
-
-#content h1 {
-  font-size: 1.75em;
-  line-height: 1;
-  color: #1f2f2f;
-  padding-bottom: 1em;
-}
 
 #content ul#sortable {
   margin-bottom: 50px;
@@ -277,35 +281,33 @@ table.details tr { border-bottom: solid 1px #c0c0c0; }
   border: none;
 }
 
-.jstab .activities { margin-bottom: 20px; }
-.jstab .activities .row { width: 100%; padding: 10px 0 15px 0; }
-.jstab .activities .row .col1 { margin-right: 20px; float:left; }
-.jstab .activities .row .col1 img { border:1px solid #ccc; }
-.jstab .activities .row .col2 { min-height: 100px; float: left; }
-.jstab .activities .row .col2 .even {
-  background-color: #cdcdcd; padding: 5px 10px;
-  -moz-border-radius: 10px 0 10px 0;
-  -webkit-border-radius: 10px 0 10px 0;
-  border--radius: 10px 0 10px 0;
+#tab1.ui-tabs-panel {
+  padding-left: 0;
 }
-.jstab .activities .row .col2 .odd {
+
+.jstab table.activities { margin-bottom: 20px; }
+.jstab table.activities td { padding: 10px; }
+.jstab table.activities .meta {
+  font-size: 95%;
   background-color: #cdcdcd;
-  padding: 5px 10px;
-  -moz-border-radius: 10px 0 10px 0;
-  -webkit-border-radius: 10px 0 10px 0;
-  border--radius: 10px 0 10px 0;
+  -moz-border-radius: 15px 0 15px 0;
+  -webkit-border-radius: 15px 0 15px 0;
+  border--radius: 15px 0 15px 0;
+  padding: 3px 15px;
+  margin-bottom: 10px;
 }
-.jstab .activities .row .col2 .actor { float: left; }
-.jstab .activities .row .col2 .time { float: right; }
-.jstab .activities .row .col2 .row2 { padding: 10px; }
-.jstab .activities .row .col2 .row2 .statusbox {
+.jstab table.activities .meta .actor { display: inline; }
+.jstab table.activities .meta .time { display: inline; float: right; }
+.jstab table.activities .action { margin: 5px 0; }
+.jstab table.activities .ui-icon { display: inline-block; vertical-align: middle; }
+.jstab table.activities .statusbox {
   display: inline-block;
   vertical-align: middle;
   height: 1.25em;
   width: 1.25em;
   margin-left: 4px;
 }
-.jstab .activities .row .col2 .row2 .status { font-weight: bold; font-size: 85%; }
+.jstab table.activities .status { font-weight: bold; font-size: 85%; }
 
 form#new_activity label { font-size: 90%; font-weight: bold; display: block; margin-bottom: 5px; }
 form#new_activity li { margin-bottom: .25em; }
