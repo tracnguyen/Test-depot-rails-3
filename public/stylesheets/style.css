@@ -103,7 +103,7 @@ th { font-weight: bold; padding: 5px; }
   margin-bottom: 1em;
 }
 
-#content, #content-full {
+#content {
   min-height: 480px;
   padding: 2em 2em 4em 2em;
   background: #fff;
@@ -169,7 +169,7 @@ th { font-weight: bold; padding: 5px; }
 }
 #sidebar ul form#job_filter li span { display:block; width:30%; float:left; padding:2px;}
 
-#content h1, #content-full h1 {
+#content h1 {
   font-size: 1.75em;
   line-height: 1;
   color: #1f2f2f;
@@ -219,9 +219,6 @@ th { font-weight: bold; padding: 5px; }
   padding: .25em 0 .5em 0;
   display: block;
 }
-
-#content-full th { font-weight: bold; padding: 5px 0; }
-#content-full td { padding: 5px 0; }
 
 ol.activities { margin: 2em 0; }
 ol.activities li { maxwidth: 41em; margin-bottom: 2em; }
@@ -277,15 +274,27 @@ table.details tr { border-bottom: solid 1px #c0c0c0; }
   margin-top: 30px;
   font: 16px/1.25 Helvetica, Arial, sans-serif;
   min-height: 240px;
+  border: none;
 }
 
 .jstab .activities { margin-bottom: 20px; }
 .jstab .activities .row { width: 100%; padding: 10px 0 15px 0; }
 .jstab .activities .row .col1 { margin-right: 20px; float:left; }
 .jstab .activities .row .col1 img { border:1px solid #ccc; }
-.jstab .activities .row .col2 { min-height: 100px; float: left; border: 1px solid #ccc; }
-.jstab .activities .row .col2 .even { background-color: #cdcdcd; padding: 5px 10px; }
-.jstab .activities .row .col2 .odd { background-color: #cdcdcd; padding: 5px 10px; }
+.jstab .activities .row .col2 { min-height: 100px; float: left; }
+.jstab .activities .row .col2 .even {
+  background-color: #cdcdcd; padding: 5px 10px;
+  -moz-border-radius: 10px 0 10px 0;
+  -webkit-border-radius: 10px 0 10px 0;
+  border--radius: 10px 0 10px 0;
+}
+.jstab .activities .row .col2 .odd {
+  background-color: #cdcdcd;
+  padding: 5px 10px;
+  -moz-border-radius: 10px 0 10px 0;
+  -webkit-border-radius: 10px 0 10px 0;
+  border--radius: 10px 0 10px 0;
+}
 .jstab .activities .row .col2 .actor { float: left; }
 .jstab .activities .row .col2 .time { float: right; }
 .jstab .activities .row .col2 .row2 { padding: 10px; }
