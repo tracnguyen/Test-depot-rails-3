@@ -116,10 +116,15 @@ table#container {
 table#container > tbody > tr > td { padding: 0; }
 
 table#container td#maincol {
-  width: 64%;
+  min-width: 600px;
   -moz-box-shadow: 2px 2px 12px #bbb;
   -webkit-box-shadow: 2px 2px 12px #bbb;
   box-shadow: 2px 2px 12px #bbb;
+}
+
+table#container td#sidebar {
+  width: 320px;
+  padding: 2% 2% 2% 5%;
 }
 
 #heading {
@@ -132,10 +137,6 @@ table#container td#maincol {
   min-height: 480px;
   padding: 1.5em 2em 4em 2em;
   background: #fff;
-}
-
-table#container td#sidebar {
-  padding: 2em 2em 2em 4em;
 }
 
 #footer {
@@ -230,7 +231,6 @@ table#container td#sidebar {
   display: block;
 }
 
-ol.activities { margin: 2em 0; }
 ol.activities li { maxwidth: 41em; margin-bottom: 2em; }
 ol.activities li p.comment { maxwidth: 41em; margin: .5em 0; }
 ol.activities li td { padding: 0; }
