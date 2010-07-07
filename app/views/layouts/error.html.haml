@@ -3,13 +3,13 @@
 %html
   %head
     %title Hiring application
-    = stylesheet_link_tag "style.css"
+    = stylesheet_link_tag "simple.css"
   %body
     #header
       .links.clearfix
       %h1#title= current_account ? current_account.name : "HiringApp"
     #container.clearfix
-      #content-full
+      #content
         - if notice || alert
           #flashes
             %p#notice= notice
