@@ -1,14 +1,44 @@
 %h1 Applications
 
-%a{:href => "#", :class => "button"}
-  Archive
-%a{:href => "#", :class => "button"}
-  Report spam
-%a{:href => "#", :class => "button"}
-  Delete
+%ul.buttons-nav
+  %li
+    Archive
+  %li
+    Report spam
+  %li
+    Delete
 
-%br
-%br
+%ul.selectors-nav
+  %li="Select:"
+  %li
+    &nbsp;
+  %li{:class => "selector"}
+    All
+  %li=","
+  %li
+    &nbsp;
+  %li{:class => "selector"}
+    None
+  %li=","
+  %li
+    &nbsp;
+  %li{:class => "selector"}
+    Read
+  %li=","
+  %li
+    &nbsp;
+  %li{:class => "selector"}
+    Unread
+  %li=","
+  %li
+    &nbsp;
+  %li{:class => "selector"}
+    Starred
+  %li=","
+  %li
+    &nbsp;
+  %li{:class => "selector"}
+    Unstarred
 
 %table.applicants
   %tr.title

@@ -240,7 +240,14 @@ ol.activities li .statusbox {
   width: 1.25em;
 }
 
-a.button { display:block; background-color:#eee; border:1px solid #ccc; text-decoration:none; padding:3px 10px; float:left;}
+ul.buttons-nav {list-style:none; overflow:auto; width:100%;}
+ul.buttons-nav li {display:block; float:left; background-color:#eee; border:1px solid #ccc; padding:3px 10px;}
+ul.buttons-nav li:hover {cursor:pointer;}
+
+ul.selectors-nav {list-style:none; overflow:auto; width:100%; padding:10px 0;}
+ul.selectors-nav li {display:block; float:left;}
+ul.selectors-nav li.selector:hover {cursor:pointer;}
+ul.selectors-nav li.selector {color:#0099ff;}
 
 table.applicants td { font-size: 92%; }
 table.applicants tr.unread { font-weight: bold; background: #ffffe0; }
