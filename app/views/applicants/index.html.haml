@@ -2,11 +2,9 @@
   %h1 Applications
 
 %ul.buttons-nav
-  %li
+  %li{:id => "button-archive"}
     Archive
-  %li
-    Report spam
-  %li
+  %li{:id => "button-delete"}
     Delete
 
 %ul.selectors-nav
@@ -41,30 +39,33 @@
   %li{:class => "selector", :id => "unstarred-selector"}
     Unstarred
 
-%table.applicants
-  %tr.title
-    %th 
-    %th
-    %th Name
-    %th Applied for
-    %th Status
-  - @applicants.each do |applicant|
-    %tr{:class => (@read_status[applicant.id] ? "read" : "unread") + (applicant.is_starred ? " starred" : " unstarred")}
-      %td.checkbox
-        %input{:type => "checkbox"}
-      %td{:class => "star", :id => "#{applicant.id}"}
-        - if applicant.is_starred
-          %img{:src => "/images/yellow-star.png", :class => "yellow-star star-icon"}
-          %img{:src => "/images/white-star.png", :class => "white-star star-icon", :style => "display:none"}
-        - else
-          %img{:src => "/images/yellow-star.png", :class => "yellow-star star-icon", :style => "display:none"}
-          %img{:src => "/images/white-star.png", :class => "white-star star-icon"}
-      %td.name
-        = link_to applicant.first_name + " " + applicant.last_name, applicant_path(applicant)
-      %td= applicant.job.title
-      %td
-        %div{:style => "background: #{applicant.job_stage.color}", :class => "statusbox"}
-        = applicant.job_stage.name
+- form_tag(batch_process_applicants_url) do 
+  %table.applicants
+    %tr.title
+      %th 
+      %th
+      %th Name
+      %th Applied for
+      %th Status
+    - @applicants.each do |applicant|
+      %tr{:class => (@read_status[applicant.id] ? "read" : "unread") + (applicant.is_starred ? " starred" : " unstarred"), :id => "#{applicant.id}"}
+        %td.checkbox
+          = check_box_tag "selection[]", applicant.id
+        %td{:class => "star"}
+          - if applicant.is_starred
+            %img{:src => "/images/yellow-star.png", :class => "yellow-star star-icon"}
+            %img{:src => "/images/white-star.png", :class => "white-star star-icon", :style => "display:none"}
+          - else
+            %img{:src => "/images/yellow-star.png", :class => "yellow-star star-icon", :style => "display:none"}
+            %img{:src => "/images/white-star.png", :class => "white-star star-icon"}
+        %td.name
+          = link_to applicant.first_name + " " + applicant.last_name, applicant_path(applicant)
+        %td= applicant.job.title
+        %td
+          %div{:style => "background: #{applicant.job_stage.color}", :class => "statusbox"}
+          = applicant.job_stage.name
+  = submit_tag "Archive", :id => "archive-submit", :style => "display:none"
+  = submit_tag "Delete", :id => "delete-submit", :style => "display:none"
 
 %br/
 
@@ -94,7 +95,7 @@
   	$('.star-icon').click(function(){
       $.ajax({
         type: 'PUT',
-        url: '/applicants/' + $(this).parent().attr('id'),
+        url: '/applicants/' + $(this).parent().parent().attr('id'),
         data: {
           'starring' : 1
         }
@@ -118,4 +119,12 @@
   	  $('.starred').children('.checkbox').children(':input').attr('checked', false);
   	  $('.unstarred').children('.checkbox').children(':input').attr('checked', true);
   	});  	
-  })
+  	
+  	$('#button-delete').click(function(){
+      $('#delete-submit').click();
+  	});
+  	
+  	$('#button-archive').click(function(){
+      $('#archive-submit').click();
+  	});
+  })  
