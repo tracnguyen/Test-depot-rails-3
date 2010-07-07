@@ -24,7 +24,6 @@ class Main::AccountsController < ApplicationController
 
   def create
     @account = Account.new(params[:account])
-    # @account.build_owner(params[:owner])
 
     if !simple_captcha_valid?
       flash[:notice] = "CAPTCHA confirmation failed!"

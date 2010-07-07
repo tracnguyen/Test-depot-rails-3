@@ -1,15 +1,19 @@
 %h1
   Your account information
 
-%table 
+%table.details
   %tr
-    %td
-      %b= "Name:"
+    %th
+      %b= "Name"
     %td= @account.name
   %tr
-    %td
-      %b= "Email:"
+    %th
+      %b= "Subdomain"
+    %td= @account.subdomain
+  %tr
+    %th
+      %b= "Email"
     %td= @account.owner.email
-%br
-%br
-= link_to "Go to your site", root_url(:subdomain => @account.subdomain)
+%br/
+%br/
+= link_to "Go to your site", dashboard_url(:subdomain => @account.subdomain)

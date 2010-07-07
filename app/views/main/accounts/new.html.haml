@@ -1,13 +1,6 @@
 %h1 Create an account
 
 = semantic_form_for([:main, @account]) do |f|
-  -if @account.errors.any?
-    #errorExplanation
-      %h2= "#{pluralize(@account.errors.count, "error")} prohibited this account from being saved:"
-      %ul
-        - @account.errors.full_messages.each do |msg|
-          %li= msg 
-    
   = f.inputs do
     = f.input :name, :label => "Company Name", :required => true
     = f.input :subdomain, :label => "Subdomain", :required => true
