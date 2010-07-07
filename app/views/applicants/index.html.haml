@@ -57,6 +57,10 @@
   		$('#job_filter').submit()
   	})
   	
+  	$('img.star-icon').mouseover(function(){
+  	  $(this).css("cursor", "pointer");
+  	});
+  	
   	$('.star-icon').click(function(){
       $.ajax({
         type: 'PUT',
