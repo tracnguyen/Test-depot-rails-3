@@ -13,7 +13,7 @@
 %table.applicants
   %tr.title
     %th 
-      %input{:type => "checkbox"}
+      %input{:type => "checkbox", :id => "mark-all"}
     %th
     %th Name
     %th Applied for
@@ -69,5 +69,9 @@
           'starring' : 1
         }
       });
+  	});
+  	
+  	$('input#mark-all').click(function(){
+  	  $('table.applicants :checkbox').attr('checked', $(this).attr('checked'));
   	});
   })
