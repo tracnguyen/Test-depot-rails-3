@@ -1,30 +1,32 @@
 %h1= @job.title
 
-%table{:class => 'jobs'}
+%table.details
   %tr
-    %td{:class => 'col1'}
-      Status
+    %td
+    %td
+  %tr
+    %th Status
     %td
       = @job.status
   %tr
-    %td{:class => 'col1'}
-      Posted on
+    %th Posted on
     %td
       = @job.creation_date
     %tr
-      %td{:class => 'col1'}
-        Closed on
+      %th Closed on
       - if @job.expiry_date
         %td
           = @job.expiry_date
-    %tr
-      %td{:class => 'col1'}
-        Description
-      %td
-        != @job.description
 
-%p= link_to 'Click to Apply', new_pub_job_applicant_path(@job)
+!= @job.description
 
 %br/
 
-= link_to 'Back to Job Board', pub_jobs_path
+%p= link_to 'Apply for this position', new_pub_job_applicant_path(@job), :id => "Apply"
+
+:javascript
+  $(function() {
+  	$("#Apply").button().css("margin-bottom", "30px")
+  })
+
+%p= link_to 'Back to Job Board', pub_jobs_path

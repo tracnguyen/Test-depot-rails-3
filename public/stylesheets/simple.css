@@ -34,7 +34,8 @@ abbr,acronym { border:0;
 
 body {
   min-width: 760px;
-  margin: 0 2em;
+  max-width: 960px;
+  margin: auto;
   background: #e5e5e5;
   font: 16px/1.25 Helvetica, Arial, sans-serif;
 }
@@ -43,7 +44,7 @@ h2 {
   font-size: 1.5em;
   line-height: 1;
   color: #696969;
-  margin-bottom: 15px;
+  margin: 20px 0 15px;
 }
 
 a { color: #4682b4; }
@@ -103,7 +104,7 @@ th { font-weight: bold; padding: 5px; }
   margin-bottom: 1em;
 }
 
-#content, #content-full {
+#content {
   min-height: 480px;
   padding: 2em 2em 4em 2em;
   background: #fff;
@@ -112,10 +113,6 @@ th { font-weight: bold; padding: 5px; }
   box-shadow: 0px 2px 8px #bbb;
   border-right: solid 1px #bbb;
   border-bottom: solid 1px #bbb;
-}
-
-#content {
-  width: 64%;
 }
 
 #sidebar {
@@ -169,47 +166,11 @@ th { font-weight: bold; padding: 5px; }
 }
 #sidebar ul form#job_filter li span { display:block; width:30%; float:left; padding:2px;}
 
-#content h1, #content-full h1 {
+#content h1 {
   font-size: 1.75em;
   line-height: 1;
   color: #1f2f2f;
   padding-bottom: 1em;
-}
-
-#content ul#sortable {
-  margin-bottom: 50px;
-}
-
-#content ul#sortable .col1{
-  float: left;
-  width: 60%;
-  padding: 5px;
-  border-bottom: 1px solid #5f9ea0;
-}
-
-#content ul#sortable .col11{
-  float: left;
-  width: 80%;
-}
-
-#content ul#sortable .col2{
-  float: left;
-  display: block;
-  padding: 5px 20px;
-}
-
-#content ul#sortable li {
-  float: left;
-  width: 100%;
-}
-
-#content ul .editable {
-  display: none;
-}
-
-#content ul#sortable .col12, .col13, .col14 {
-  float: left;
-  width: 30px;
 }
 
 #header h1#title {
@@ -220,95 +181,15 @@ th { font-weight: bold; padding: 5px; }
   display: block;
 }
 
-#content-full th { font-weight: bold; padding: 5px 0; }
-#content-full td { padding: 5px 0; }
+#content th { font-weight: bold; padding: 5px 0; }
+#content td { padding: 5px 0; }
 
-ol.activities { margin: 2em 0; }
-ol.activities li { maxwidth: 41em; margin-bottom: 2em; }
-ol.activities li p.comment { maxwidth: 41em; margin: .5em 0; }
-ol.activities li td { padding: 0; }
-ol.activities li table.threecol td:firstchild { width: 33%; }
-ol.activities li table.twocol td { width: 33%; }
-ol.activities li td span.actor { color: #4682b4; }
-ol.activities li td span.time { fontsize: 80%; }
-ol.activities li span.status { fontsize: 80%; fontweight: bold; }
-ol.activities li span.arrow { fontweight: bold; margin: 0 10px; }
-ol.activities li .statusbox {
-  display: inline-block;
-  vertical-align: middle;
-  height: 1.25em;
-  width: 1.25em;
-}
-
-a.button { display:block; background-color:#eee; border:1px solid #ccc; text-decoration:none; padding:3px 10px; float:left;}
-
-table.applicants td { font-size: 92%; }
-table.applicants tr.unread { font-weight: bold; background: #ffffe0; }
-table.applicants tr.read { color: #808080; background: #fffafa; }
-table.applicants th:nth-child(3) { padding-left: 10px; }
-table.applicants td:nth-child(3) { padding-left: 10px; }
-table.applicants .statusbox {
-  display: inline-block;
-  vertical-align: middle;
-  height: 1em;
-  width: 1em;
-  margin-right: 5px;
-}
-table.applicants tr {border:1px solid #ccc;}
-table.applicants tr.title {background-color:#ddd;}
-table.applicants td.checkbox, .star {width:10px;}
-table.applicants td.name a {text-decoration:none;}
-
-#content ul.actions li { display: inline;  padding: 5px; }
+table.lined tr { border-bottom: solid 1px #c0c0c0; }
 
 table.details { width: 50%; clear: right; margin-bottom: 25px; }
 table.details th { font-weight: bold; }
 table.details th:nth-child(1) { width: 7.5em; }
 table.details tr { border-bottom: solid 1px #c0c0c0; }
-
-#jstabs.ui-widget {
-  margin-top: 30px;
-  font: 16px/1.25 Helvetica, Arial, sans-serif;
-  min-height: 240px;
-}
-
-.jstab .activities { margin-bottom: 20px; }
-.jstab .activities .row { width: 100%; padding: 10px 0 15px 0; }
-.jstab .activities .row .col1 { margin-right: 20px; float:left; }
-.jstab .activities .row .col1 img { border:1px solid #ccc; }
-.jstab .activities .row .col2 { min-height: 100px; float: left; border: 1px solid #ccc; }
-.jstab .activities .row .col2 .even { background-color: #cdcdcd; padding: 5px 10px; }
-.jstab .activities .row .col2 .odd { background-color: #cdcdcd; padding: 5px 10px; }
-.jstab .activities .row .col2 .actor { float: left; }
-.jstab .activities .row .col2 .time { float: right; }
-.jstab .activities .row .col2 .row2 { padding: 10px; }
-.jstab .activities .row .col2 .row2 .statusbox {
-  display: inline-block;
-  vertical-align: middle;
-  height: 1.25em;
-  width: 1.25em;
-  margin-left: 4px;
-}
-.jstab .activities .row .col2 .row2 .status { font-weight: bold; font-size: 85%; }
-
-form#new_activity label { font-size: 90%; font-weight: bold; display: block; margin-bottom: 5px; }
-form#new_activity li { margin-bottom: .25em; }
-form#new_activity table th, td { vertical-align: top; }
-form#new_activity table td { overflow: hidden; }
-form#new_activity input[type=submit] { margin-top: 20px; padding: 5px 10px; }
-form#new_activity .statusbox {
-  display: inline-block;
-  vertical-align: middle;
-  height: 1.25em;
-  width: 1.25em;
-  margin: 0 2px;
-}
-
-.jstab .attachments { float: left; padding-left: 40px; }
-.jstab .attachments ul { list-style-type: square; list-style-position: inside; }
-.jstab .attachments ul a { text-decoration: none; }
-
-table.jobs .col1 { width: 20%; font-weight: bold;}
 
 #flashes { margin: 10px 0; padding: 5px 0; }
 #flashes p { max-width: 28em; }
