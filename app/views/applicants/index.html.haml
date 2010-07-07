@@ -12,12 +12,12 @@
   %li="Select:"
   %li
     &nbsp;
-  %li{:class => "selector"}
+  %li{:class => "selector", :id => "all-selector"}
     All
   %li=","
   %li
     &nbsp;
-  %li{:class => "selector"}
+  %li{:class => "selector", :id => "none-selector"}
     None
   %li=","
   %li
@@ -32,24 +32,23 @@
   %li=","
   %li
     &nbsp;
-  %li{:class => "selector"}
+  %li{:class => "selector", :id => "starred-selector"}
     Starred
   %li=","
   %li
     &nbsp;
-  %li{:class => "selector"}
+  %li{:class => "selector", :id => "unstarred-selector"}
     Unstarred
 
 %table.applicants
   %tr.title
     %th 
-      %input{:type => "checkbox", :id => "mark-all"}
     %th
     %th Name
     %th Applied for
     %th Status
   - @applicants.each do |applicant|
-    %tr{:class => @read_status[applicant.id] ? "read" : "unread"}
+    %tr{:class => (@read_status[applicant.id] ? "read" : "unread") + (applicant.is_starred ? " starred" : " unstarred")}
       %td.checkbox
         %input{:type => "checkbox"}
       %td{:class => "star", :id => "#{applicant.id}"}
@@ -84,8 +83,8 @@
 :javascript
   $(function() {
   	$('#job_title, #apt_status').change(function() {
-  		$('#job_filter').submit()
-  	})
+  		$('#job_filter').submit();
+  	});
   	
   	$('img.star-icon').mouseover(function(){
   	  $(this).css("cursor", "pointer");
@@ -101,7 +100,21 @@
       });
   	});
   	
-  	$('input#mark-all').click(function(){
-  	  $('table.applicants :checkbox').attr('checked', $(this).attr('checked'));
+  	$('#all-selector').click(function(){
+  	  $('table.applicants :checkbox').attr('checked', true);
   	});
+
+  	$('#none-selector').click(function(){
+  	  $('table.applicants :checkbox').attr('checked', false);
+  	});
+
+  	$('#starred-selector').click(function(){
+  	  $('.starred').children('.checkbox').children(':input').attr('checked', true);
+  	  $('.unstarred').children('.checkbox').children(':input').attr('checked', false);
+  	});
+
+  	$('#unstarred-selector').click(function(){
+  	  $('.starred').children('.checkbox').children(':input').attr('checked', false);
+  	  $('.unstarred').children('.checkbox').children(':input').attr('checked', true);
+  	});  	
   })
