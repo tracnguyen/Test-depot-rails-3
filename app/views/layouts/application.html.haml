@@ -34,9 +34,9 @@
             %li= link_to "Configuration", config_admin_path
           %li= link_to "Public jobs board", pub_jobs_path
     %table#container
-      %tr
-        %td
-          - if notice || alert
+      - if notice || alert
+        %tr
+          %td
             #flashes
               - if notice
                 #notice= notice

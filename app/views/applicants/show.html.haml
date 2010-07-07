@@ -63,8 +63,8 @@
               %span.attachment
                 - if a.caption.empty?
                   = link_to a.attachment_file_name, a.attachment.url
-                - else 
-                  = link_to a.caption, a.attachment.url
+                - else
+                  = link_to a.caption + ' (' + a.attachment_file_name + ')', a.attachment.url
         - else
           %p.comment= activity.comment
           - if activity.next_stage
@@ -102,8 +102,8 @@
       %li
         - if a.caption.empty?
           = link_to a.attachment_file_name, a.attachment.url
-        - else 
-          = link_to a.caption, a.attachment.url
+        - else
+          = link_to a.caption + ' (' + a.attachment_file_name + ')', a.attachment.url
 - else 
   %p
     (No attachment)

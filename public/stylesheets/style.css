@@ -59,13 +59,13 @@ h3 {
 
 a { color: #4682b4; }
 a:visited { color: #5f9ea0; }
-a.ui-button { color: #212121; }
+a .ui-button-text { color: #212121; }
 
 em { font-variant: italic; }
 strong { font-weight: bold; }
 
 p {
-  max-width: 32em;
+  max-width: 42em;
   margin-bottom: 10px;
 }
 
@@ -123,7 +123,7 @@ table#container td#maincol {
 }
 
 table#container td#sidebar {
-  width: 320px;
+  width: 360px;
   padding: 2% 2% 2% 5%;
 }
 
@@ -311,6 +311,7 @@ table.details tr { border-bottom: solid 1px #c0c0c0; }
 }
 
 .jstab table.activities { margin-bottom: 20px; }
+.jstab table.activities p { font-size: 95%; padding: 0 10px }
 .jstab table.activities td { padding: 10px; }
 .jstab table.activities .meta {
   font-size: 95%;
@@ -336,8 +337,9 @@ table.details tr { border-bottom: solid 1px #c0c0c0; }
 
 form#new_activity label { font-size: 90%; font-weight: bold; display: block; margin-bottom: 5px; }
 form#new_activity li { margin-bottom: .25em; }
+form#new_activity table { margin-left: 10px; }
 form#new_activity table th, td { vertical-align: top; }
-form#new_activity table td { overflow: hidden; }
+form#new_activity table td:nth-child(2) { width: 160px; }
 form#new_activity input[type=submit] { margin-top: 20px; padding: 5px 10px; }
 form#new_activity .statusbox {
   display: inline-block;
@@ -348,7 +350,8 @@ form#new_activity .statusbox {
 }
 
 .jstab ul.attachments { list-style-type: square; list-style-position: inside; margin-bottom: 20px; }
-.jstab ul.attachments a { text-decoration: none; }
+.jstab ul.attachments a { text-decoration: none; color: #4682b4; }
+}
 
 table.jobs .col1 { width: 20%; font-weight: bold;}
 
