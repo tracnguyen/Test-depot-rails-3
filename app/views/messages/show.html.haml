@@ -1,0 +1,39 @@
+.field
+  %span{:style => 'font-weight: bold'} From: 
+  %span= @message.from
+.field
+  %span{:style => 'font-weight: bold'} Subject:
+  %span= @message.subject
+- if @message.has_attachments?
+  .field
+    %span{:style => 'font-weight: bold'} Attachments:  
+    - @message.attachments.each do |a|
+      %span= link_to a.attachment_file_name, a.attachment.url 
+.field
+  %span{:style => 'font-weight: bold'} Content:
+  %br  
+  %div{:style => 'border: 1px solid #CCC; min-height: 200px; max-height: 300px; overflow: auto;'}
+    - if @message.content_type == "html"
+      = @message.content.html_safe
+    - else
+      = simple_format(@message.content)
+%div
+  %input{:type => 'button', :value => 'Convert this message to application'}
+%br  
+%div
+  - semantic_form_for @applicant, :html => {:id => 'form'} do |f|
+    - f.inputs do
+      = f.input :job_id, :as => :select, :collection => current_account.jobs.map { |job| [job.title, job.id] }
+      = f.input :first_name, :label => "First name"
+      = f.input :last_name, :label => "Last name"
+      = f.input :email, :label => "Email"
+      = f.input :phone, :label => "Phone"
+      %li
+        = radio_button_tag 'action', '1', true, :id => 'act1'
+        = label_tag 'act1', 'Use message content as Cover letter and attachments as Resume', :for => 'act1'
+        %br
+        = radio_button_tag 'action', '2', false, :id => 'act2'
+        = label_tag 'act2', 'Use message content as Resume', :for => 'act2'        
+  
+    - f.buttons do
+      = f.commit_button 'Save'

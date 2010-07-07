@@ -5,6 +5,7 @@ Hiringapp::Application.routes.draw do |map|
     resources :users, :only => [:new, :create, :update]
     
     resources :jobs
+    resources :messages
     
     resources :applicants do
       resources :activities, :only => [:index, :create]

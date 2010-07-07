@@ -1,0 +1,20 @@
+%h1 Messages
+
+%table
+  %tr
+    %th From
+    %th Subject
+    %th Arrived at
+    %th
+    %th
+
+  - @messages.each do |message|
+    %tr
+      %td= message.from
+      %td= message.subject
+      %td= message.created_at.to_s(:short)
+      - if message.has_attachments?
+        %td= image_tag('attachment.png')
+      - else
+        %td
+      %td= link_to 'View', message_path(message)

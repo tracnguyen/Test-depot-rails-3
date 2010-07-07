@@ -2,7 +2,33 @@ class MailReceiver < ActionMailer::Base
   def receive(email)
     puts "Fetching email to the database..."
     debugger
-    puts extract_message(email, nil)
+    msg = extract_message(email, nil)
+    account = Account.find_by_owner_email(email.to.to_s)
+    # TODO: raise add exception here and catch it in the fetcher        
+        
+    message = Message.new(:from => email.from.to_s,
+                          :uid => email.message_id,
+                          :subject => email.subject,
+                          :content => msg.body,
+                          :content_type => msg.content_type,
+                          :account_id => account.id)
+    
+    if email.has_attachments?
+      email.attachments.each do |attachment|
+        new_attachment = message.attachments.build
+        new_attachment.attachment_file_name = attachment.original_filename
+        new_attachment.attachment_content_type = attachment.content_type
+        new_attachment.attachment_file_size = 1024 # FIXME: dynamic size
+        new_attachment.attachment_updated_at = Time.now.to_datetime
+        new_attachment.attachment = attachment.body
+      end
+    end
+    if message.save
+      puts "Message has been saved."
+    else
+      puts "Failed to save message."
+    end
+    
     puts "Fetch completed."
   end
   

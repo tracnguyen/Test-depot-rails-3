@@ -65,11 +65,20 @@ module MailFetcher
 end
 
 # TODO: replace this configuration for each account
-config = {
+gmail_pop_config = {
   :server => "pop.gmail.com",
   :port => 995,
   :ssl => true,
   :username => "hoang.nghiem@techpropulsionlabs.com",
   :password => "hnghiem1!"
 }
-MailFetcher::Pop3Fetcher.fetch(config)
+
+gmail_imap_config = {
+  :server => "imap.gmail.com",
+  :port => 993,
+  :ssl => true,
+  :username => "hoang.nghiem@techpropulsionlabs.com",
+  :password => "hnghiem1!"
+}
+
+MailFetcher::Pop3Fetcher.fetch(gmail_pop_config)
