@@ -47,8 +47,14 @@ h1 {
 
 h2 {
   font-size: 1.35em;
-  color: #696969;
+  color: #444;
   margin-bottom: 15px;
+}
+
+h3 {
+  font-size: 1.15em;
+  color: #696969;
+  margin-bottom: 10px;
 }
 
 a { color: #4682b4; }
@@ -322,9 +328,8 @@ form#new_activity .statusbox {
   margin: 0 2px;
 }
 
-.jstab .attachments { float: left; padding-left: 40px; }
-.jstab .attachments ul { list-style-type: square; list-style-position: inside; }
-.jstab .attachments ul a { text-decoration: none; }
+.jstab ul.attachments { list-style-type: square; list-style-position: inside; margin-bottom: 20px; }
+.jstab ul.attachments a { text-decoration: none; }
 
 table.jobs .col1 { width: 20%; font-weight: bold;}
 
