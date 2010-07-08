@@ -18,7 +18,7 @@
   
   buildPicker = function(element){
     //build color picker
-    control = $("<div class='color_picker'>&nbsp;</div>")
+    control = $("<div class='color_picker' style='text-align:center'>a</div>")
     control.css('background-color', $(element).val());
     
     //bind click event to color picker
@@ -43,16 +43,16 @@
 
      //add color pallete
      $.each($.fn.colorPicker.defaultColors, function(i){
-      swatch = $("<div class='color_swatch'>&nbsp;</div>")
+      swatch = $("<div class='color_swatch' style='text-align:center'>a</div>")
       swatch.css("background-color", "#" + this);
       swatch.bind("click", function(e){ changeColor($(this).css("background-color")) });
       swatch.bind("mouseover", function(e){ 
         $(this).css("border-color", "#598FEF"); 
-        $("input#color_value").val(toHex($(this).css("background-color")));    
+          $("input#color_value").val(toHex($(this).css("background-color")));    
         }); 
       swatch.bind("mouseout", function(e){ 
         $(this).css("border-color", "#000");
-        $("input#color_value").val(toHex($(selectorOwner).css("background-color")));
+          $("input#color_value").val(toHex($(selectorOwner).css("background-color")));
         });
       
      swatch.appendTo(selector);
@@ -65,7 +65,7 @@
       if(event.keyCode == 27) {toggleSelector()}
      });
      
-     $("<div id='color_custom'></div>").append(hex_field).appendTo(selector);
+     $("<div id='color_custom' style='display:none'></div>").append(hex_field).appendTo(selector);
 
      $("body").append(selector); 
      selector.hide();
