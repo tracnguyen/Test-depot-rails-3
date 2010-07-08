@@ -10,6 +10,11 @@
     = f.input :attachment, :as => :file, :label => "Attachment (2)"
   
   - f.buttons do
-    = f.commit_button 'Save'
+    = f.commit_button 'Submit'
 
-= link_to 'Back to Job Description', pub_job_path(@applicant.job)
+= link_to 'Back to Job description', pub_job_path(@applicant.job)
+
+:javascript
+  $(function() {
+  	$("input[type=submit]").button()
+  })

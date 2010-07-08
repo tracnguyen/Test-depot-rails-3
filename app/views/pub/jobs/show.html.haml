@@ -6,7 +6,9 @@
     %td
   %tr
     %th Status
-    %td= @job.status
+    %td
+      %span{:style => !@job.open? ? "color: red" : ""}
+        = @job.status
   %tr
     %th Posted on
     %td= @job.creation_date.to_formatted_s(:long)
@@ -16,13 +18,12 @@
 
 != @job.description
 
-%br/
-
-%p= link_to 'Apply for this position', new_pub_job_applicant_path(@job), :id => "Apply"
+- if @job.open?
+  %p= link_to 'Apply for this position', new_pub_job_applicant_path(@job), :id => "Apply"
 
 :javascript
   $(function() {
-  	$("#Apply").button().css("margin-bottom", "30px")
+  	$("#Apply").button().css({"width": "20em", "display": "block", "margin": "0 auto 30px auto"})
   })
 
-%p= link_to 'Back to Job Board', pub_jobs_path
+%p= link_to 'Back to Job board', pub_jobs_path
