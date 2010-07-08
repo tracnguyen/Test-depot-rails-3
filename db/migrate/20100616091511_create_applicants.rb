@@ -11,6 +11,7 @@ class CreateApplicants < ActiveRecord::Migration
       t.integer :job_stage_id
       t.boolean :is_archived, :default => false
       t.boolean :is_starred, :default => false
+      t.boolean :is_read, :default => false
       
       t.timestamps
     end
