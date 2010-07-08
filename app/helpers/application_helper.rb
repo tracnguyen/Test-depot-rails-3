@@ -1,8 +1,4 @@
 module ApplicationHelper
-  def job_status_collection
-    [['Draft', 'draft'],['Open', 'open'],['Closed', 'closed']]
-  end
-  
   def job_filter_collection
     [["All", ""]] + current_account.jobs.collect{|job| [job.title, job.id.to_s]}
   end

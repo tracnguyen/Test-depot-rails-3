@@ -17,13 +17,15 @@
       = f.input :attachment, :as => :file, :label => "Attachment (2)"
 
   - f.buttons do
-    = f.commit_button 'Save'
+    = f.commit_button "Submit"
 
 = link_to 'Back', applicants_path
 
 - content_for :head do
   :javascript
     $(function() {
+      $('input[type=submit]').button()
+      
       $('#rm-atm').click(function() {
         if (confirm('Are you sure?')) {
           $('#form').append('<input type="hidden" name="remove_attachment" value="true">');

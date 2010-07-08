@@ -128,14 +128,18 @@ table#container td#sidebar {
 }
 
 #heading {
-  padding: 0.65em 2em .45em 2em;
   background: #faf0e6;
   color: #000;
+}
+#heading h1 {
+  font-size: 1.15em;
+  display: inline-block;
+  margin: 0.65em 0 .45em 2em;
 }
 
 #content {
   min-height: 480px;
-  padding: 1.5em 2em 4em 2em;
+  padding: 1.5em 4em 4em 2em;
   background: #fff;
 }
 
@@ -193,11 +197,6 @@ table#container td#sidebar {
 #header .links a, #header .links a:visited { color: #ddd; }
 #header .tabs a, #header .tabs a:visited { color: #444; text-decoration: none; }
 
-#heading h1 {
-  font-size: 1.15em;
-  margin: 0;
-}
-
 #sidebar h2 { border-bottom: solid 1px #ccc; }
 #sidebar ul { margin-bottom: 20px; }
 #sidebar ul li {
@@ -205,6 +204,9 @@ table#container td#sidebar {
   padding: 5px 0;
 }
 #sidebar ul form#job_filter li span { display:block; width:30%; float:left; padding:2px;}
+
+#heading a.ui-button { display: inline-block; margin: .4em 4em .4em 0; }
+#heading a .ui-button-text { font-size: 90%; padding: .3em 1em; }
 
 #content ul#sortable {
   margin-bottom: 50px;
@@ -251,12 +253,12 @@ table#container td#sidebar {
 }
 
 ol.activities li { maxwidth: 41em; margin-bottom: 2em; }
-ol.activities li p.comment { maxwidth: 41em; margin: .5em 0; }
+ol.activities li p.comment { margin: .5em 0; font-size: 95%; }
 ol.activities li td { padding: 0; }
 ol.activities li table.threecol td:firstchild { width: 33%; }
 ol.activities li table.twocol td { width: 33%; }
 ol.activities li td span.actor { color: #4682b4; }
-ol.activities li td span.time { fontsize: 80%; }
+ol.activities li td span.time { fontsize: 80%; font-size: 95%; }
 ol.activities li span.status { fontsize: 80%; fontweight: bold; }
 ol.activities li span.arrow { fontweight: bold; margin: 0 10px; }
 ol.activities li .statusbox {
@@ -266,9 +268,7 @@ ol.activities li .statusbox {
   width: 1.25em;
 }
 
-ul.buttons-nav {list-style:none; overflow:auto; width:100%;}
-ul.buttons-nav li {display:block; float:left; background-color:#eee; border:1px solid #ccc; padding:3px 10px;}
-ul.buttons-nav li:hover {cursor:pointer;}
+ul.buttons-nav li .ui-button-text { padding: 0.25em 0.75em; }
 
 ul.selectors-nav {list-style:none; overflow:auto; width:100%; padding:10px 0;}
 ul.selectors-nav li {display:block; float:left;}
@@ -335,12 +335,16 @@ table.details tr { border-bottom: solid 1px #c0c0c0; }
 }
 .jstab table.activities .status { font-weight: bold; font-size: 85%; }
 
+form fieldset.ui-buttonset .ui-button-text { font-size: 95%; padding: .25em 1em; }
+
+form#new_job table th { width: 10em; font-weight: normal; }
+form#new_job table th, form#new_job table td { padding-bottom: 2em; }
+
 form#new_activity label { font-size: 90%; font-weight: bold; display: block; margin-bottom: 5px; }
 form#new_activity li { margin-bottom: .25em; }
 form#new_activity table { margin-left: 10px; }
-form#new_activity table th, td { vertical-align: top; }
 form#new_activity table td:nth-child(2) { width: 160px; }
-form#new_activity input[type=submit] { margin-top: 20px; padding: 5px 10px; }
+form#new_activity input[type=submit] { margin-top: 20px; }
 form#new_activity .statusbox {
   display: inline-block;
   vertical-align: middle;
@@ -351,7 +355,6 @@ form#new_activity .statusbox {
 
 .jstab ul.attachments { list-style-type: square; list-style-position: inside; margin-bottom: 20px; }
 .jstab ul.attachments a { text-decoration: none; color: #4682b4; }
-}
 
 table.jobs .col1 { width: 20%; font-weight: bold;}
 
