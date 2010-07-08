@@ -23,7 +23,7 @@
   %tr
     %td
       %strong Status
-    %td{:style => "background: #{@applicant.job_stage.color}"}= @applicant.job_stage.name
+    %td{:style => "background: #{@applicant.job_stage.color}; color:#{map_to_char_color(@applicant.job_stage.color)}"}= @applicant.job_stage.name
 
 %ul.actions
   %li= link_to 'Edit details', edit_applicant_path(@applicant)
@@ -61,11 +61,11 @@
             .action
               .ui-icon.ui-icon-info
               changed status
-              %div{:style => "background: #{activity.prev_stage.color}", :class => "statusbox"}
-              %span.status= activity.prev_stage.name
+              %div{:style => "background: #{activity.prev_stage.color}; color:#{map_to_char_color(activity.prev_stage.color)}", :class => "statusbox"}
+                = activity.prev_stage.name
               →
-              %div{:style => "background: #{activity.next_stage.color}", :class => "statusbox"}
-              %span.status= activity.next_stage.name
+              %div{:style => "background: #{activity.next_stage.color}; color:#{map_to_char_color(activity.next_stage.color)}", :class => "statusbox"}
+                = activity.next_stage.name
 
 = form_for @activity, :url => applicant_activities_path(@applicant), :html => { :class => "clearfix" } do |f|
   %table
@@ -79,8 +79,8 @@
           - current_account.job_stages.undeleted.each do |stage|
             %li
               = f.radio_button :next_stage, stage.id, :checked => @applicant.job_stage.id == stage.id
-              %div{:style => "background: #{stage.color}", :class => "statusbox"}
-              = stage.name
+              %div{:style => "background: #{stage.color}; color:#{map_to_char_color(stage.color)}", :class => "statusbox"}
+                = stage.name
         = f.submit "Submit"
 </div><!--#tab1-->
 

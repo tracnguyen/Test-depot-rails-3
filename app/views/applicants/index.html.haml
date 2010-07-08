@@ -64,8 +64,8 @@
           = link_to applicant.first_name + " " + applicant.last_name, applicant_path(applicant)
         %td= applicant.job.title
         %td
-          %div{:style => "background: #{applicant.job_stage.color}", :class => "statusbox"}
-          = applicant.job_stage.name
+          %div{:style => "background: #{applicant.job_stage.color}; color:#{map_to_char_color(applicant.job_stage.color)}", :class => "statusbox"}
+            = applicant.job_stage.name
   = submit_tag "Archive", :id => "archive-submit", :style => "display:none"
   = submit_tag "Delete", :id => "delete-submit", :style => "display:none"
 
