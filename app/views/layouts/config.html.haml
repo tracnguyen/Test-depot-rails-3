@@ -31,6 +31,7 @@
             %li= link_to "Dashboard", dashboard_path
             %li= link_to "Jobs", jobs_path
             %li= link_to @n_unread_applications == 0 ? "Applications" : "Applications (#{@n_unread_applications})", applicants_path
+            %li= link_to "Message Center", messages_path
         %ol.right
           - if user_signed_in?
             %li= link_to "Configuration", config_admin_path
@@ -42,6 +43,7 @@
             %li= link_to "Job Stages", config_job_stages_path
             - if current_user.owns?(current_account)
               %li= link_to "Users", config_users_path
+              %li= link_to "Email Setting", config_email_settings_path
         = yield :sidebar
       #content
         - if notice || alert

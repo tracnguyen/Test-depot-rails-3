@@ -1,14 +1,16 @@
 ENV['RAILS_ENV'] ||= 'development'
 require File.dirname(__FILE__) + '/../config/environment'
+require 'net/pop'
+require 'net/imap'
 require 'net/http'
 require 'rubygems'
 require 'logger'
+require "yaml"
+require "pp"
 
 module MailFetcher  
   class Pop3Fetcher
     def self.fetch(config={})
-      require 'net/pop'
-      
       log = Logger.new(STDOUT)
       Net::POP3.enable_ssl(OpenSSL::SSL::VERIFY_NONE) if config[:ssl]
       Net::POP3.start(config[:server], 
@@ -33,11 +35,9 @@ module MailFetcher
   
   class ImapFetcher
     def self.fetch(config={})
-      require 'net/imap'
-      
       log = Logger.new(STDOUT)
       begin
-        imap = Net::IMAP.new(config[:host], config[:port], config[:ssl])
+        imap = Net::IMAP.new(config[:server], config[:port], config[:ssl])
         imap.login(config[:username], config[:password])
         log.info "logged in"
       
@@ -80,5 +80,18 @@ gmail_imap_config = {
   :username => "hoang.nghiem@techpropulsionlabs.com",
   :password => "hnghiem1!"
 }
-
-MailFetcher::Pop3Fetcher.fetch(gmail_pop_config)
+settings = EmailSetting.all
+settings.each do |setting|
+  config = {
+    :server => setting.server,
+    :port => setting.port,
+    :ssl => setting.ssl,
+    :username => setting.username,
+    :password => setting.password
+  }
+  if setting.protocol == "POP3"
+    MailFetcher::Pop3Fetcher.fetch(config)
+  else
+    MailFetcher::ImapFetcher.fetch(config)
+  end
+end

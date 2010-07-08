@@ -5,7 +5,7 @@ Hiringapp::Application.routes.draw do |map|
     resources :users, :only => [:new, :create, :update]
     
     resources :jobs
-    resources :messages
+    resources :messages, :only => [:index, :show, :create]
     
     resources :applicants do
       resources :activities, :only => [:index, :create]
@@ -24,6 +24,7 @@ Hiringapp::Application.routes.draw do |map|
       resource :admin
       resources :users, :only => [:index, :create]
       resources :job_stages
+      resources :email_settings
     end
     
     match "dashboard" => "dashboard#index", :as => :dashboard

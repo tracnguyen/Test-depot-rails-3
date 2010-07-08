@@ -54,7 +54,7 @@ class ApplicantsController < BaseAccountController
   def create
     @applicant = Applicant.new(params[:applicant])
     @applicant.account_id = current_account.id
-
+    
     respond_to do |format|
       if @applicant.save
         format.html { redirect_to(applicants_url, :notice => 'Applicant was successfully created.') }

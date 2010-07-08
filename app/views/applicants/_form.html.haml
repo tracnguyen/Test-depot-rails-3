@@ -5,7 +5,7 @@
     = f.input :last_name, :label => "Last name"
     = f.input :email, :label => "Email"
     = f.input :phone, :label => "Phone"
-    = f.input :cv, :label => "CV (1)"
+    = f.input :cover_letter, :label => "CV (1)"
     = hidden_field_tag :remove_attachment
     - if @applicant.attachment?
       /= link_to @applicant.attachment_file_name, @applicant.attachment.url

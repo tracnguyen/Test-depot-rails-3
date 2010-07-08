@@ -1,6 +1,6 @@
 %h1 Messages
 
-%table
+%table.applicants
   %tr
     %th From
     %th Subject
@@ -10,7 +10,7 @@
 
   - @messages.each do |message|
     %tr
-      %td= message.from
+      %td= message.sender_email
       %td= message.subject
       %td= message.created_at.to_s(:short)
       - if message.has_attachments?

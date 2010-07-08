@@ -28,6 +28,16 @@
   %li= link_to 'Edit details', edit_applicant_path(@applicant)
   %li= link_to 'Mark as unread', mark_applicant_as_unread_path(@applicant)
 
+- if !@applicant.cover_letter.blank?
+  .box_wrapper  
+    = link_to 'Cover letter', '#', :id => 'cover_letter'
+    .box= @applicant.cover_letter.html_safe
+
+- if !@applicant.resume.blank?
+  .box_wrapper  
+    = link_to 'Resume', '#', :id => 'resume'
+    .box= @applicant.resume.html_safe
+
 <div id=jstabs>
 %ul
   %li= link_to "Activities", "#tab1"
@@ -96,11 +106,11 @@
 <div id=tab2 class=jstab>
 .attachments
   Attachments:
-  - unless @applicant.attachments.empty?
+  - unless @applicant.attachments.blank?
     %ul
       - @applicant.attachments.each do |a|
         %li
-          - if a.caption.empty?
+          - if a.caption.blank?
             = link_to a.attachment_file_name, a.attachment.url
           - else 
             = link_to a.caption, a.attachment.url
@@ -135,4 +145,10 @@
   	$("#jstabs").tabs()
   	$("ul.actions a").button()
   	$('#add_attachment').hide()
+  	$('#cover_letter').click(function() {
+  	  $(this).next().slideToggle();
+  	});
+  	$('#resume').click(function() {
+  	  $(this).next().slideToggle();
+  	});
   })

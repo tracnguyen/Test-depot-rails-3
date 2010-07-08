@@ -5,6 +5,7 @@ class Account < ActiveRecord::Base
   has_many :applicants
   has_many :activities
   has_many :messages, :order => "created_at DESC"
+  has_one :email_setting
   
   validates_presence_of :name, :subdomain
   validates_uniqueness_of :subdomain

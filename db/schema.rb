@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100706095738) do
+ActiveRecord::Schema.define(:version => 20100707104204) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(:version => 20100706095738) do
     t.string   "last_name"
     t.string   "email"
     t.string   "phone"
-    t.text     "cv"
+    t.text     "cover_letter"
     t.integer  "job_id"
     t.integer  "account_id"
     t.integer  "job_stage_id"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(:version => 20100706095738) do
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
     t.datetime "attachment_updated_at"
+    t.text     "resume"
   end
 
   add_index "applicants", ["account_id", "job_stage_id"], :name => "index_applicants_on_account_and_stage"
@@ -124,6 +125,18 @@ ActiveRecord::Schema.define(:version => 20100706095738) do
     t.datetime "updated_at"
   end
 
+  create_table "email_settings", :force => true do |t|
+    t.integer  "account_id"
+    t.string   "server"
+    t.string   "port"
+    t.string   "username"
+    t.string   "password"
+    t.boolean  "ssl",        :default => true
+    t.string   "protocol"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "invitations", :force => true do |t|
     t.string  "email"
     t.string  "token"
@@ -159,10 +172,14 @@ ActiveRecord::Schema.define(:version => 20100706095738) do
   create_table "messages", :force => true do |t|
     t.integer  "account_id"
     t.string   "uid"
-    t.string   "from"
+    t.string   "sender_first_name"
+    t.string   "sender_last_name"
+    t.string   "sender_email"
     t.string   "subject"
     t.text     "content"
     t.string   "content_type"
+    t.boolean  "converted",         :default => false
+    t.integer  "applicant_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,12 +1,14 @@
 class MailReceiver < ActionMailer::Base
   def receive(email)
     puts "Fetching email to the database..."
-    debugger
-    msg = extract_message(email, nil)
+    msg = extract_message(email, nil)    
     account = Account.find_by_owner_email(email.to.to_s)
-    # TODO: raise add exception here and catch it in the fetcher        
-        
-    message = Message.new(:from => email.from.to_s,
+    # TODO: raise add exception here and catch it in the fetcher
+    
+    sender = sender_name(email)        
+    message = Message.new(:sender_email => email.from.to_s,
+                          :sender_first_name => sender.first_name,
+                          :sender_last_name => sender.last_name,
                           :uid => email.message_id,
                           :subject => email.subject,
                           :content => msg.body,
@@ -21,9 +23,17 @@ class MailReceiver < ActionMailer::Base
         new_attachment.attachment_file_size = 1024 # FIXME: dynamic size
         new_attachment.attachment_updated_at = Time.now.to_datetime
         new_attachment.attachment = attachment.body
+#        base_dir = RAILS_ROOT + "#{new_attachment.attachment.options[]}"
+#        File.open(base_dir + attachment.original_filename,File::CREAT|File::TRUNC|File::WRONLY,0666){ |f|
+#          f.write(attachment.read)
+#        }
       end
     end
+    
     if message.save
+      message.attachments.each do |a|
+        puts a.attachment.path        
+      end
       puts "Message has been saved."
     else
       puts "Failed to save message."
@@ -110,5 +120,25 @@ class MailReceiver < ActionMailer::Base
     else
       puts "Job email #{job_email} not found!"
     end
+  end
+  
+  
+  #
+  # Extract sender name from the email
+  #
+  def sender_name(email)
+    struct = Struct.new('Sender', :first_name, :last_name)
+    sender = struct.new
+
+    full_name = email.header[:from].to_s.split(/</).first.strip
+    names = (full_name).split(/\s/)
+    if names.length > 1
+      sender.first_name = names[0]
+      sender.last_name = names[1]
+    elsif names.length = 1
+      sender.first_name = names[0]
+      sender.last_name = ""
+    end
+    sender
   end
 end

@@ -1,6 +1,6 @@
 .field
   %span{:style => 'font-weight: bold'} From: 
-  %span= @message.from
+  %span= @message.sender_email
 .field
   %span{:style => 'font-weight: bold'} Subject:
   %span= @message.subject
@@ -17,23 +17,57 @@
       = @message.content.html_safe
     - else
       = simple_format(@message.content)
-%div
-  %input{:type => 'button', :value => 'Convert this message to application'}
-%br  
-%div
-  - semantic_form_for @applicant, :html => {:id => 'form'} do |f|
-    - f.inputs do
-      = f.input :job_id, :as => :select, :collection => current_account.jobs.map { |job| [job.title, job.id] }
-      = f.input :first_name, :label => "First name"
-      = f.input :last_name, :label => "Last name"
-      = f.input :email, :label => "Email"
-      = f.input :phone, :label => "Phone"
-      %li
-        = radio_button_tag 'action', '1', true, :id => 'act1'
-        = label_tag 'act1', 'Use message content as Cover letter and attachments as Resume', :for => 'act1'
-        %br
-        = radio_button_tag 'action', '2', false, :id => 'act2'
-        = label_tag 'act2', 'Use message content as Resume', :for => 'act2'        
+
+- if !@message.converted
+  %div
+    = link_to 'Convert to application from this message', '#', :id => 'tog'
+    %span#arrow
+      = image_tag("arrow_#{@applicant.errors.any? ? 'down' : 'right'}.png")
+  %br  
+  #convert_form{:style => "display: #{@applicant.errors.any? ? 'block' : 'none'}"}
+    - form_for @applicant, :url => {:controller => 'messages', :action => 'create'}, :html => {:id => 'form'} do |f|
+      - if @applicant.errors.any?
+        #errorExplanation
+          %h2= "#{pluralize(@applicant.errors.count, "error")} prohibited this job from being saved:"
+          %ul
+            - @applicant.errors.full_messages.each do |msg|
+              %li= msg
+
+      = f.hidden_field :message_id
+      = label :job_id, 'Job:'
+      = f.select :job_id, current_account.jobs.map { |job| [job.title, job.id] }
+      %br
+      = label :first_name, 'First Name:'
+      = f.text_field :first_name
+      %br
+      = label :last_name, 'Last Name:'
+      = f.text_field :last_name
+      %br
+      = label :email, 'Email:'
+      = f.text_field :email
+      %br
+      = label :phone, 'Phone Number:'
+      = f.text_field :phone
+      %br    
+      = f.radio_button :action, '1', :id => 'act1', :checked => true
+      = label_tag 'act1', 'Use message content as Cover letter and attachments as Resume', :for => 'act1'    
+      %br
+      = f.radio_button :action, '2', :id => 'act2'
+      = label_tag 'act2', 'Use message content as Resume', :for => 'act2'        
+      %br
+      = f.submit 'Save'
+- else
+  %p ** This message has been converted to #{link_to 'this', applicant_path(:id => @message.applicant_id)} application.
   
-    - f.buttons do
-      = f.commit_button 'Save'
+:erb
+  <script type="text/javascript">
+  $(function(){
+    $('#tog').toggle(function() {
+      $('#convert_form').slideDown();
+      $('#arrow').html('<%= image_tag("arrow_down.png") %>');
+    }, function() {
+      $('#convert_form').slideUp();
+      $('#arrow').html('<%= image_tag("arrow_right.png") %>');
+    });
+  });
+  </script>

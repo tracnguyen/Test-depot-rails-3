@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  server: MyString
+  port: MyString
+  username: MyString
+  password: MyString
+  ssl: false
+  protocol: MyString
+
+two:
+  server: MyString
+  port: MyString
+  username: MyString
+  password: MyString
+  ssl: false
+  protocol: MyString

@@ -13,7 +13,7 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'capistrano'
 
 # To use debugger
-# gem 'ruby-debug'
+gem 'ruby-debug'
 
 gem "subdomain-fu", :git => "git://github.com/nhowell/subdomain-fu.git"
 gem "devise", "1.1.rc2"

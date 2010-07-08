@@ -364,3 +364,15 @@ div.field, div.actions {
 #footer a, #footer a:visited {
   color: #666;
 }
+.box_wrapper {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.box {
+  border: 1px solid #CCC;
+  overflow: auto; 
+  min-height: 150px;
+  max-height: 300px;
+  padding: 10px;
+  margin-top: 10px;
+}
