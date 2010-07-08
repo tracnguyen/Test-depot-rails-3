@@ -27,12 +27,10 @@ class User < ActiveRecord::Base
     if uv.empty?
       self.user_views.create(:applicant_id => applicant.id)
     end
-    applicant.update_attribute(:is_read, true) unless applicant.is_read
   end
   
   def mark_as_unread(applicant)
     self.user_views.where('applicant_id' => applicant.id).delete_all
-    applicant.update_attribute(:is_read, false) if applicant.is_read
   end
 
   # Return this user's read status of the list of applicants as a hash of
