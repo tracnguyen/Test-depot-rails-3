@@ -7,28 +7,33 @@
           %li= msg
   %table
     %tr
-      %td
-        Position          
+      %th Position          
       %td
         = f.text_field :title
     %tr
+      %th Status
       %td
-        Expiry date
-      %td
-        = date_select(:job, :expiry_date)
+        %fieldset#status
+          - Job::STATUSES.each do |s|
+            = label "job_status", s
+            = radio_button :job, :status, s
     %tr
+      %th Expiry date
       %td
+        = f.text_field :expiry_date
+    %tr
+      %th{:style => "vertical-align: top"}
         Description
       %td
         = f.cktext_area :description
     %tr
+      %th
       %td
-        Status
-      %td
-        = select(:job, :status, job_status_collection)
-    %tr
-      %td
-      %td
-        = submit_tag 'Save'
-    
+        = submit_tag 'Submit'
 
+:javascript
+  $(function() {
+  	$("fieldset#status").buttonset()
+  	$("input#job_expiry_date").datepicker()
+  	$("input[type=submit]").button()
+  })

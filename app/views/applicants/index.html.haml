@@ -1,10 +1,12 @@
 = content_for :heading do
   %h1 Applications
+  .right
+    = link_to 'Create a new Application', new_applicant_path, :id => "new_applicant"
 
 %ul.buttons-nav
-  %li{:id => "button-archive"}
+  %li#button-archive
     Archive
-  %li{:id => "button-delete"}
+  %li#button-delete
     Delete
 
 %ul.selectors-nav
@@ -67,10 +69,6 @@
   = submit_tag "Archive", :id => "archive-submit", :style => "display:none"
   = submit_tag "Delete", :id => "delete-submit", :style => "display:none"
 
-%br/
-
-= link_to 'Create a new Application', new_applicant_path
-
 - content_for :sidebar do
   %h2 Filters
   %ul
@@ -84,6 +82,9 @@
 
 :javascript
   $(function() {
+  	$("a#new_applicant").button()
+  	$("ul.buttons-nav li").button()
+  	
   	$('#job_title, #apt_status').change(function() {
   		$('#job_filter').submit();
   	});
@@ -93,13 +94,11 @@
   	});
   	
   	$('.star-icon').click(function(){
-      $.ajax({
-        type: 'PUT',
-        url: '/applicants/' + $(this).parent().parent().attr('id'),
-        data: {
-          'starring' : 1
-        }
-      });
+  		$.ajax({
+  			type: 'PUT',
+  			url: '/applicants/' + $(this).parent().parent().attr('id'),
+  			data: { 'starring' : 1 }
+  		});
   	});
   	
   	$('#all-selector').click(function(){
