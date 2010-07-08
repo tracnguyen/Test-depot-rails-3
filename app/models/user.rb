@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   
   def mark_as_read(applicant)
     uv = self.user_views.where('applicant_id' => applicant.id)
-    if uv.empty?
+    if uv.blank?
       self.user_views.create(:applicant_id => applicant.id)
     end
   end

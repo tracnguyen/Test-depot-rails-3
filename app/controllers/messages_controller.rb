@@ -30,7 +30,13 @@ class MessagesController < BaseAccountController
       @applicant.cover_letter = ""
     end
     
-    @applicant.attachments = @message.attachments
+    @message.attachments.each do |a|
+      new_atm = @applicant.attachments.build
+      new_atm.attachment_file_name = a.attachment_file_name
+      new_atm.attachment_file_size = a.attachment_file_size
+      new_atm.attachment_content_type = a.attachment_content_type
+      new_atm.attachment_updated_at = a.attachment_updated_at
+    end
 
     success = false
     begin
@@ -39,12 +45,21 @@ class MessagesController < BaseAccountController
         @message.converted = true
         @message.applicant_id = @applicant.id
         @message.save!
+
+        # copy message's attachments to applicant's attachments 
+        @message.attachments.each_with_index do |a, index|
+          dest = "#{Rails.root}/public/assets/attachments/#{@applicant.attachments[index].id}"
+          FileUtils.mkdir_p(dest) # create if did not existed
+          FileUtils.cp(a.attachment.path, dest)
+        end        
+        
         success = true
       end
     rescue Exception => ex
       logger.error ex
       success = false
     end
+    logger.info "Success : #{success}"
     respond_to do |format|
       if success
         format.html { redirect_to(@message, :notice => 'Applicant was successfully created.') }

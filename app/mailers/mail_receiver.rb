@@ -1,5 +1,6 @@
 class MailReceiver < ActionMailer::Base
   def receive(email)
+    debugger
     puts "Fetching email to the database..."
     msg = extract_message(email, nil)    
     account = Account.find_by_owner_email(email.to.to_s)
@@ -18,24 +19,14 @@ class MailReceiver < ActionMailer::Base
     if email.has_attachments?
       email.attachments.each do |attachment|
         new_attachment = message.attachments.build
-        new_attachment.attachment_file_name = attachment.original_filename
-        new_attachment.attachment_content_type = attachment.content_type
-        new_attachment.attachment_file_size = 1024 # FIXME: dynamic size
-        new_attachment.attachment_updated_at = Time.now.to_datetime
-        new_attachment.attachment = attachment.body
-#        base_dir = RAILS_ROOT + "#{new_attachment.attachment.options[]}"
-#        File.open(base_dir + attachment.original_filename,File::CREAT|File::TRUNC|File::WRONLY,0666){ |f|
-#          f.write(attachment.read)
-#        }
+        tempfile = Paperclip::Tempfile.new(attachment.original_filename)
+        tempfile.write attachment.read
+        new_attachment.attachment = tempfile
       end
     end
-    
     if message.save
-      message.attachments.each do |a|
-        puts a.attachment.path        
-      end
       puts "Message has been saved."
-    else
+  else
       puts "Failed to save message."
     end
     
@@ -49,22 +40,27 @@ class MailReceiver < ActionMailer::Base
     struct = Struct.new('Message', :body, :content_type)
     message = struct.new
     if email.parts.size > 0
-      email.parts.each do |part|
-        if part.content_type.include?("multipart/alternative")
-          if !part.html_part.body.nil?
-            message.body = part.html_part.body.raw_source
-            message.content_type = "html"
+      if email.multipart?
+        message.body = email.html_part.body.decoded
+        message.content_type = "html"
+      else
+        email.parts.each do |part|
+          if part.content_type.include?("multipart/alternative")
+            if !part.html_part.body.nil?
+              message.body = part.html_part.body.raw_source
+              message.content_type = "html"
+            else
+              message.body = part.text_part.body.raw_source
+              message.content_type = "text"
+            end
           else
-            message.body = part.text_part.body.raw_source
-            message.content_type = "text"
-          end
-        else
-          if part.content_type.include?("text/html")
-            message.body = part.body.raw_source
-            message.content_type = "html"
-          elsif part.content_type.include?("text/plain")
-            message.body = part.body.raw_source
-            message.content_type = "text"
+            if part.content_type.include?("text/html")
+              message.body = part.body.raw_source
+              message.content_type = "html"
+            elsif part.content_type.include?("text/plain")
+              message.body = part.body.raw_source
+              message.content_type = "text"
+            end
           end
         end
       end
