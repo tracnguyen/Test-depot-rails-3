@@ -13,8 +13,8 @@
           - if activity.next_stage
             %td
               %div.right
-                %div{:style => "background: #{activity.next_stage.color}", :class => "statusbox"}
-                %span.status= activity.next_stage.name
+                %div{:style => "background: #{activity.next_stage.color}; color:#{map_to_char_color(activity.next_stage.color)}", :class => "statusbox"}
+                  = activity.next_stage.name
       %p.comment= activity.comment
       %table.twocol
         %tr
