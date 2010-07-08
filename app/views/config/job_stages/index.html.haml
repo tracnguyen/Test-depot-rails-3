@@ -1,5 +1,8 @@
+= content_for :head do
+  = javascript_include_tag "jquery.inlineEdit.js", "jquery.colorPicker.js"
+
 = content_for :heading do
-  %h1 Configure application' statuses
+  %h1 Status of applications
 
 %ul{:id => 'sortable'}
   .col1

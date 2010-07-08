@@ -1,13 +1,10 @@
 = content_for :heading do
-  %h1 Listing users
+  %h1 Account users
 
 %table
   - @users.each do |user|
     %tr
       %td= user.email
-
-%br/
-%br/
 
 %h1 Invite new user
 
