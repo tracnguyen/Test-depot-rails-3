@@ -3,12 +3,12 @@
 %html
   %head
     %title Hiring application
-    %script{ :type => "text/javascript", :src => "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" }
-    %script{ :type => "text/javascript", :src => "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js" }    
     = stylesheet_link_tag "jquery-ui-1.8.2.custom.css", "style.css"
     = formtastic_stylesheet_link_tag
+    / %script{ :type => "text/javascript", :src => "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" }
+    / %script{ :type => "text/javascript", :src => "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js" }
+    = javascript_include_tag 'jquery.min.js', 'jquery-ui-1.8.2.custom.min.js', 'rails.js'
     = javascript_include_tag :ckeditor
-    = javascript_include_tag :all
     = csrf_meta_tag
     = yield :head
   %body
