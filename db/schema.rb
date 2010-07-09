@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100707104204) do
+ActiveRecord::Schema.define(:version => 20100709083953) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -74,8 +74,8 @@ ActiveRecord::Schema.define(:version => 20100707104204) do
     t.integer  "job_id"
     t.integer  "account_id"
     t.integer  "job_stage_id"
-    t.boolean  "is_archived",             :default => false
-    t.boolean  "is_starred",              :default => false
+    t.boolean  "is_archived",               :default => false
+    t.boolean  "is_starred",                :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "attachment_file_name"
@@ -83,6 +83,8 @@ ActiveRecord::Schema.define(:version => 20100707104204) do
     t.integer  "attachment_file_size"
     t.datetime "attachment_updated_at"
     t.text     "resume"
+    t.string   "cover_letter_content_type", :default => "text"
+    t.string   "resume_content_type"
   end
 
   add_index "applicants", ["account_id", "job_stage_id"], :name => "index_applicants_on_account_and_stage"
@@ -195,6 +197,7 @@ ActiveRecord::Schema.define(:version => 20100707104204) do
     t.integer  "applicant_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "has_attachments"
   end
 
   create_table "simple_captcha_data", :force => true do |t|

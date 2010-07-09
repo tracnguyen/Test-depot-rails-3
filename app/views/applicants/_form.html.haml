@@ -5,7 +5,7 @@
     = f.input :last_name, :label => "Last name"
     = f.input :email, :label => "Email"
     = f.input :phone, :label => "Phone"
-    = f.input :cover_letter, :label => "CV (1)"
+    = f.input :cover_letter, :label => "Cover letter"
     = hidden_field_tag :remove_attachment
     - if @applicant.attachment?
       /= link_to @applicant.attachment_file_name, @applicant.attachment.url
@@ -14,7 +14,7 @@
         = f.label @applicant.attachment_file_name
         = link_to 'Remove', 'javascript:void(0);', :id => 'rm-atm'
     - else
-      = f.input :attachment, :as => :file, :label => "Attachment (2)"
+      = f.input :attachment, :as => :file, :label => "Attachment"
 
   - f.buttons do
     = f.commit_button "Submit"

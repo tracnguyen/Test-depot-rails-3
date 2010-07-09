@@ -413,3 +413,26 @@ div.field, div.actions {
   padding: 10px;
   margin-top: 10px;
 }
+.viewer {
+  border: 1px solid #CCC; 
+  -moz-box-shadow: 0px 0px 4px #fff;
+  -webkit-box-shadow: 0px 0px 4px #fff;
+  box-shadow: 0px 0px 4px #fff;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 100%;
+}
+.converted {
+  background-color: #DFFFF2;
+}
+.messages a {
+  text-decoration: none;
+}
+#cover_letter {
+  text-decoration: none;  
+}
+.info {
+  background-color: #EFF8FF;
+  border: 1px solid #7FC6FF;
+  padding: 10px;
+}

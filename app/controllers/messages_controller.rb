@@ -10,7 +10,7 @@ class MessagesController < BaseAccountController
   end
   
   def show
-    @message = Message.find(params[:id])
+    @message = Message.includes(:attachments).find(params[:id])
     @applicant = Applicant.new
     @applicant.first_name = @message.sender_first_name
     @applicant.last_name = @message.sender_last_name
@@ -24,9 +24,11 @@ class MessagesController < BaseAccountController
     @message = Message.find(@applicant.message_id)
     if @applicant.action == "1" # use as cover letter
       @applicant.cover_letter = @message.content    
+      @applicant.cover_letter_content_type = @message.content_type
       @applicant.resume = ""
     else # use as resume
       @applicant.resume = @message.content   
+      @applicant.resume_content_type = @message.content_type
       @applicant.cover_letter = ""
     end
     
@@ -69,5 +71,11 @@ class MessagesController < BaseAccountController
         format.xml  { render :xml => @message.errors, :status => :unprocessable_entity }
       end
     end
+  end
+  
+  def content
+    @message = Message.find(params[:id])
+    render :partial => "shared/viewer", :locals => {:content_type => @message.content_type,
+                                                    :content => @message.content}
   end
 end

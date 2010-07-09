@@ -76,11 +76,11 @@ module MailPoller
       begin
         imap = Net::IMAP.new(config[:server], config[:port], config[:ssl])
         imap.login(config[:username], config[:password])
-        log.info "logged in"
+        log.info "logged in #{config[:username]}"
       
         imap.select('Inbox')
         new_emails = imap.uid_search(["NOT", "SEEN"])
-        log.info "Found #{new_emails.size} new email in the server"
+        log.info "Found #{new_emails.size} new email in the server."
         new_emails.each do |uid|
           source   = imap.uid_fetch(uid, 'RFC822').first.attr['RFC822']
           MailReceiver.receive(source)

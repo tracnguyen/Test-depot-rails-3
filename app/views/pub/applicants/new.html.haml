@@ -6,8 +6,8 @@
     = f.input :last_name, :label => "Last name"
     = f.input :email, :label => "Email"
     = f.input :phone, :label => "Phone"
-    = f.input :cover_letter, :label => "CV (1)", :input_html => {:rows => 15}
-    = f.input :attachment, :as => :file, :label => "Attachment (2)"
+    = f.input :cover_letter, :label => "Cover letter", :input_html => {:rows => 15}
+    = f.input :attachment, :as => :file, :label => "Attachment"
   
   - f.buttons do
     = f.commit_button 'Submit'

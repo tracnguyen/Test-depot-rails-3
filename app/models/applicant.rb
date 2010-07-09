@@ -12,7 +12,7 @@ class Applicant < ActiveRecord::Base
   has_many :attachments, :as => :attachable
   attr_accessor :action, :message_id
   
-  validates_presence_of :first_name, :last_name, :email, :phone, :job, :account
+  validates_presence_of :first_name, :last_name, :email, :phone, :job, :account, :action, :message_id
   validates_associated :job
 #  validate do |applicant| 
 #    if (applicant.resume.blank? && applicant.attachment_file_name.nil?)

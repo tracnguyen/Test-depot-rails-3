@@ -1,3 +1,5 @@
+- content_for :head do
+  = javascript_include_tag 'autoHeight'
 = content_for :heading do
   %h1= @applicant.first_name + " " + @applicant.last_name
 
@@ -29,20 +31,11 @@
   %li= link_to 'Edit details', edit_applicant_path(@applicant)
   %li= link_to 'Mark as unread', mark_applicant_as_unread_path(@applicant)
 
-- if !@applicant.cover_letter.blank?
-  .box_wrapper  
-    = link_to 'Cover letter', '#', :id => 'cover_letter'
-    .box= @applicant.cover_letter.html_safe
-
-- if !@applicant.resume.blank?
-  .box_wrapper  
-    = link_to 'Resume', '#', :id => 'resume'
-    .box= @applicant.resume.html_safe
-
 <div id=jstabs>
 %ul
   %li= link_to "Activities", "#tab1"
   %li= link_to "Attachments", "#tab2"
+  %li= link_to "Resume", "#tab3"
 
 <div id=tab1 class=jstab>
 %table.activities
@@ -126,19 +119,36 @@
       %td
         = f.submit "Attach"              
 </div><!--#tab2-->
+
+<div id=tab3 class=jstab>
+- if !@applicant.cover_letter.blank?
+  = link_to 'Cover Letter', '#', :id => 'cover_letter'
+  %span#arrow
+    = image_tag("arrow_right.png")
+  %iframe#cl.viewer.autoHeight{:src => cover_letter_applicant_url(@message), :style => 'display:none;'}
+    %p Cannot view cover letter on this browser
+
+- if !@applicant.resume.blank?
+  %h4{:style => 'margin-top:10px;'} Resume
+  %iframe.viewer.autoHeight{:src => resume_applicant_url(@message)}
+    %p Cannot view resume on this browser
+</div><!--#tab3-->
      
 </div> <!--#jstabs-->
 
-:javascript
+:erb
+  <script type="text/javascript">
   $(function() {
   	$("#jstabs").tabs()
   	$("ul.actions a").button()
   	$('#add_attachment').hide()
-  	$('#cover_letter').click(function() {
-  	  $(this).next().slideToggle();
-  	});
-  	$('#resume').click(function() {
-  	  $(this).next().slideToggle();
-  	});
   	$("input[type=submit]").button()
+  	$('#cover_letter').toggle(function() {
+      $('#cl').slideDown();
+      $('#arrow').html('<%= image_tag("arrow_down.png") %>');
+    }, function() {
+      $('#cl').slideUp();
+      $('#arrow').html('<%= image_tag("arrow_right.png") %>');
+    });
   })
+  </script>

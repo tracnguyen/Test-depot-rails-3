@@ -128,5 +128,17 @@ class ApplicantsController < BaseAccountController
     end 
     redirect_to(applicants_url)
   end
+  
+  def cover_letter
+    applicant = Applicant.find(params[:id])
+    render :partial => "shared/viewer", :locals => {:content_type => applicant.cover_letter_content_type,
+                                                    :content => applicant.cover_letter}
+  end
+  
+  def resume
+    applicant = Applicant.find(params[:id])
+    render :partial => "shared/viewer", :locals => {:content_type => applicant.resume_content_type,
+                                                    :content => applicant.resume}
+  end
 end
 

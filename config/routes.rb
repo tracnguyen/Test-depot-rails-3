@@ -5,12 +5,18 @@ Hiringapp::Application.routes.draw do |map|
     resources :users, :only => [:new, :create, :update]
     
     resources :jobs
-    resources :messages, :only => [:index, :show, :create]
+    resources :messages, :only => [:index, :show, :create] do
+      get :content, :on => :member
+    end
     
     resources :applicants do
       resources :activities, :only => [:index, :create]
       resources :attachments
       post :batch_process, :on => :collection 
+      member do
+        get :cover_letter
+        get :resume
+      end
     end
     match "applicants/:id/mark_as_unread" => "applicants#mark_as_unread", \
       :as => :mark_applicant_as_unread

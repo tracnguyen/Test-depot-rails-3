@@ -1,20 +1,24 @@
-%h1 Messages
-
-%table.applicants
-  %tr
-    %th From
-    %th Subject
-    %th Arrived at
-    %th
-    %th
-
-  - @messages.each do |message|
-    %tr
-      %td= message.sender_email
-      %td= message.subject
-      %td= message.created_at.to_s(:short)
-      - if message.has_attachments?
-        %td= image_tag('attachment.png')
-      - else
+= content_for :heading do
+  %h1 Messages
+- if current_account.email_setting.blank?
+  %span.info
+    You have to configure the email setting to receive the message.
+    = link_to 'Click here', config_email_settings_path
+    to configure the email.
+- else
+  %table.applicants.messages
+    %tr.title
+      %th{:width => '30%'} From
+      %th{:width => '40%'} Subject
+      %th{:width => '15%'}
+      %th{:width => '15%'} Arrived at
+    - @messages.each do |message|
+      %tr{:class => "#{message.converted? ? 'converted' : ''}"}
+        %td= message.sender_email
+        %td= link_to truncate(message.subject, 50, "..."), message_path(message)
         %td
-      %td= link_to 'View', message_path(message)
+          - if message.has_attachments
+            = image_tag('attachment.png')
+          - if message.converted
+            = link_to image_tag('converted.png'), applicant_path(:id => message.applicant_id), :title => 'Go to converted application'
+        %td= message.created_at.to_s(:short)

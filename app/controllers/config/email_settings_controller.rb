@@ -9,6 +9,7 @@ class Config::EmailSettingsController < BaseAccountController
   def index
     if current_account.email_setting.blank?
       @setting = current_account.build_email_setting
+      @setting.username = current_account.owner.email
     else
       @setting = current_account.email_setting
       @setting.password = AesCrypt.decrypt(@setting.password, 
