@@ -123,8 +123,8 @@ table#container td#maincol {
 }
 
 table#container td#sidebar {
-  width: 360px;
-  padding: 2% 2% 2% 5%;
+  width: 200px;
+  padding: 2% 2% 2% 2%;
   vertical-align: top;
 }
 

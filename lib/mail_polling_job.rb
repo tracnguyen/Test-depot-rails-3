@@ -1,5 +1,3 @@
-ENV['RAILS_ENV'] ||= 'development'
-require File.dirname(__FILE__) + '/../config/environment'
 require 'net/pop'
 require 'net/imap'
 require 'net/http'
@@ -8,7 +6,46 @@ require 'logger'
 require "yaml"
 require "pp"
 
-module MailFetcher  
+class MailPollingJob
+  def perform
+    settings = EmailSetting.all
+    settings.each do |setting|
+      config = {
+        :server => setting.server,
+        :port => setting.port,
+        :ssl => setting.ssl,
+        :username => setting.username,
+        :password => AesCrypt.decrypt(setting.password, 
+                                      Rails.application.config.secret_token, 
+                                      nil, 
+                                      "AES-256-ECB")
+      }
+      if setting.protocol == "POP3"
+        MailPoller::Pop3Fetcher.fetch(config)
+      else
+        MailPoller::ImapFetcher.fetch(config)
+      end
+    end
+  end
+end
+
+#gmail_pop_config = {
+#  :server => "pop.gmail.com",
+#  :port => 995,
+#  :ssl => true,
+#  :username => "hoang.nghiem@techpropulsionlabs.com",
+#  :password => "hnghiem1!"
+#}
+
+#gmail_imap_config = {
+#  :server => "imap.gmail.com",
+#  :port => 993,
+#  :ssl => true,
+#  :username => "hoang.nghiem@techpropulsionlabs.com",
+#  :password => "hnghiem1!"
+#}
+
+module MailPoller
   class Pop3Fetcher
     def self.fetch(config={})
       log = Logger.new(STDOUT)
@@ -61,37 +98,5 @@ module MailFetcher
           log.warn e
       end      
     end
-  end
-end
-
-# TODO: replace this configuration for each account
-gmail_pop_config = {
-  :server => "pop.gmail.com",
-  :port => 995,
-  :ssl => true,
-  :username => "hoang.nghiem@techpropulsionlabs.com",
-  :password => "hnghiem1!"
-}
-
-gmail_imap_config = {
-  :server => "imap.gmail.com",
-  :port => 993,
-  :ssl => true,
-  :username => "hoang.nghiem@techpropulsionlabs.com",
-  :password => "hnghiem1!"
-}
-settings = EmailSetting.all
-settings.each do |setting|
-  config = {
-    :server => setting.server,
-    :port => setting.port,
-    :ssl => setting.ssl,
-    :username => setting.username,
-    :password => setting.password
-  }
-  if setting.protocol == "POP3"
-    MailFetcher::Pop3Fetcher.fetch(config)
-  else
-    MailFetcher::ImapFetcher.fetch(config)
   end
 end

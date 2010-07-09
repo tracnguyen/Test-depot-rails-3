@@ -1,6 +1,5 @@
 class MailReceiver < ActionMailer::Base
   def receive(email)
-    debugger
     puts "Fetching email to the database..."
     msg = extract_message(email, nil)    
     account = Account.find_by_owner_email(email.to.to_s)
@@ -37,43 +36,25 @@ class MailReceiver < ActionMailer::Base
   # Extract email content and return a struct with body and content type
   #
   def extract_message(email, delimiter)
-    struct = Struct.new('Message', :body, :content_type)
-    message = struct.new
-    if email.parts.size > 0
-      if email.multipart?
-        message.body = email.html_part.body.decoded
-        message.content_type = "html"
+    email_content = EmailContent.new
+    if email.multipart?
+      if !email.html_part.nil?
+        email_content.body = email.html_part.body.decoded
+        email_content.content_type = "html"
       else
-        email.parts.each do |part|
-          if part.content_type.include?("multipart/alternative")
-            if !part.html_part.body.nil?
-              message.body = part.html_part.body.raw_source
-              message.content_type = "html"
-            else
-              message.body = part.text_part.body.raw_source
-              message.content_type = "text"
-            end
-          else
-            if part.content_type.include?("text/html")
-              message.body = part.body.raw_source
-              message.content_type = "html"
-            elsif part.content_type.include?("text/plain")
-              message.body = part.body.raw_source
-              message.content_type = "text"
-            end
-          end
-        end
+        email_content.body = email.text_part.body.decoded
+        email_content.content_type = "text"
       end
     else
-      message.body = email.body.raw_source
-      message.content_type = "text"
+      email_content.body = email.body.decoded
+      email_content.content_type = "text"
     end
 
     if delimiter
       regex = Regexp.new(delimiter)
-      message.body = message.body.split(regex).first if message.body.include?(delimiter)
+      email_content.body = email_content.body.split(regex).first if email_content.body.include?(delimiter)
     end
-    message
+    email_content
   end
   
   #
@@ -123,8 +104,7 @@ class MailReceiver < ActionMailer::Base
   # Extract sender name from the email
   #
   def sender_name(email)
-    struct = Struct.new('Sender', :first_name, :last_name)
-    sender = struct.new
+    sender = Sender.new
 
     full_name = email.header[:from].to_s.split(/</).first.strip
     names = (full_name).split(/\s/)
@@ -137,4 +117,7 @@ class MailReceiver < ActionMailer::Base
     end
     sender
   end
+  
+  EmailContent = Struct.new(:body, :content_type)
+  Sender = Struct.new(:first_name, :last_name)
 end

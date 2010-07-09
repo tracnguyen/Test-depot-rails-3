@@ -24,6 +24,8 @@ gem "state_machine"
 gem "paperclip"
 gem "rmagick"
 gem 'ckeditor', :git => 'git://github.com/galetahub/rails-ckeditor.git', :branch => 'rails3'
+gem 'delayed_job', '2.0.3'
+gem 'clockwork', '0.2.0'
 
 group :test do
   gem "rspec", ">=2.0.0.beta.8"
