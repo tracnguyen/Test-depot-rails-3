@@ -34,7 +34,7 @@
         = f.input :last_name, :label => 'Last Name'
         = f.input :email, :label => 'Email'
         = f.input :phone, :label => 'Phone'
-        - options = [['Use message content as Cover letter', '1'],['Use message content as Resume', '2']]
+        - options = [['Use message content as Cover Letter', '1'],['Use message content as Resume', '2']]
         = f.input :action, :as => :radio, :wrapper_html => {:class => 'articles'}, :collection => options
       - f.buttons do
         = f.commit_button "Submit"
@@ -51,5 +51,6 @@
       $('#convert_form').slideUp();
       $('#arrow').html('<%= image_tag("arrow_right.png") %>');
     });
+    $('#applicant_action_1').attr('checked', true);
   });
   </script>

@@ -1,4 +1,5 @@
-%h1 Configure email receiving
+= content_for :heading do
+  %h1 Configure email receiving
 
 = semantic_form_for [:config, @setting] do |f|
   -if @setting.errors.any?
@@ -8,14 +9,18 @@
         - @setting.errors.full_messages.each do |msg|
           %li= msg
 
+  #server_info
+    %h3 Enter mail server information
+    = f.inputs do
+      = f.input :server, :label => "Server"
+      = f.input :port, :label => "Port"
+      = f.input :ssl, :as => :boolean, :label => "SSL"
+      = f.input :protocol, :as => :select, :label => "Protocol", :collection => ["POP3", "IMAP"]
+
+  %h3 Enter the email account your want to receive message from
   = f.inputs do
-    = f.input :server, :label => "Server"
-    = f.input :port, :label => "Port"
-    = f.input :ssl, :as => :boolean, :label => "SSL"
-    = f.input :protocol, :as => :select, :label => "Protocol", :collection => ["POP3", "IMAP"]
     = f.input :username, :label => "Username"
     = f.input :password, :as => :password, :label => "Password"
     
   = f.buttons do
     = f.commit_button 'Save'
-    
