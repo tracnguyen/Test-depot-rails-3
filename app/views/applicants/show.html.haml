@@ -125,12 +125,12 @@
   = link_to 'Cover Letter', '#', :id => 'cover_letter'
   %span#arrow
     = image_tag("arrow_right.png")
-  %iframe#cl.viewer.autoHeight{:src => cover_letter_applicant_url(@message), :style => 'display:none;'}
+  %iframe#cl.viewer.autoHeight{:style => 'display:none;'}
     %p Cannot view cover letter on this browser
 
 - if !@applicant.resume.blank?
   %h4{:style => 'margin-top:10px;'} Resume
-  %iframe.viewer.autoHeight{:src => resume_applicant_url(@message)}
+  %iframe#rs.viewer.autoHeight
     %p Cannot view resume on this browser
 </div><!--#tab3-->
      
@@ -139,17 +139,34 @@
 :erb
   <script type="text/javascript">
   $(function() {
-  	$("#jstabs").tabs()
+    clreload = false;
+    rsreload = false;    
+  	$("#jstabs").tabs({
+  	  select: function(event, ui) {
+  	    if (ui.index == 2) {  
+  	      if (<%= !@applicant.resume.blank?	%> && !rsreload) {
+  	        $("#rs").attr('src', '<%= resume_applicant_url(@message) %>');
+  	        rsreload = true;
+  	      }
+  	    }
+  	  }
+  	})
   	$("ul.actions a").button()
   	$('#add_attachment').hide()
   	$("input[type=submit]").button()
-  	$('#cover_letter').toggle(function() {
-      $('#cl').slideDown();
-      $('#arrow').html('<%= image_tag("arrow_down.png") %>');
-    }, function() {
-      $('#cl').slideUp();
-      $('#arrow').html('<%= image_tag("arrow_right.png") %>');
-    });
+  	if (<%= !@applicant.cover_letter.blank?	%>) {
+    	$('#cover_letter').toggle(function() {
+    	  if (!clreload) {
+    	    $('#cl').attr('src', '<%= cover_letter_applicant_url(@message) %>');
+      	  clreload = true;
+      	}
+        $('#cl').slideDown();
+        $('#arrow').html('<%= image_tag("arrow_down.png") %>');
+      }, function() {
+        $('#cl').slideUp();
+        $('#arrow').html('<%= image_tag("arrow_right.png") %>');
+      });
+    }
   	$("input[type=submit]").button()
   })
   </script>
