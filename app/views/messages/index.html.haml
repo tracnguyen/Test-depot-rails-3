@@ -29,7 +29,7 @@
       %li{:class => "selector", :id => 'unread-selector'}
         Unread
     .per_page
-      = label_tag 'View per page:'
+      = label_tag 'Messages per page:'
       = select_tag 'view_per_page', options_for_select([10,15,20]), :id => 'view_per_page'
   - form_tag(batch_process_messages_path) do
     %table.applicants.messages
