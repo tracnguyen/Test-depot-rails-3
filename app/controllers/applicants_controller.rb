@@ -27,7 +27,7 @@ class ApplicantsController < BaseAccountController
 
   def show
     @applicant = Applicant.where(:id => params[:id]).includes(:job).first
-    current_user.mark_as_read(@applicant)
+    UserView.mark_as_read(current_user, @applicant)
     
     @activities = @applicant.activities.order("created_at ASC").includes(:actor, :prev_stage, :next_stage).all
     @activity = @applicant.activities.build
@@ -107,7 +107,7 @@ class ApplicantsController < BaseAccountController
   
   def mark_as_unread
     @applicant = Applicant.find(params[:id])
-    current_user.mark_as_unread(@applicant)
+    UserView.mark_as_unread(current_user, @applicant)
     respond_to do |format|
       format.xml  { head :ok }
       format.html { redirect_to(applicants_path) }

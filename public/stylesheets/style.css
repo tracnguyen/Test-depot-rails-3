@@ -271,7 +271,7 @@ ol.activities li .statusbox {
 
 ul.buttons-nav li .ui-button-text { padding: 0.25em 0.75em; }
 
-ul.selectors-nav {list-style:none; overflow:auto; width:100%; padding:10px 0;}
+ul.selectors-nav {list-style:none; overflow:auto; padding:10px 0;}
 ul.selectors-nav li {display:block; float:left;}
 ul.selectors-nav li.selector:hover {cursor:pointer;}
 ul.selectors-nav li.selector {color:#0099ff;}
@@ -436,3 +436,42 @@ div.field, div.actions {
   border: 1px solid #7FC6FF;
   padding: 10px;
 }
+#nav-wrapper .selectors-nav {
+  float: left;
+}
+#nav-wrapper .per_page {
+  float: right;
+  padding: 10px 0; 
+}
+/* pagination */
+div.pagination {
+	padding: 3px;
+	margin-top: 8px;
+}
+
+div.pagination a {
+	padding: 2px 5px 2px 5px;
+	margin: 2px;
+	border: 1px solid #AAAADD;
+	text-decoration: none; /* no underline */
+	color: #000099;
+}
+div.pagination a:hover, div.pagination a:active {
+	border: 1px solid #000099;
+	color: #000;
+}
+div.pagination span.current {
+	padding: 2px 5px 2px 5px;
+	margin: 2px;
+	border: 1px solid #000099;
+	font-weight: bold;
+	background-color: #000099;
+	color: #FFF;
+}
+div.pagination span.disabled {
+  padding: 2px 5px 2px 5px;
+  margin: 2px;
+  border: 1px solid #EEE;
+  color: #DDD;
+}
+

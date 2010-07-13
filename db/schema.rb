@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100709083953) do
+ActiveRecord::Schema.define(:version => 20100712110423) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -74,9 +74,8 @@ ActiveRecord::Schema.define(:version => 20100709083953) do
     t.integer  "job_id"
     t.integer  "account_id"
     t.integer  "job_stage_id"
-    t.boolean  "is_archived",             :default => false
-    t.boolean  "is_starred",              :default => false
-    t.boolean  "is_read",                 :default => false
+    t.boolean  "is_archived",               :default => false
+    t.boolean  "is_starred",                :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "attachment_file_name"
@@ -185,6 +184,14 @@ ActiveRecord::Schema.define(:version => 20100709083953) do
 
   add_index "jobs", ["account_id"], :name => "index_jobs_on_account"
 
+  create_table "message_readings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "message_id"
+    t.boolean  "is_read",    :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "messages", :force => true do |t|
     t.integer  "account_id"
     t.string   "uid"
@@ -199,6 +206,7 @@ ActiveRecord::Schema.define(:version => 20100709083953) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "has_attachments"
+    t.integer  "converter_id"
   end
 
   create_table "simple_captcha_data", :force => true do |t|

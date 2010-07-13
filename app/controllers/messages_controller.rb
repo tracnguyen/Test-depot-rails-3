@@ -6,7 +6,9 @@ class MessagesController < BaseAccountController
   end
   
   def index
-    @messages = current_account.messages
+    page = params[:page] || 1
+    per_page = params[:per_page] || 10
+    @messages = current_user.all_messages(page, per_page)
   end
   
   def show
@@ -16,6 +18,7 @@ class MessagesController < BaseAccountController
     @applicant.last_name = @message.sender_last_name
     @applicant.email = @message.sender_email
     @applicant.message_id = @message.id
+    MessageReading.mark_as_read(current_user, @message)    
   end 
   
   def create
@@ -46,6 +49,7 @@ class MessagesController < BaseAccountController
         @applicant.save!
         @message.converted = true
         @message.applicant_id = @applicant.id
+        @message.converter_id = current_user.id
         @message.save!
 
         # copy message's attachments to applicant's attachments 
@@ -61,7 +65,6 @@ class MessagesController < BaseAccountController
       logger.error ex
       success = false
     end
-    logger.info "Success : #{success}"
     respond_to do |format|
       if success
         format.html { redirect_to(@message, :notice => 'Applicant was successfully created.') }
@@ -77,5 +80,18 @@ class MessagesController < BaseAccountController
     @message = Message.find(params[:id])
     render :partial => "shared/viewer", :locals => {:content_type => @message.content_type,
                                                     :content => @message.content}
+  end
+  
+  def batch_process
+    is_read = params[:commit] == "Read"
+    ids = params[:selection]
+    MessageReading.update_all({:is_read => is_read}, ['user_id = ? AND message_id IN (?)', current_user.id, ids])
+
+    url = messages_url
+    url << "?" if !params[:page].blank? || !params[:per_page].blank?
+    url << "page=#{params[:page]}" if !params[:page].blank?
+    url << "per_page=#{params[:per_page]}" if !params[:per_page].blank?
+    
+    redirect_to url
   end
 end

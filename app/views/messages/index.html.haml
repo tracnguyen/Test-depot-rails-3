@@ -6,19 +6,75 @@
     = link_to 'Click here', config_email_settings_path
     to configure the email.
 - else
-  %table.applicants.messages
-    %tr.title
-      %th{:width => '30%'} From
-      %th{:width => '40%'} Subject
-      %th{:width => '15%'}
-      %th{:width => '15%'} Arrived at
-    - @messages.each do |message|
-      %tr{:class => "#{message.converted? ? 'converted' : ''}"}
-        %td= message.sender_email
-        %td= link_to truncate(message.subject, 50, "..."), message_path(message)
-        %td
-          - if message.has_attachments
-            = image_tag('attachment.png')
-          - if message.converted
-            = link_to image_tag('converted.png'), applicant_path(:id => message.applicant_id), :title => 'Go to converted application'
-        %td= message.created_at.to_s(:short)
+  #nav-wrapper.clearfix
+    %ul.selectors-nav
+      %li="Select:"
+      %li
+        &nbsp;
+      %li{:class => "selector", :id => "all-selector"}
+        All
+      %li=","
+      %li
+        &nbsp;
+      %li{:class => "selector", :id => "none-selector"}
+        None
+      %li=","
+      %li
+        &nbsp;
+      %li{:class => "selector", :id => "read-selector"}
+        Read
+      %li=","
+      %li
+        &nbsp;
+      %li{:class => "selector", :id => 'unread-selector'}
+        Unread
+    .per_page
+      = label_tag 'View per page:'
+      = select_tag 'view_per_page', options_for_select([10,15,20]), :id => 'view_per_page'
+  - form_tag(batch_process_messages_path) do
+    %table.applicants.messages
+      %tr.title
+        %th
+        %th{:width => '18px'}
+        %th{:width => '18px'}
+        %th{:width => '18px'}
+        %th From
+        %th Subject
+        %th{:width => '15%'} Arrived at
+      - @messages.each do |message|
+        %tr{:class => "#{message.unread? ? 'unread' : ''}"}
+          %td.checkbox= check_box_tag "selection[]", message.id
+          %td= image_tag("#{message.unread? ? 'message_new.png' : 'message_open.png'}", :title => "#{message.unread? ? 'Unread' : 'Read'}")
+          %td= image_tag('attachment.png') if message.has_attachments
+          %td= link_to image_tag('converted.png'), applicant_path(:id => message.applicant_id), :title => 'Go to converted application' if message.converted
+          %td= message.sender_email
+          %td= link_to truncate(message.subject, :omission => "...", :length => 50), message_path(message)
+          %td= message.created_at.to_s(:short)
+    = hidden_field_tag 'page', params[:page]
+    = hidden_field_tag 'per_page', params[:per_page]
+    = submit_tag "Read", :id => "read-submit", :style => "display:none"
+    = submit_tag "Unread", :id => "unread-submit", :style => "display:none"
+  = will_paginate @messges
+:erb
+  <script type="text/javascript">
+  $(function() {
+    <% if !params[:per_page].blank? %>
+      $("#view_per_page").val('<%= params[:per_page] %>');
+    <% end %>
+    $('#all-selector').click(function() {
+  	  $('table.applicants :checkbox').attr('checked', true);
+  	});
+  	$('#none-selector').click(function(){
+  	  $('table.applicants :checkbox').attr('checked', false);
+  	});
+  	$("#read-selector").click(function() {
+  	  $("#read-submit").click();
+  	});
+  	$("#unread-selector").click(function() {
+  	  $("#unread-submit").click();
+  	});
+  	$("#nav-wrapper .per_page").change(function() {
+  	  window.location = "/messages?per_page=" + $("#view_per_page").val();
+  	});
+  });
+  </script>

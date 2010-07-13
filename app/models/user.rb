@@ -21,17 +21,8 @@ class User < ActiveRecord::Base
   
   has_many :user_views
   has_many :viewed_applications, :through =>  :user_views, :class_name => "Applicant", :source => "applicant"
-  
-  def mark_as_read(applicant)
-    uv = self.user_views.where('applicant_id' => applicant.id)
-    if uv.blank?
-      self.user_views.create(:applicant_id => applicant.id)
-    end
-  end
-  
-  def mark_as_unread(applicant)
-    self.user_views.where('applicant_id' => applicant.id).delete_all
-  end
+  has_many :message_readings
+  has_many :messages, :through => :message_readings, :order => 'created_at DESC'
 
   # Return this user's read status of the list of applicants as a hash of
   # { applicant_id => true } for those applications that the user has viewed.
@@ -46,4 +37,21 @@ class User < ActiveRecord::Base
   end
   
   has_many :invitations, :foreign_key => "inviter_id"
+  
+  def unread_messages_count
+    self.message_readings.unread.count
+  end
+  
+  def unread?(message)
+    ids = MessageReading.select("message_id") \
+                        .where(:user_id => id, :is_read => false) \
+                        .map {|mr| mr.message_id}
+    ids.include?(message.id) 
+  end
+  
+  def all_messages(page, per_page)
+    messages.paginate(:page => page, :per_page => per_page).each do |m|
+      m.is_read = !unread?(m)
+    end
+  end
 end

@@ -25,16 +25,18 @@ class MailReceiver < ActionMailer::Base
           new_attachment.attachment = tempfile
         end        
       end
-      if message.save
-        puts "Message has been saved."
-      else
-        puts "Failed to save message."
-      end
+      message.readers = account.users
+#      puts "#{account.users.size} Users"
+#      account.users.each do |user|
+#        message.message_readings.build({:reader_id => user.id})
+#      end
+      message.save!
+
     rescue Exception => ex
       logger.error "Error occurred while process the email from #{email.from.to_s}, subject: '#{email.subject}'"
       logger.error ex
     end
-    puts "Fetch completed."
+    puts "Message has been saved. Fetch completed."
   end
   
   #

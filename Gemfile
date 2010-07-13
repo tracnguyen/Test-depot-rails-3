@@ -18,7 +18,7 @@ gem 'ruby-debug'
 gem "subdomain-fu", :git => "git://github.com/nhowell/subdomain-fu.git"
 gem "devise", "1.1.rc2"
 gem "haml", ">=3.0.4"
-# gem "will_paginate", ">=3.0.pre"
+gem "will_paginate", ">=3.0.pre"
 gem "rails3-generators", :git => "git://github.com/indirect/rails3-generators.git"
 gem "state_machine"
 gem "paperclip"
