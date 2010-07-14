@@ -1,5 +1,12 @@
 class MailReceiver < ActionMailer::Base
   def receive(email)
+    # make sure we don't receive a message more than once
+    # due to server configuration may change
+    existed_uid = Message.select(:uid).map{ |m| m.uid }
+    if existed_uid.include?(email.message_id)
+      puts "** This message has been received and cannot process again."
+    end
+    
     puts "Fetching email to the database..."
     begin
       msg = extract_message(email, nil)    
@@ -63,6 +70,7 @@ class MailReceiver < ActionMailer::Base
     rescue Exception => ex
       puts "Error occurred while process the email from #{email.from.to_s}, subject: '#{email.subject}'"
       puts ex
+      puts ex.backtrace
     end
     puts "Message has been saved. Fetch completed."
   end
