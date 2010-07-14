@@ -14,59 +14,19 @@ class MessagesController < BaseAccountController
   def show
     @message = Message.includes(:attachments).find(params[:id])
     @applicant = Applicant.new
-    @applicant.first_name = @message.sender_first_name
-    @applicant.last_name = @message.sender_last_name
-    @applicant.email = @message.sender_email
-    @applicant.message_id = @message.id
+    auto_fill_applicant_info(@message, @applicant)
     MessageReading.mark_as_read(current_user, @message)    
   end 
   
   def create
-    @applicant = Applicant.new(params[:applicant])
-    @applicant.account_id = current_account.id
-    @message = Message.find(@applicant.message_id)
-    if @applicant.action == "1" # use as cover letter
-      @applicant.cover_letter = @message.content    
-      @applicant.cover_letter_content_type = @message.content_type
-      @applicant.resume = ""
-    else # use as resume
-      @applicant.resume = @message.content   
-      @applicant.resume_content_type = @message.content_type
-      @applicant.cover_letter = ""
-    end
+    @message = Message.find(params[:applicant][:message_id])
+    options = params[:applicant]
+    options[:account_id] = current_account.id
+    options[:converter_id] = current_user.id
+    applicant = @message.to_applicant(options)
     
-    @message.attachments.each do |a|
-      new_atm = @applicant.attachments.build
-      new_atm.attachment_file_name = a.attachment_file_name
-      new_atm.attachment_file_size = a.attachment_file_size
-      new_atm.attachment_content_type = a.attachment_content_type
-      new_atm.attachment_updated_at = a.attachment_updated_at
-    end
-
-    success = false
-    begin
-      Applicant.transaction do
-        @applicant.save!
-        @message.converted = true
-        @message.applicant_id = @applicant.id
-        @message.converter_id = current_user.id
-        @message.save!
-
-        # copy message's attachments to applicant's attachments 
-        @message.attachments.each_with_index do |a, index|
-          dest = "#{Rails.root}/public/assets/attachments/#{@applicant.attachments[index].id}"
-          FileUtils.mkdir_p(dest) # create if did not existed
-          FileUtils.cp(a.attachment.path, dest)
-        end        
-        
-        success = true
-      end
-    rescue Exception => ex
-      logger.error ex
-      success = false
-    end
     respond_to do |format|
-      if success
+      if !applicant.nil?
         format.html { redirect_to(@message, :notice => 'Applicant was successfully created.') }
         format.xml  { render :xml => @message, :status => :created, :location => @message }
       else
@@ -93,5 +53,14 @@ class MessagesController < BaseAccountController
     url << "per_page=#{params[:per_page]}" if !params[:per_page].blank?
     
     redirect_to url
+  end
+  
+  private
+  def auto_fill_applicant_info(message, applicant)
+    applicant.first_name = message.sender_first_name
+    applicant.last_name = message.sender_last_name
+    applicant.email = message.sender_email
+    applicant.phone = message.sender_phone
+    applicant.message_id = message.id
   end
 end

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100712110423) do
+ActiveRecord::Schema.define(:version => 20100714064334) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -207,6 +207,7 @@ ActiveRecord::Schema.define(:version => 20100712110423) do
     t.datetime "updated_at"
     t.boolean  "has_attachments"
     t.integer  "converter_id"
+    t.string   "sender_phone"
   end
 
   create_table "simple_captcha_data", :force => true do |t|

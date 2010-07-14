@@ -123,7 +123,17 @@ class ApplicantsController < BaseAccountController
         
       when params[:commit] == "Delete" && params[:selection]
         params[:selection].each do |t|
-          Applicant.find(t).destroy
+          Applicant.transaction do
+            a = Applicant.find(t)
+            a.destroy
+            message = Message.find_by_applicant_id(a.id)
+            if !message.nil?
+              message.applicant_id = nil
+              message.converted = false
+              message.converter_id = nil
+              message.save
+            end
+          end
         end
     end 
     redirect_to(applicants_url)

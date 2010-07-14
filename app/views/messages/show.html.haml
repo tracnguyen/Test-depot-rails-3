@@ -40,8 +40,12 @@
         = f.commit_button "Submit"
 - else
   %div
-    ** This message has been converted to #{link_to 'this', applicant_path(:id => @message.applicant_id)} | 
-    application by <b>#{@message.converter.email}</b>
+    - if @message.converter_id.blank?
+      ** This message has been auto converted to #{link_to 'this', applicant_path(:id => @message.applicant_id)} | 
+      application.
+    - else
+      ** This message has been converted to #{link_to 'this', applicant_path(:id => @message.applicant_id)} | 
+      application by <b>#{@message.converter.email}</b>
 :erb
   <script type="text/javascript">
   $(function(){

@@ -4,12 +4,12 @@ class MailReceiver < ActionMailer::Base
     begin
       msg = extract_message(email, nil)    
       account = Account.find_by_owner_email(email.to.to_s)
-      # TODO: raise add exception here and catch it in the fetcher
-      
+                  
       sender = sender_name(email)        
       message = Message.new(:sender_email => email.from.to_s,
                             :sender_first_name => sender.first_name,
                             :sender_last_name => sender.last_name,
+                            :sender_phone => extract_phone(email, msg),
                             :uid => email.message_id,
                             :subject => email.subject,
                             :content => msg.body,
@@ -26,15 +26,43 @@ class MailReceiver < ActionMailer::Base
         end        
       end
       message.readers = account.users
-#      puts "#{account.users.size} Users"
-#      account.users.each do |user|
-#        message.message_readings.build({:reader_id => user.id})
-#      end
       message.save!
+      
+      # auto create applicant if this message come from Vietnamworks
+      if from_vietnamworks?(email)
+        puts "Converting message to applicant..."
+        failed_msg = "** WARNING: This message has failed to auto convert to applicant due to: "
+        position = extract_position(email, msg)
+        if !position.empty?
+          puts "Found position: #{position}"
+          job = Job.find_by_title(position)
+          if !job.nil?
+            options = {
+              :action => Message::USE_AS_RESUME,
+              :account_id => account.id,
+              :job_id => job.id,
+              :first_name => message.sender_first_name,
+              :last_name => message.sender_last_name,
+              :email => message.sender_email,
+              :phone => message.sender_phone
+            }
+            applicant = message.to_applicant(options)
+            if applicant.nil?
+              puts failed_msg << "Error occur while converting message to applicant."
+            else
+              puts "** This message has been auto converted to applicant."
+            end
+          else
+            puts failed_msg << "Cannot find the position #{position} in the database." 
+          end
+        else
+          puts failed_msg << "Cannot extract the apply position from this message."
+        end
+      end
 
     rescue Exception => ex
-      logger.error "Error occurred while process the email from #{email.from.to_s}, subject: '#{email.subject}'"
-      logger.error ex
+      puts "Error occurred while process the email from #{email.from.to_s}, subject: '#{email.subject}'"
+      puts ex
     end
     puts "Message has been saved. Fetch completed."
   end
@@ -80,6 +108,30 @@ class MailReceiver < ActionMailer::Base
       sender.last_name = ""
     end
     sender
+  end
+  
+  def extract_phone(email, msg)
+    phone = ""
+    if (msg.content_type == "html")
+      if from_vietnamworks?(email)
+        phone = EmailExtractor::VietnamWorks.extract_phone(msg.body)
+      end
+    end
+    phone
+  end
+  
+  def extract_position(email, msg)
+    position = ""
+    if (msg.content_type == "html")
+      if from_vietnamworks?(email)
+        position = EmailExtractor::VietnamWorks.extract_position(msg.body)
+      end
+    end
+    position
+  end
+  
+  def from_vietnamworks?(email)
+    email.header['References'].to_s.include?(EmailExtractor::VietnamWorks::MAIL_SERVER)
   end
   
   EmailContent = Struct.new(:body, :content_type)
