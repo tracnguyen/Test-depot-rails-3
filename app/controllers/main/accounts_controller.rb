@@ -29,7 +29,19 @@ class Main::AccountsController < ApplicationController
       flash[:notice] = "CAPTCHA confirmation failed!"
       render :action => 'new'
     else
-      if @account.save
+      success = false
+      begin
+        Account.transaction do
+          @account.save
+          owner = @account.owner
+          owner.account_id = @account.id
+          owner.save
+          success = true
+        end
+      rescue
+        success = false
+      end
+      if success
         redirect_to main_account_path(@account), :notice => 'Account was successfully created.'
       else
         render :action => "new"
