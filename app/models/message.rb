@@ -1,6 +1,6 @@
 class Message < ActiveRecord::Base
   belongs_to :account
-  has_many :attachments, :as => :attachable
+  has_many :attachments, :as => :attachable, :dependent => :destroy
   belongs_to :converter, :class_name => 'User', :foreign_key => :converter_id
   has_many :message_readings
   has_many :readers, :through => :message_readings, :source => :user
@@ -15,6 +15,11 @@ class Message < ActiveRecord::Base
   end
   
   def to_applicant(options = {})
+    converter_id = options[:converter_id]
+    account_id = options[:account_id]
+    options.delete(:converter_id)
+    options.delete(:account_id)
+    
     applicant = Applicant.new(options)
     if options[:action] == USE_AS_COVER_LETTER # use as cover letter
       applicant.cover_letter = content    
@@ -26,7 +31,7 @@ class Message < ActiveRecord::Base
       applicant.cover_letter = ""
     end
 
-    applicant.account_id = options[:account_id]
+    applicant.account_id = account_id
     copy_attachments_to_applicant(applicant)
 
     begin
@@ -34,7 +39,7 @@ class Message < ActiveRecord::Base
         applicant.save!
         self.converted = true
         self.applicant_id = applicant.id
-        self.converter_id = options[:converter_id]
+        self.converter_id = converter_id
         self.save!
 
         # copy message's attachments to applicant's attachments 

@@ -4,4 +4,4 @@ log/*.log
 tmp/**/*
 *.swp
 tmp/*
-public/assets/attachments/*
+public/assets/**

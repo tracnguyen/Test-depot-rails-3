@@ -43,15 +43,19 @@ class MessagesController < BaseAccountController
   end
   
   def batch_process
-    is_read = params[:commit] == "Read"
-    ids = params[:selection]
-    MessageReading.update_all({:is_read => is_read}, ['user_id = ? AND message_id IN (?)', current_user.id, ids])
-
     url = messages_url
-    url << "?" if !params[:page].blank? || !params[:per_page].blank?
-    url << "page=#{params[:page]}" if !params[:page].blank?
-    url << "per_page=#{params[:per_page]}" if !params[:per_page].blank?
-    
+    case
+      when params[:commit] == "Read" || params[:commit] == "Unread"
+        is_read = params[:commit] == "Read"
+        ids = params[:selection]
+        MessageReading.update_all({:is_read => is_read}, ['user_id = ? AND message_id IN (?)', current_user.id, ids])
+        
+        url << "?" if !params[:page].blank? || !params[:per_page].blank?
+        url << "page=#{params[:page]}" if !params[:page].blank?
+        url << "per_page=#{params[:per_page]}" if !params[:per_page].blank?
+      when params[:commit] == "Delete"
+        Message.delete(params[:selection].map{ |s| s.to_i })
+    end    
     redirect_to url
   end
   

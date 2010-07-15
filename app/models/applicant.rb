@@ -9,7 +9,7 @@ class Applicant < ActiveRecord::Base
   	:path => ":rails_root/public/assets/resumes/:id/:basename.:extension",
   	:url => "/assets/resumes/:id/:basename.:extension"
 
-  has_many :attachments, :as => :attachable
+  has_many :attachments, :as => :attachable, :dependent => :destroy
   attr_accessor :action, :message_id
   
   validates_presence_of :first_name, :last_name, :email, :phone, :job, :account
