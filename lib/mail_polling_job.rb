@@ -15,10 +15,7 @@ class MailPollingJob
         :port => setting.port,
         :ssl => setting.ssl,
         :username => setting.username,
-        :password => AesCrypt.decrypt(setting.password, 
-                                      Rails.application.config.secret_token, 
-                                      nil, 
-                                      "AES-256-ECB")
+        :password => setting.password
       }
       if setting.protocol == "POP3"
         MailPoller::Pop3Fetcher.fetch(config)
