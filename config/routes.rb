@@ -1,6 +1,8 @@
 Hiringapp::Application.routes.draw do |map|
   constraints(:subdomain => /.+/) do 
-    devise_for :users
+    devise_for :users, :controllers => {
+      :sessions => "main/sessions",
+    }
     
     resources :users, :only => [:new, :create, :update]
     

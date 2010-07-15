@@ -474,4 +474,9 @@ div.pagination span.disabled {
   border: 1px solid #EEE;
   color: #DDD;
 }
-
+.warning {
+  border: 2px solid #FFE59F;
+  background: #FFF6DF;
+  padding: 10px;
+  margin-bottom: 10px;
+}

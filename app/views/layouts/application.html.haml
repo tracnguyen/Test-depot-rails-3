@@ -42,6 +42,10 @@
                 #notice= notice
               - if alert
                 #alert= alert
+      - if !flash[:warning].blank?
+        %tr
+          %td
+            .warning= flash[:warning].html_safe
       %tr
         %td#maincol
           #heading
