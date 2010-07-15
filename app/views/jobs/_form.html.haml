@@ -14,7 +14,8 @@
       %th Status
       %td
         %fieldset#status
-          - Job::STATUSES.each do |s|
+          - statuses = @job.new_record? ? Job::STATUSES[0...2] : Job::STATUSES
+          - statuses.each do |s|
             = label "job_status", s
             = radio_button :job, :status, s
     %tr
@@ -25,7 +26,7 @@
       %th{:style => "vertical-align: top"}
         Description
       %td
-        = f.cktext_area :description, :height => 400
+        = f.cktext_area :description, :height => 400, :width => 720
     %tr
       %th
       %td
