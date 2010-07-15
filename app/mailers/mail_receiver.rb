@@ -2,16 +2,26 @@ class MailReceiver < ActionMailer::Base
   def receive(email)
     # make sure we don't receive a message more than once
     # due to server configuration may change
-    existed_uid = Message.select(:uid).map{ |m| m.uid }
-    if existed_uid.include?(email.message_id)
-      puts "** This message has been received and cannot process again."
-    end
+#    existed_uid = Message.select(:uid).map{ |m| m.uid }
+#    if existed_uid.include?(email.message_id)
+#      puts "** This message has been received and cannot process again."
+#    end
     
     puts "Fetching email to the database..."
     begin
-      msg = extract_message(email, nil)    
-      account = Account.find_by_owner_email(email.to.to_s)
-                  
+      msg = extract_message(email, nil)
+#      account = Account.find_by_owner_email(email.to.to_s)
+      setting = EmailSetting.find_by_username(email.to.to_s)      
+      if setting.nil?
+        puts "** WARNING: The email #{email.to.to_s} was not configured. Abort!"
+        return
+      end
+      account = setting.account
+      if account.nil?
+        puts "** WARNING: Could not found any accounts match the given setting. Abort!"
+        return
+      end
+      
       sender = sender_name(email)        
       message = Message.new(:sender_email => email.from.to_s,
                             :sender_first_name => sender.first_name,
