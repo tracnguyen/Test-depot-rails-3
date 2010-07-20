@@ -27,6 +27,7 @@ gem 'ckeditor', :git => 'git://github.com/galetahub/rails-ckeditor.git', :branch
 gem 'delayed_job', '2.0.3'
 gem 'clockwork', '0.2.0'
 gem 'nokogiri'
+gem 'foreman'
 
 group :test do
   gem "rspec", ">=2.0.0.beta.8"
