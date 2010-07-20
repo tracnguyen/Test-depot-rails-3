@@ -6,4 +6,18 @@ Install:
   For captcha:
   == 
     sudo apt-get install imagemagick --fix-missing 
-abc
+
+Deployment note:
+===
+1. Open Procfile file and change the full path of the *.sh file to the correct project location
+
+2. Open foreman/*.conf and change app folder location
+
+3. Copy these .conf files to /etc/init directory
+   sudo mv foreman/* /etc/init
+
+4. Start clockwork and delayed job
+   sudo start hiringapp
+
+5. Stop clockwork and delayed job   
+   sudo stop hiringapp
