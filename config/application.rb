@@ -49,3 +49,13 @@ end
     config.filter_parameters += [:password]
   end
 end
+ActionMailer::Base.delivery_method = :smtp
+ActionMailer::Base.smtp_settings = {
+  :address => "smtp.sendgrid.net",
+  :port => '25',
+  :domain => "hrapp.techpropulsionlabs.com/",
+  :authentication => :plain,
+  :user_name => "tpldev1@gmail.com",
+  :password => "tpldev1!"
+}
+
