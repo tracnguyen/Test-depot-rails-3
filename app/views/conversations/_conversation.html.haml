@@ -1,0 +1,13 @@
+.conversation.clearfix
+  .icon
+    - if conversation.outcome
+      = image_tag('send.png')
+    - else
+      = image_tag('reply.png')
+  .msg  
+    %p
+      - if conversation.outcome
+        %b= "Sent to #{applicant.display_name}"
+      - else
+        %b= "Reply from #{applicant.display_name}"
+    %p= simple_format(conversation.message)

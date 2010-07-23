@@ -1,5 +1,5 @@
 - content_for :head do
-  = javascript_include_tag 'autoHeight'
+  = javascript_include_tag 'autoHeight', 'jquery.form'
 = content_for :heading do
   %h1= @applicant.first_name + " " + @applicant.last_name
 
@@ -36,6 +36,7 @@
   %li= link_to "Activities", "#tab1"
   %li= link_to "Attachments", "#tab2"
   %li= link_to "Resume", "#tab3"
+  %li= link_to "Conversation", "#tab4"
 
 <div id=tab1 class=jstab>
 %table.activities
@@ -133,6 +134,27 @@
   %iframe#rs.viewer.autoHeight
     %p Cannot view resume on this browser
 </div><!--#tab3-->
+
+- if @applicant.job.has_email_setting?
+  <div id=tab4 class=jstab>
+  #conversations
+    - @applicant.conversations.each do |c|
+      = render :partial => 'conversations/conversation', :locals => { :conversation => c, :applicant => @applicant }
+
+  = form_for @conversation, :url => conversations_path, :html => {:id => 'frm-msg', :multipart => true} do |f|
+    = f.label :message, 'Enter message:'
+    %p
+      = f.text_area :message, :cols => 80, :rows => 7, :id => 'message'
+      = f.hidden_field :applicant_id
+    %p
+      = f.label :attachment, 'Attachment:'
+      = f.file_field :attachment
+    %p
+      %b Note:
+      = "This message will be sent as an e-mail to #{@applicant.display_name}." 
+    = f.submit 'Send Message', :id => 'send'
+    = image_tag('loading.gif', :style => 'display:none', :id => 'loading')
+  </div><!--#tab4-->
      
 </div> <!--#jstabs-->
 
@@ -141,32 +163,47 @@
   $(function() {
     clreload = false;
     rsreload = false;    
-  	$("#jstabs").tabs({
-  	  select: function(event, ui) {
-  	    if (ui.index == 2) {  
-  	      if (<%= !@applicant.resume.blank?	%> && !rsreload) {
-  	        $("#rs").attr('src', '<%= resume_applicant_url(@message) %>');
-  	        rsreload = true;
-  	      }
-  	    }
-  	  }
-  	})
-  	$("ul.actions a").button()
-  	$('#add_attachment').hide()
-  	$("input[type=submit]").button()
-  	if (<%= !@applicant.cover_letter.blank?	%>) {
-    	$('#cover_letter').toggle(function() {
-    	  if (!clreload) {
-    	    $('#cl').attr('src', '<%= cover_letter_applicant_url(@message) %>');
-      	  clreload = true;
-      	}
-        $('#cl').slideDown();
-        $('#arrow').html('<%= image_tag("arrow_down.png") %>');
-      }, function() {
-        $('#cl').slideUp();
-        $('#arrow').html('<%= image_tag("arrow_right.png") %>');
-      });
-    }
-  	$("input[type=submit]").button()
+    	$("#jstabs").tabs({
+    	  select: function(event, ui) {
+    	    if (ui.index == 2) {  
+    	      if (<%= !@applicant.resume.blank?	%> && !rsreload) {
+    	        $("#rs").attr('src', '<%= resume_applicant_url(@message) %>');
+    	        rsreload = true;
+    	      }
+    	    }
+    	  }
+    	})
+    	$("ul.actions a").button();
+    	$('#add_attachment').hide();
+    	$("input[type=submit]").button();
+    	if (<%= !@applicant.cover_letter.blank?	%>) {
+      	$('#cover_letter').toggle(function() {
+      	  if (!clreload) {
+      	    $('#cl').attr('src', '<%= cover_letter_applicant_url(@message) %>');
+        	  clreload = true;
+        	}
+          $('#cl').slideDown();
+          $('#arrow').html('<%= image_tag("arrow_down.png") %>');
+        }, function() {
+          $('#cl').slideUp();
+          $('#arrow').html('<%= image_tag("arrow_right.png") %>');
+        });
+      }
+    	$("input[type=submit]").button();
+      if (<%= @applicant.job.has_email_setting? %>) {
+        $("#frm-msg").submit(function() {
+          $("#loading").show();
+          $(this).ajaxSubmit({            
+            success: function(resp) {
+      	      $("#conversations").append($(resp).hide().fadeIn(2000));
+      	      $("#message").val('');
+      	      $("#loading").hide();
+      	    },
+      	    clearForm: true,
+      	    resetForm: true  
+          });
+          return false;
+        });
+    	}
   })
   </script>

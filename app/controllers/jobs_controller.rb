@@ -16,6 +16,11 @@ class JobsController < BaseAccountController
 
   def new
     @job = Job.new
+    setting = @job.build_email_setting
+    setting.server = current_account.email_setting.server
+    setting.port = current_account.email_setting.port
+    setting.ssl = current_account.email_setting.ssl
+    setting.protocol = current_account.email_setting.protocol
 
     respond_to do |format|
       format.html # new.html.erb
@@ -25,11 +30,19 @@ class JobsController < BaseAccountController
 
   def edit
     @job = Job.find(params[:id])
+    if @job.has_email_setting?
+      @setting = @job.email_setting
+    else
+      @setting = @job.build_email_setting
+      @setting.server = current_account.email_setting.server
+      @setting.port = current_account.email_setting.port
+      @setting.ssl = current_account.email_setting.ssl
+      @setting.protocol = current_account.email_setting.protocol
+    end
   end
 
   def create
     @job = current_account.jobs.build(params[:job])
-
     respond_to do |format|
       if @job.save
         format.html { redirect_to(jobs_url, :notice => 'Job was successfully created.') }

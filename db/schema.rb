@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100714064334) do
+ActiveRecord::Schema.define(:version => 20100719070110) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -120,6 +120,15 @@ ActiveRecord::Schema.define(:version => 20100714064334) do
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_assetable_type"
   add_index "ckeditor_assets", ["user_id"], :name => "fk_user"
 
+  create_table "conversations", :force => true do |t|
+    t.string   "content_type"
+    t.text     "message"
+    t.boolean  "outcome"
+    t.integer  "applicant_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "default_job_stages", :force => true do |t|
     t.string   "name"
     t.string   "color"
@@ -141,15 +150,16 @@ ActiveRecord::Schema.define(:version => 20100714064334) do
   end
 
   create_table "email_settings", :force => true do |t|
-    t.integer  "account_id"
     t.string   "server"
     t.string   "port"
     t.string   "username"
     t.string   "password"
-    t.boolean  "ssl",        :default => true
+    t.boolean  "ssl",               :default => true
     t.string   "protocol"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "configurable_id"
+    t.string   "configurable_type"
   end
 
   create_table "invitations", :force => true do |t|

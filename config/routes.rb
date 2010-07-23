@@ -7,6 +7,7 @@ Hiringapp::Application.routes.draw do |map|
     resources :users, :only => [:new, :create, :update]
     
     resources :jobs
+    resources :conversations
     resources :messages, :only => [:index, :show, :create] do
       get :content, :on => :member
       post :batch_process, :on => :collection 

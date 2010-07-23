@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  content_type: MyString
+  message: MyText
+  outcome: false
+  applicant_id: 1
+
+two:
+  content_type: MyString
+  message: MyText
+  outcome: false
+  applicant_id: 1

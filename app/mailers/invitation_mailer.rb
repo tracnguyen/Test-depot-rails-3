@@ -9,4 +9,12 @@ class InvitationMailer < ActionMailer::Base
     mail :to => invitation.email,
     	:subject => "You are invited to join #{@invitation.inviter.account.name} on HiringApp"
   end
+  
+  def conversation_email(applicant, conversation)
+    @message = conversation.message
+    attachments["#{conversation.attachment.original_filename}"] = File.read(conversation.attachment.path)
+    mail :from => applicant.job.email_setting.username,
+          :to => applicant.email,
+          :subject => "#{applicant.job.account.name} has sent you a message"          
+  end
 end

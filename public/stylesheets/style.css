@@ -480,3 +480,16 @@ div.pagination span.disabled {
   padding: 10px;
   margin-bottom: 10px;
 }
+.conversation {
+  margin-bottom: 10px;
+  border-bottom: 1px dotted #CCC;
+}
+.conversation .icon {
+  float: left;
+  width: 40px;
+  margin-right: 10px;
+}
+.conversation .msg {
+  padding-top: 5px;
+  float:left;
+}

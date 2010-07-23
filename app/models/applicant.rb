@@ -4,6 +4,7 @@ class Applicant < ActiveRecord::Base
   belongs_to :job_stage
   
   has_many :activities
+  has_many :conversations
 
   has_attached_file :attachment,
   	:path => ":rails_root/public/assets/resumes/:id/:basename.:extension",
@@ -29,7 +30,7 @@ class Applicant < ActiveRecord::Base
   }
   
   def display_name
-    first_name + " " + last_name
+    first_name.capitalize + " " + last_name.capitalize
   end
   
 end

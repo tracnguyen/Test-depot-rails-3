@@ -1,6 +1,6 @@
-class MailPollingJob
+class ConversationPollingJob
   def perform
-    settings = EmailSetting.where(:configurable_type => "Account")
+    settings = EmailSetting.where(:configurable_type => "Job")
     settings.each do |setting|
       config = {
         :server => setting.server,
@@ -10,10 +10,11 @@ class MailPollingJob
         :password => setting.password
       }
       if setting.protocol == "POP3"
-        MailPoller::Pop3Fetcher.fetch("MailReceiver", config)
+        MailPoller::Pop3Fetcher.fetch("ConversationReceiver", config)
       else
-        MailPoller::ImapFetcher.fetch("MailReceiver", config)
+        MailPoller::ImapFetcher.fetch("ConversationReceiver", config)
       end
     end
   end
 end
+
