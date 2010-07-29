@@ -1,8 +1,8 @@
 class EmailSetting < ActiveRecord::Base
 #  belongs_to :account
   belongs_to :configurable, :polymorphic => true
-  validates_presence_of :server, :port, :protocol, :username, :password
-  validate :validate_setting
+  #validates_presence_of :server, :port, :protocol, :username, :password
+  #validate :validate_setting
   after_find :decrypt_password
   before_save :encrypt_password
   
