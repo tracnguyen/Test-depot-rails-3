@@ -15,7 +15,13 @@
 class JobStage < ActiveRecord::Base
   belongs_to :account
   
+  validates_uniqueness_of :name, :case_sensitive => false
+  
   default_scope :order => 'position'
   scope :undeleted, where(:is_deleted => false)  
+  
+  def before_validation
+    self.name.strip!
+  end
 end
 

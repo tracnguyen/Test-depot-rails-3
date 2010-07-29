@@ -28,7 +28,7 @@ class Config::JobStagesController < BaseAccountController
         format.html { redirect_to(config_job_stages_path, :notice => 'Job stage was successfully created.') }
         format.xml  { render :xml => @job_stage, :status => :created, :location => @job_stage }
       else
-        format.html { render :action => "new" }
+        format.html { redirect_to(config_job_stages_path, :alert => @job_stage.errors.collect{|k, v| "#{k} #{v}\n"}) }
         format.xml  { render :xml => @job_stage.errors, :status => :unprocessable_entity }
       end
     end
@@ -65,7 +65,7 @@ class Config::JobStagesController < BaseAccountController
     respond_to do |format|
       message = @job_stage.update_attributes({:is_deleted => true, :name => @job_stage.name + ' (deleted)'}) ? 'Job stage was successfully deleted.' : 'Job stage deletion failed.'
         
-      format.html { redirect_to(config_job_stages_url, :notice => message) }
+      format.html { redirect_to(config_job_stages_url, :alert => message) }
       format.xml  { head :ok }
     end
   end
