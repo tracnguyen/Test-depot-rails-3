@@ -17,10 +17,12 @@ class JobsController < BaseAccountController
   def new
     @job = Job.new
     setting = @job.build_email_setting
-    setting.server = current_account.email_setting.server
-    setting.port = current_account.email_setting.port
-    setting.ssl = current_account.email_setting.ssl
-    setting.protocol = current_account.email_setting.protocol
+    unless current_account.email_setting.nil?
+      setting.server = current_account.email_setting.server
+      setting.port = current_account.email_setting.port
+      setting.ssl = current_account.email_setting.ssl
+      setting.protocol = current_account.email_setting.protocol
+    end
 
     respond_to do |format|
       format.html # new.html.erb
