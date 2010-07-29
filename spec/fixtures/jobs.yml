@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: jobs
+#
+#  id               :integer         not null, primary key
+#  account_id       :integer
+#  title            :string(255)
+#  description      :text
+#  status           :string(255)
+#  creation_date    :date
+#  expiry_date      :date
+#  applicants_count :integer
+#
+
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
@@ -9,3 +23,4 @@ two:
   title: MyString
   description: MyText
   status: MyString
+

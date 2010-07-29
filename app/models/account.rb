@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: accounts
+#
+#  id          :integer         not null, primary key
+#  name        :string(255)
+#  description :string(255)
+#  subdomain   :string(255)
+#  owner_id    :integer
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
 class Account < ActiveRecord::Base
   has_many :users
   has_many :jobs
@@ -31,4 +44,5 @@ class Account < ActiveRecord::Base
     !accounts.blank? ? accounts.first : nil    
   end
 end
+
 

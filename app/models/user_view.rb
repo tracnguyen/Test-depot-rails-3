@@ -1,3 +1,11 @@
+# == Schema Information
+#
+# Table name: user_views
+#
+#  user_id      :integer
+#  applicant_id :integer
+#
+
 class UserView < ActiveRecord::Base
   belongs_to :user
   belongs_to :applicant
@@ -13,3 +21,4 @@ class UserView < ActiveRecord::Base
     user.user_views.where('applicant_id' => applicant.id).delete_all
   end
 end
+

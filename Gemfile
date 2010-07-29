@@ -28,6 +28,7 @@ gem 'delayed_job', '2.0.3'
 gem 'clockwork', '0.2.0'
 gem 'nokogiri'
 gem 'foreman'
+gem 'annotate'
 
 group :test do
   gem "rspec", ">=2.0.0.beta.8"

@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: message_readings
+#
+#  id         :integer         not null, primary key
+#  user_id    :integer
+#  message_id :integer
+#  is_read    :boolean         default(FALSE)
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class MessageReading < ActiveRecord::Base
   belongs_to :user
   belongs_to :message
@@ -15,3 +27,4 @@ class MessageReading < ActiveRecord::Base
     reading.save!
   end
 end
+

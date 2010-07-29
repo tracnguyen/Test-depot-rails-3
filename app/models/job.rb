@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: jobs
+#
+#  id               :integer         not null, primary key
+#  account_id       :integer
+#  title            :string(255)
+#  description      :text
+#  status           :string(255)
+#  creation_date    :date
+#  expiry_date      :date
+#  applicants_count :integer
+#
+
 class Job < ActiveRecord::Base
   belongs_to :account
   has_many :applicants
@@ -30,3 +44,4 @@ class Job < ActiveRecord::Base
   end
   
 end
+
