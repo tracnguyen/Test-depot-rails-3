@@ -5,27 +5,26 @@ class ActivitiesController < BaseAccountController
     @applicant = Applicant.find(params[:applicant_id])
     next_stage = params[:activity][:next_stage].nil? ? nil : JobStage.find(params[:activity][:next_stage])
     state_changed = (!next_stage.nil? && (next_stage != @applicant.job_stage))
-    @activity = @applicant.activities.build \
-    	:actor => current_user,
-    	:prev_stage => state_changed ? @applicant.job_stage : nil,
-    	:next_stage => state_changed ? next_stage : nil,
-    	:comment => params[:activity][:comment],
-    	:job_id => @applicant.job_id,
-    	:account_id => @applicant.account_id
-    success = @activity.save
-    if state_changed
-      success &= @applicant.update_attribute(:job_stage, next_stage)
-    end
-    respond_to { |fmt|
-      if success
-        fmt.html {
-          redirect_to @applicant, :notice => "Activity stream updated."
-        }
-      else
-        fmt.xml {
-          render :xml => @activity.errors, :status => :unprocessable_entity
-        }
+    
+    unless params[:activity][:comment].empty? && !state_changed
+      @activity = @applicant.activities.build \
+      	:actor => current_user,
+      	:prev_stage => state_changed ? @applicant.job_stage : nil,
+      	:next_stage => state_changed ? next_stage : nil,
+      	:comment => params[:activity][:comment],
+      	:job_id => @applicant.job_id,
+      	:account_id => @applicant.account_id
+
+      success = @activity.save 
+      success &= @applicant.update_attribute(:job_stage, next_stage) if state_changed
+
+      respond_to do |format|
+        format.html { redirect_to @applicant, :notice => (success ? "Activity stream updated." : "Updating failed!") }
       end
-    }
+    else
+      respond_to do |format|
+        format.html { redirect_to @applicant, :notice => "You haven't done anything!" }
+      end
+    end
   end
 end
