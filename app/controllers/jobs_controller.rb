@@ -50,6 +50,7 @@ class JobsController < BaseAccountController
         format.html { redirect_to(jobs_url, :notice => 'Job was successfully created.') }
         format.xml  { render :xml => @job, :status => :created, :location => @job }
       else
+        flash[:alert] = @job.errors.full_messages.first
         format.html { render :action => "new" }
         format.xml  { render :xml => @job.errors, :status => :unprocessable_entity }
       end

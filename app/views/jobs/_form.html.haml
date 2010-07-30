@@ -1,10 +1,4 @@
 = form_for @job do |f|
-  - if @job.errors.any?
-    #errorExplanation
-      %h2= "#{pluralize(@job.errors.count, "error")} prohibited this job from being saved:"
-      %ul
-        - @job.errors.full_messages.each do |msg|
-          %li= msg
   %table
     %tr
       %th Position          
