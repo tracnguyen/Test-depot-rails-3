@@ -28,7 +28,7 @@ class Config::JobStagesController < BaseAccountController
         format.html { redirect_to(config_job_stages_path, :notice => 'Job stage was successfully created.') }
         format.xml  { render :xml => @job_stage, :status => :created, :location => @job_stage }
       else
-        format.html { redirect_to(config_job_stages_path, :alert => @job_stage.errors.collect{|k, v| "#{k} #{v}\n"}) }
+        format.html { redirect_to(config_job_stages_path, :alert => @job_stage.errors.full_messages.first) }
         format.xml  { render :xml => @job_stage.errors, :status => :unprocessable_entity }
       end
     end
