@@ -16,11 +16,11 @@ class Job < ActiveRecord::Base
   belongs_to :account
   has_many :applicants
   
-  validates_presence_of :account, :title, :description
+  validates_presence_of :account, :title, :description, :expiry_date
 #  validates :email, :length => {:minimum => 3, :maximum => 254},
 #                    :uniqueness => true,
 #                    :format => {:with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i}
-  validates_acceptance_of :expiry_date, :if => Proc.new {|job| job.expiry_date <= Date.today}, :message => "must be in the future!"
+  validates_acceptance_of :expiry_date, :if => Proc.new {|job| job.expiry_date && job.expiry_date <= Date.today}, :message => "must be in the future!"
 
   has_one :email_setting, :as => :configurable
   accepts_nested_attributes_for :email_setting
