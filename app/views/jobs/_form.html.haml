@@ -69,11 +69,13 @@
   <script type="text/javascript">
   $(function() {
     $("fieldset#status").buttonset();
-    	$("input#job_expiry_date").datepicker();
-    	$("input[type=submit]").button();
-    	var show = <%= @job.has_email_setting? %>;
-    	$("#setting").attr('checked', show);
-    	$("#setting").next().hover(function() { $(this).css('cursor', 'pointer') })
+  	$("input#job_expiry_date").datepicker();
+  	$("input[type=submit]").button();
+
+  	var show = <%= @job.has_email_setting? %>;
+  	
+  	$("#setting").attr('checked', show);
+  	$("#setting").next().hover(function() { $(this).css('cursor', 'pointer') })
     $("#setting").click(function() {
       $(this).attr('checked', !show);
       show = !show;

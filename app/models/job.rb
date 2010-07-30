@@ -42,7 +42,7 @@ class Job < ActiveRecord::Base
   end
   
   def has_email_setting?
-    !self.email_setting.blank? && !self.email_setting.username.blank?
+    self.email_setting.nil?
   end
   
 end
