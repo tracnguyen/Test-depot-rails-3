@@ -311,10 +311,10 @@ table.details tr { border-bottom: solid 1px #c0c0c0; }
   padding-left: 0;
 }
 
-.jstab table.activities { margin-bottom: 20px; }
-.jstab table.activities p { font-size: 95%; padding: 0 10px }
-.jstab table.activities td { padding: 10px; }
-.jstab table.activities .meta {
+table.activities { margin-bottom: 20px; }
+table.activities p { font-size: 95%; padding: 0 10px }
+table.activities td { padding: 10px; }
+table.activities .meta {
   font-size: 95%;
   background-color: #cdcdcd;
   -moz-border-radius: 15px 0 15px 0;
@@ -323,18 +323,18 @@ table.details tr { border-bottom: solid 1px #c0c0c0; }
   padding: 3px 15px;
   margin-bottom: 10px;
 }
-.jstab table.activities .meta .actor { display: inline; }
-.jstab table.activities .meta .time { display: inline; float: right; }
-.jstab table.activities .action { margin: 5px 0; }
-.jstab table.activities .ui-icon { display: inline-block; vertical-align: middle; }
-.jstab table.activities .statusbox {
+table.activities .meta .actor { display: inline; }
+table.activities .meta .time { display: inline; float: right; }
+table.activities .action { margin: 5px 0; }
+table.activities .ui-icon { display: inline-block; vertical-align: middle; }
+table.activities .statusbox {
   display: inline-block;
   vertical-align: middle;
   margin-left: 4px;
   font-weight: normal;
   padding: 1px 5px;
 }
-.jstab table.activities .status { font-weight: bold; font-size: 85%; }
+table.activities .status { font-weight: bold; font-size: 85%; }
 
 form fieldset.ui-buttonset .ui-button-text { font-size: 95%; padding: .25em 1em; }
 

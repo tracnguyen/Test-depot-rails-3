@@ -1,22 +1,35 @@
 = content_for :heading do
   %h1 Recent activities
 
-%ol.activities
-  - @activities.each do |activity|
-    %li
-      %table.twocol
-        %tr
-          %td
-            %span.actor= activity.actor.email
-            on
-            != "<a href=#{applicant_path(activity.applicant)}>#{activity.applicant.display_name}</a>"
+%table.activities
+  - @activities.each_with_index do |activity, i|
+    %tr
+      %td
+        = image_tag "no-picture.png"
+      %td
+        .meta
+          .actor= activity.actor.email
+          .time= humanize_time(activity.created_at)
+        - if activity.action
+          .action
+            .ui-icon.ui-icon-info
+            %span.action= activity.action
+            - if activity.action == 'attached'
+              - a = Attachment.find(activity.subject_id)
+              %span.attachment
+                - if a.caption.empty?
+                  = link_to a.attachment_file_name, a.attachment.url
+                - else
+                  = link_to a.caption + ' (' + a.attachment_file_name + ')', a.attachment.url
+        - else
+          %p.comment= activity.comment
           - if activity.next_stage
-            %td
-              %div.right
-                %div{:style => "background: #{activity.next_stage.color}; color:#{map_to_char_color(activity.next_stage.color)}", :class => "statusbox"}
-                  = activity.next_stage.name
-      %p.comment= activity.comment
-      %table.twocol
-        %tr
-          %td
-            %span.time= humanize_time(activity.created_at)
+            .action
+              .ui-icon.ui-icon-info
+              changed status
+              %div{:style => "background: #{activity.prev_stage.color}; color:#{map_to_char_color(activity.prev_stage.color)}", :class => "statusbox"}
+                = activity.prev_stage.name
+              →
+              %div{:style => "background: #{activity.next_stage.color}; color:#{map_to_char_color(activity.next_stage.color)}", :class => "statusbox"}
+                = activity.next_stage.name
+
