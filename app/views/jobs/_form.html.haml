@@ -1,4 +1,13 @@
 = form_for @job do |f|
+  - if @job.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@job.errors.count, "error")} prohibited this job from being saved:"
+      %ul
+        - if @job.errors.has_key?(:title)
+          - @job.errors.add(:position, @job.errors[:title])
+          - @job.errors.delete(:title)
+        - @job.errors.full_messages.each do |msg|
+          %li= msg
   %table
     %tr
       %th Position          

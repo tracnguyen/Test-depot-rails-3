@@ -368,8 +368,7 @@ div.field, div.actions {
 }
 
 .field_with_errors {
-  padding: 2px;
-  background-color: red;
+  border: 2px solid red;
   display: table;
 }
 
@@ -393,9 +392,11 @@ div.field, div.actions {
   color: #fff;
 }
 
+#error_explanation ul {padding:10px;}
+
 #error_explanation ul li {
   font-size: 12px;
-  list-style: square;
+  list-style: square inside;
 }
 
 #footer a, #footer a:visited {
