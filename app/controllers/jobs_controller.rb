@@ -59,6 +59,8 @@ class JobsController < BaseAccountController
 
   def update
     @job = Job.find(params[:id])
+    params[:job][:status] = "open" if params[:commit] == "Publish"
+    params[:job][:status] = "close" if params[:commit] == "Close this job"
 
     respond_to do |format|
       if @job.update_attributes(params[:job])

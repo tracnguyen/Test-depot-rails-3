@@ -30,14 +30,14 @@ class Job < ActiveRecord::Base
     self.save
   }
   
-  STATUSES = ['draft', 'open', 'closed']
+  STATUSES = ['draft', 'open', 'close']
   
   scope :open, where(:status => "open")
   
   state_machine :status, :initial => :draft do
     event :change_status do
       transition :draft => :open
-      transition [:open, :closed] => :closed
+      transition [:open, :close] => :close
     end
   end
   
