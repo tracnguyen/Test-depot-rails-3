@@ -26,7 +26,7 @@
       %th
       %td
         = check_box_tag '', '1', @job.has_email_setting?, :id => 'setting'
-        = label_tag 'setting', 'Configure conversation with candidate through this job'
+        = label_tag 'setting', 'Configure email to contact with the candidate'
     %tr
       %td{:colspan => 2}
         %table{:id => 'settings', :style => "display: #{@job.has_email_setting? ? 'block' : 'none'}"}    
