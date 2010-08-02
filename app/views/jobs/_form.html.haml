@@ -7,11 +7,7 @@
     %tr
       %th Status
       %td
-        %fieldset#status
-          - statuses = @job.new_record? ? Job::STATUSES[0...2] : Job::STATUSES
-          - statuses.each do |s|
-            = label "job_status", s
-            = radio_button :job, :status, s
+        = select :job, :status, job_status_collection
     %tr
       %th Expiry date
       %td
