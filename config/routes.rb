@@ -1,7 +1,9 @@
 Hiringapp::Application.routes.draw do |map|
   constraints(:subdomain => /.+/) do 
     devise_for :users, :controllers => {
-      :sessions => "main/sessions",
+      :sessions => "subdomain/sessions",
+      :passwords => "subdomain/passwords",
+      :unlocks => "subdomain/unlocks"
     }
     
     resources :users, :only => [:new, :create, :update]
@@ -22,6 +24,7 @@ Hiringapp::Application.routes.draw do |map|
         get :resume
       end
     end
+    
     match "applicants/:id/mark_as_unread" => "applicants#mark_as_unread", \
       :as => :mark_applicant_as_unread
     
