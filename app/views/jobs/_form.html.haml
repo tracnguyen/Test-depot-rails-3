@@ -3,20 +3,16 @@
     #error_explanation
       %h2= "#{pluralize(@job.errors.count, "error")} prohibited this job from being saved:"
       %ul
-        - if @job.errors.has_key?(:title)
-          - @job.errors.add(:position, @job.errors[:title])
-          - @job.errors.delete(:title)
-        - @job.errors.full_messages.each do |msg|
-          %li= msg
+        - @job.errors.each do |key, value|
+          - if key == :title
+            %li= "Position #{value}"
+          - else
+            %li= "#{key.to_s.titleize.capitalize} #{value}"
   %table
     %tr
       %th Position          
       %td
         = f.text_field :title
-    %tr
-      %th Status
-      %td
-        = select :job, :status, job_status_collection
     %tr
       %th Expiry date
       %td
@@ -68,7 +64,8 @@
     %tr
       %th
       %td
-        = submit_tag 'Submit'
+        = submit_tag 'Publish'
+        = submit_tag 'Save as draft'
 
 :erb
   <script type="text/javascript">
