@@ -44,6 +44,7 @@ class JobsController < BaseAccountController
   end
 
   def create
+    params[:job][:status] = (params[:commit] == "Publish" ? "open" : "draft")
     @job = current_account.jobs.build(params[:job])
     respond_to do |format|
       if @job.save
