@@ -25,9 +25,14 @@ class Config::JobStagesController < BaseAccountController
 
     respond_to do |format|
       if @job_stage.save
+        @job_stages = current_account.job_stages.undeleted
+        @first_stage = @job_stages.first
+        @job_stages.slice!(0)
+        format.js
         format.html { redirect_to(config_job_stages_path, :notice => 'Job stage was successfully created.') }
         format.xml  { render :xml => @job_stage, :status => :created, :location => @job_stage }
       else
+        format.js { render :js => "alert('hello');"}
         format.html { 
           @job_stages = current_account.job_stages.undeleted
           @first_stage = @job_stages.first
