@@ -24,21 +24,18 @@ class Config::JobStagesController < BaseAccountController
     @job_stage = current_account.job_stages.build(params[:job_stage])
 
     respond_to do |format|
-      if @job_stage.save
-        @job_stages = current_account.job_stages.undeleted
-        @first_stage = @job_stages.first
-        @job_stages.slice!(0)
+      @saved = @job_stage.save
+      @job_stages = current_account.job_stages.undeleted
+      @first_stage = @job_stages.first
+      @job_stages.slice!(0)
+
+      if @saved
         format.js
         format.html { redirect_to(config_job_stages_path, :notice => 'Job stage was successfully created.') }
         format.xml  { render :xml => @job_stage, :status => :created, :location => @job_stage }
       else
-        format.js { render :js => "alert('hello');"}
-        format.html { 
-          @job_stages = current_account.job_stages.undeleted
-          @first_stage = @job_stages.first
-          @job_stages.slice!(0)
-          render :action => "index" 
-        }
+        format.js
+        format.html { render :action => "index" }
         format.xml  { render :xml => @job_stage.errors, :status => :unprocessable_entity }
       end
     end
