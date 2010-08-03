@@ -28,7 +28,12 @@ class Config::JobStagesController < BaseAccountController
         format.html { redirect_to(config_job_stages_path, :notice => 'Job stage was successfully created.') }
         format.xml  { render :xml => @job_stage, :status => :created, :location => @job_stage }
       else
-        format.html { redirect_to(config_job_stages_path, :alert => @job_stage.errors.full_messages.first) }
+        format.html { 
+          @job_stages = current_account.job_stages.undeleted
+          @first_stage = @job_stages.first
+          @job_stages.slice!(0)
+          render :action => "index" 
+        }
         format.xml  { render :xml => @job_stage.errors, :status => :unprocessable_entity }
       end
     end
@@ -48,7 +53,7 @@ class Config::JobStagesController < BaseAccountController
         if @job_stage.update_attributes(params[:stage])
           render :js => "$('##{params[:id]}').children('.editable').hide(); $('##{params[:id]}').children('.ineditable').text('#{params[:stage][:name]}'); $('##{params[:id]}').children('.ineditable').show();"
         else 
-          render :js => "alert('update failed!');"
+          render :js => "$('##{params[:id]}').children('.editable').show(); $('##{params[:id]}').children('.ineditable').hide();"
         end
       when params[:stage][:color]
         if @job_stage.update_attributes(params[:stage])

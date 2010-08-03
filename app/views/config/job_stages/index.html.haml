@@ -30,6 +30,10 @@
             = job_stage.name
           .ineditable
             = job_stage.name
+          .progress{:style => "display: none"}
+            %span
+              Updating...  
+            = image_tag "loading.gif", :alt => "Updating"
         .col12
           = image_tag("edit-icon.png")
         .col13
@@ -56,11 +60,22 @@
     $(document).ready(function() {
       $('.editable').inlineEdit({
         save: function(data) {
+          var editable = $(this);
+          var ineditable = $(this).siblings('.ineditable');
+          var progress = $(this).siblings('.progress');
+          
           $.ajax({
             type: 'PUT',
             url: '/config/job_stages/' + $(this).parent().attr('id'),
             data: {
               'stage[name]' : data.value,
+            },
+            beforeSend: function(){
+              editable.hide();
+              progress.show();
+            },
+            complete: function(){
+              progress.hide();
             }
           })
         },
@@ -106,6 +121,10 @@
         e.children(".editable").click();
       });
       
-      $('#new_stage_form').hide();     
+      <% if @job_stage.errors.empty? %>
+        $('#new_stage_form').hide();
+      <% else %>
+        $('#new_stage_button').hide();
+      <% end %>
     })
   </script>
