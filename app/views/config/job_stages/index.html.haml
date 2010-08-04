@@ -8,7 +8,7 @@
 %ul{:id => 'sortable'}
   = render :partial => 'stages'
 
-%button{:id => 'new_stage_button', :onclick => "$('#new_stage_form').show(); $(this).hide();"}
+%button{:id => 'new_stage_button'}
   New job stage
 #new_stage_form
   Add a new Stage
@@ -16,39 +16,32 @@
     = f.text_field :name
     = submit_tag 'Add'
     or 
-    %a{:href => "#new_stage_cancel", :id => "new_stage_cancel"}
+    %span.pseudo_link.cancel_new
       Cancel
 
 
 :erb
   <script type='text/javascript'>
-    $(document).ready(function() {
-      $('.editable').inlineEdit({
-        save: function(data) {
-          var editable = $(this);
-          var ineditable = $(this).siblings('.ineditable');
-          var progress = $(this).siblings('.progress');
-          
-          $.ajax({
-            type: 'PUT',
-            url: '/config/job_stages/' + $(this).parent().attr('id'),
-            data: {
-              'stage[name]' : data.value,
-            },
-            beforeSend: function(){
-              editable.hide();
-              progress.show();
-            },
-            complete: function(){
-              progress.hide();
-            }
-          })
-        },
-        cancel: function() {
-          $(this).val($(this).next());
-          $(this).hide();
-          $(this).next().show();
-        }
+    $(document).ready(function() {    
+      $('.update_form, #new_stage_form').hide();
+      
+      $('.edit_job_stage').bind("ajax:loading", function(){ $(this).parent().siblings('.progress').show();}).bind("ajax:complete", function(){$(this).parent().siblings('.progress').hide();});
+      
+      $('.pseudo_link, .col12').hover(function(){ 
+        $(this).css('cursor', 'pointer');
+      });
+      
+      $('.cancel_update').click(function(){
+        var form = $(this).parent().parent();
+        form.hide();
+        form.siblings('.editable').show();
+      });
+      
+      $('#new_stage_button').click(function(){
+        $('#new_job_stage > #job_stage_name').val('');
+        $('#new_stage_form').show(); 
+        $('#new_job_stage > #job_stage_name').focus();
+        $(this).hide();
       });
       
       $('#sortable').sortable({
@@ -73,26 +66,27 @@
           type: 'PUT',
           url: '/config/job_stages/' + stage_id,
           data: {
-            'stage[color]' : $(this).val(),
+            'job_stage[color]' : $(this).val(),
           }
         });
       });
       
       $('.col12 > img').click(function(){
-        var stage = $(this).parent().parent();
-        var e = stage.children(":first-child"); 
-        e.children(".ineditable").hide();
-        e.children(".editable").show();
-        e.children(".editable").click();
+        var stage = $(this).parent().parent().children(":first-child"); 
+        var editable = stage.children(".editable");
+        var update_form = stage.children(".update_form");
+        var will_be_removed = update_form.children().children('.field_with_errors');
+        
+        editable.hide();
+        
+        if (will_be_removed) {
+          will_be_removed.replaceWith(will_be_removed.contents());
+        }
+        update_form.children().children('#job_stage_name').val(editable.text().trim());
+        update_form.show();
       });
-      
-      <% if @job_stage.errors.empty? %>
-        $('#new_stage_form').hide();
-      <% else %>
-        $('#new_stage_button').hide();
-      <% end %>
-      
-      $('#new_stage_cancel').click(function(){
+            
+      $('.cancel_new').click(function(){
         var will_be_removed = $(this).siblings('.field_with_errors')
 
         $('#new_stage_form').hide(); 

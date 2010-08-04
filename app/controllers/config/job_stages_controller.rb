@@ -43,26 +43,27 @@ class Config::JobStagesController < BaseAccountController
 
   def update
     @job_stage = JobStage.find(params[:id])
-
-    case 
-      when params[:order]
-        orders = params[:order] 
-        stages = current_account.job_stages
-        stages.slice!(0) 
-        stages.each {|stage| stage.update_attributes(:position => orders.index(stage.id.to_s) + 1)}
-        render :nothing => true
-      when params[:stage][:name]
-        if @job_stage.update_attributes(params[:stage])
-          render :js => "$('##{params[:id]}').children('.editable').hide(); $('##{params[:id]}').children('.ineditable').text('#{params[:stage][:name]}'); $('##{params[:id]}').children('.ineditable').show();"
-        else 
-          render :js => "$('##{params[:id]}').children('.ineditable').hide(); alert('#{@job_stage.errors.full_messages.first.gsub(/[']/, '\\\\\'')}'); $('##{params[:id]}').children('.editable').show(); $('##{params[:id]}').children('.editable').click();"
-        end
-      when params[:stage][:color]
-        if @job_stage.update_attributes(params[:stage])
+    @params = params
+    
+    respond_to do |format|
+      case 
+        when params[:order]
+          orders = params[:order] 
+          stages = current_account.job_stages
+          stages.slice!(0) 
+          stages.each {|stage| stage.update_attributes(:position => orders.index(stage.id.to_s) + 1)}
           render :nothing => true
-        else
-          render :js => "alert('update failed!);"
-        end
+        when params[:job_stage][:name]
+          @updated = @job_stage.update_attributes(params[:job_stage])
+          format.js
+        when params[:job_stage][:color]
+          if @job_stage.update_attributes(params[:job_stage])
+            render :nothing => true
+          else
+            render :js => "alert('update failed!');"
+          end
+          
+      end
     end
   end
 

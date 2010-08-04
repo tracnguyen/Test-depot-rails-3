@@ -1,8 +1,45 @@
 <% if @saved %>      
-  $('#sortable').html("<%= escape_javascript(render :partial => 'stages') %>");                         
+  $('#sortable').html("<%= escape_javascript(render :partial => 'stages') %>");
+  $('.update_form, #new_stage_form').hide();  
+  $('#new_stage_button').show();
+  $('.pseudo_link, .col12').hover(function(){ 
+    $(this).css('cursor', 'pointer');
+  });  
+  $('.cancel_update').click(function(){
+    var form = $(this).parent().parent();
+    form.hide();
+    form.siblings('.editable').show();
+  });  
+  $('.edit_job_stage').bind("ajax:loading", function(){ $(this).parent().siblings('.progress').show();}).bind("ajax:complete", function(){$(this).parent().siblings('.progress').hide();});  
   $('.color').colorPicker();
+  $('.color').change(function(e, data){
+    var stage_id = $(this).attr('id').slice(5);
+    
+    $.ajax({
+      type: 'PUT',
+      url: '/config/job_stages/' + stage_id,
+      data: {
+        'stage[color]' : $(this).val(),
+      }
+    });
+  });
+  
+  $('.col12 > img').click(function(){
+    var stage = $(this).parent().parent().children(":first-child"); 
+    var editable = stage.children(".editable");
+    var update_form = stage.children(".update_form");
+    var will_be_removed = update_form.children().children('.field_with_errors');
+    
+    editable.hide();
+    
+    if (will_be_removed) {
+      will_be_removed.replaceWith(will_be_removed.contents());
+    }
+    update_form.children().children('#job_stage_name').val(editable.text().trim());
+    update_form.show();
+  });  
 <% else %>
-  $('#job_stage_name').wrap('<div class="field_with_errors" style="float:left" />');
+  $('#new_job_stage > #job_stage_name').wrap('<div class="field_with_errors" style="float:left" />');
   alert('<%= escape_javascript(@job_stage.errors.full_messages.first) %>');
 <% end %>
   

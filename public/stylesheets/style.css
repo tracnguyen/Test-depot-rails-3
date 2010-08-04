@@ -236,9 +236,6 @@ table#container td#sidebar {
   width: 100%;
 }
 
-#content ul .editable {
-  display: none;
-}
 
 #content ul#sortable .col12, .col13, .col14 {
   float: left;
@@ -366,6 +363,8 @@ form.formtastic input.ui-button { padding:0.4em 1em; }
 div.field, div.actions {
   margin-bottom: 10px;
 }
+
+span.pseudo_link { color:#5F9EA0; text-decoration:underline; }
 
 .field_with_errors {
   border: 2px solid red;

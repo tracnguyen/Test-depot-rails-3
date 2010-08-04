@@ -1,0 +1,11 @@
+<% if @updated %>
+  $('#<%= @params[:id] %>').children('.update_form').hide(); 
+  $('#<%= @params[:id] %>').children('.editable').text('<%= escape_javascript(@job_stage.name) %>'); 
+  $('#<%= @params[:id] %>').children('.progress').hide();
+  $('#<%= @params[:id] %>').children('.editable').show();
+<% else %>
+  $('#<%= @params[:id] %>').children('.update_form').children().children('#job_stage_name').focus();
+  $('#<%= @params[:id] %>').children('.update_form').children().children('#job_stage_name').wrap('<div class="field_with_errors" style="float:left" />');
+
+  alert('<%= escape_javascript(@job_stage.errors.full_messages.first) %>'); 
+<% end %>

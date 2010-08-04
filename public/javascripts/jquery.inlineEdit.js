@@ -71,8 +71,7 @@
                                 window.clearTimeout(self.timer);
                             }
                             self.timer = window.setTimeout(function() {
-                                self.html(self.value() || placeholderHtml);
-                                self.removeClass(options.hover);
+                              options.cancel.call(self);
                             }, 200);
                         })
                         .focus();
@@ -89,6 +88,7 @@
 
         if (!self.value()) {
             self.html($(placeholderHtml));
+            self.click();
         } else if (options.value) {
             self.html(options.value);
         }

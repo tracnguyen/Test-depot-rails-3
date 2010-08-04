@@ -1,9 +1,18 @@
 .col1
   .col11{:id => @first_stage.id}
+    .update_form
+      = form_for([:config, @first_stage], :remote => true, :html => {:method => :put}) do |f|
+        = f.text_field :name
+        = submit_tag 'Update'
+        or 
+        %span.pseudo_link.cancel_update
+          Cancel
     .editable
       = @first_stage.name
-    .ineditable
-      = @first_stage.name
+    .progress{:style => "display: none"}
+      %span{:style => "color:blue"}
+        Updating...  
+      = image_tag "loading.gif", :alt => "Updating"
   .col12
     = image_tag("edit-icon.png")
   .col13
@@ -18,9 +27,14 @@
   %li{:id => "order_#{job_stage.id}"}
     .col1
       .col11{:id => job_stage.id}
+        .update_form
+          = form_for([:config, job_stage], :remote => true, :html => {:method => :put}) do |f|
+            = f.text_field :name
+            = submit_tag 'Update'
+            or 
+            %span.pseudo_link.cancel_update
+              Cancel
         .editable
-          = job_stage.name
-        .ineditable
           = job_stage.name
         .progress{:style => "display: none"}
           %span{:style => "color:blue"}
