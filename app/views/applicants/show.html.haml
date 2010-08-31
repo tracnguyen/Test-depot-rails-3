@@ -89,8 +89,8 @@
 </div><!--#tab1-->
 
 <div id=tab2 class=jstab>
-%h3 Listing attachments
 - unless @applicant.attachments.blank?
+  %h3 Listing attachments
   %ul.attachments
     - @applicant.attachments.each do |a|
       %li
@@ -98,9 +98,6 @@
           = link_to a.attachment_file_name, a.attachment.url
         - else
           = link_to a.caption + ' (' + a.attachment_file_name + ')', a.attachment.url
-- else 
-  %p
-    (No attachment)
 
 %h3 New attachment
 = form_for [@applicant, Attachment.new], :url => applicant_attachments_path(@applicant), :html => {:multipart => true} do |f|          
@@ -142,10 +139,10 @@
       = render :partial => 'conversations/conversation', :locals => { :conversation => c, :applicant => @applicant }
 
   = form_for @conversation, :url => conversations_path, :html => {:id => 'frm-msg', :multipart => true} do |f|
-    = f.label :message, 'Enter message:'
+    = f.hidden_field :applicant_id
     %p
+      = f.label :message, 'Enter message:'
       = f.text_area :message, :cols => 80, :rows => 7, :id => 'message'
-      = f.hidden_field :applicant_id
     %p
       = f.label :attachment, 'Attachment:'
       = f.file_field :attachment

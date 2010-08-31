@@ -28,8 +28,9 @@
         = check_box_tag '', '1', @job.has_email_setting?, :id => 'setting'
         = label_tag 'setting', 'Configure conversation with candidate through this job'
     %tr
-      %td{:colspan => 2}
-        %table{:id => 'settings', :style => "display: #{@job.has_email_setting? ? 'block' : 'none'}"}    
+      %td
+      %td
+        %table{:id => 'settings', :style => "display: #{@job.has_email_setting? ? 'block' : 'none'}"}
           = f.fields_for :email_setting do |builder|
             %tr
               %td{:colspan => 2} 

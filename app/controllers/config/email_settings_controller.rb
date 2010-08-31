@@ -17,10 +17,7 @@ class Config::EmailSettingsController < BaseAccountController
   
   def create
     @setting = EmailSetting.new(params[:email_setting])
-    current_account.email_setting = @setting
-#    @setting.account = current_account
-#    if @setting.save
-    if current_account.save
+    if current_account.update_attribute(:email_setting, @setting)
       redirect_to(config_email_settings_url, :notice => 'Settings was successfully updated.')
     else
       render :action => :index
