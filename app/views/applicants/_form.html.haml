@@ -1,4 +1,4 @@
-- semantic_form_for @applicant, :html => {:multipart => true, :id => 'form'} do |f|
+= semantic_form_for @applicant, :html => {:multipart => true, :id => 'form'} do |f|
   - f.inputs do
     = f.input :job_id, :as => :select, :collection => current_account.jobs.map { |job| [job.title, job.id] }
     = f.input :first_name, :label => "First name"

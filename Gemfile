@@ -18,9 +18,10 @@ gem 'ruby-debug'
 gem "subdomain-fu", :git => "git://github.com/nhowell/subdomain-fu.git"
 gem "devise", "1.1.rc2"
 gem "haml", "~>3.0.4"
+gem 'formtastic', :git => "http://github.com/justinfrench/formtastic.git", :branch => "rails3"
 gem "will_paginate", ">=3.0.pre"
 gem "rails3-generators", :git => "git://github.com/indirect/rails3-generators.git"
-gem "state_machine", "0.9.3"
+gem "state_machine", "~> 0.9.4"
 gem "paperclip"
 gem "rmagick"
 gem 'ckeditor', :git => 'git://github.com/galetahub/rails-ckeditor.git', :branch => 'rails3'

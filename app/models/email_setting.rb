@@ -15,6 +15,8 @@
 #  configurable_type :string(255)
 #
 
+require 'aes_crypt'
+
 class EmailSetting < ActiveRecord::Base
 #  belongs_to :account
   belongs_to :configurable, :polymorphic => true

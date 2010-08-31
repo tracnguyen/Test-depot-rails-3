@@ -28,5 +28,7 @@ Hiringapp::Application.configure do
 #    :password => 'tpldev1!',  
 #    :authentication => 'plain',  
 #    :enable_starttls_auto => true 
-#  } 
+#  }
+
+  config.active_support.deprecation = :log
 end
