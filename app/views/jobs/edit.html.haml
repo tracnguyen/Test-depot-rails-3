@@ -1,6 +1,97 @@
 = content_for :heading do
   %h1 Editing job
 
-= render :partial => 'form_edit'
+= form_for @job do |f|
+  - if @job.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@job.errors.count, "error")} prohibited this job from being saved:"
+      %ul
+        - @job.errors.each do |key, value|
+          - if key == :title
+            %li= "Position #{value}"
+          - else
+            %li= "#{key.to_s.titleize.capitalize} #{value}"
+  %table
+    %tr
+      %th Position          
+      %td
+        = f.text_field :title
+    %tr
+      %th Expiry date
+      %td
+        = f.text_field :expiry_date
+    %tr
+      %th{:style => "vertical-align: top"}
+        Description
+      %td
+        = f.cktext_area :description, :height => 400, :width => 720
+    %tr
+      %th
+      %td
+        = check_box_tag '', '1', @job.has_email_setting?, :id => 'setting'
+        = label_tag 'setting', 'Configure conversation with candidate through this job'
+    %tr
+      %td
+      %td
+        %table{:id => 'settings', :style => "display: #{@job.has_email_setting? ? 'block' : 'none'}"}
+          = f.fields_for :email_setting do |builder|
+            %tr
+              %td{:colspan => 2} 
+                %h3 Enter mail server information
+            %tr
+              %th Server
+              %td
+                = builder.text_field :server
+            %tr
+              %th Port
+              %td
+                = builder.text_field :port
+            %tr
+              %th SSL
+              %td
+                = builder.check_box :ssl
+            %tr
+              %th Protocol
+              %td
+                = builder.select :protocol, ['IMAP', 'POP3']                            
+            %tr
+              %td{:colspan => 2} 
+                %h3 Enter the email account for this job
+            %tr
+              %th Username
+              %td
+                = builder.text_field :username
+            %tr
+              %th Password
+              %td
+                = builder.password_field :password            
+    %tr
+      %th
+      %td
+        = submit_tag 'Update'
+        - if @job.status == "draft"
+          = submit_tag 'Publish'
+        = submit_tag 'Close this job'
 
-= link_to 'Back', jobs_path
+:erb
+  <script type="text/javascript">
+  $(function() {
+    $("fieldset#status").buttonset();
+  	$("input#job_expiry_date").datepicker();
+  	$("input[type=submit]").button();
+
+  	var show = <%= @job.has_email_setting? %>;
+  	
+  	$("#setting").attr('checked', show);
+  	$("#setting").next().hover(function() { $(this).css('cursor', 'pointer') })
+    $("#setting").click(function() {
+      $(this).attr('checked', !show);
+      show = !show;
+      if (show) {
+        $("#settings").fadeIn();
+      } else {
+        $("#settings").fadeOut();
+      }
+    });
+  })
+  </script>
