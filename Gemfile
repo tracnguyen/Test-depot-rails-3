@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.0.beta4'
+gem 'rails', '3.0.0'
 
 gem "mongrel"
 gem "cgi_multipart_eof_fix"
@@ -17,7 +17,7 @@ gem 'ruby-debug'
 
 gem "subdomain-fu", :git => "git://github.com/nhowell/subdomain-fu.git"
 gem "devise", "1.1.rc2"
-gem "haml", ">=3.0.4"
+gem "haml", "~>3.0.4"
 gem "will_paginate", ">=3.0.pre"
 gem "rails3-generators", :git => "git://github.com/indirect/rails3-generators.git"
 gem "state_machine", "0.9.3"
@@ -27,17 +27,17 @@ gem 'ckeditor', :git => 'git://github.com/galetahub/rails-ckeditor.git', :branch
 gem 'delayed_job', '2.0.3'
 gem 'clockwork', '0.2.0'
 gem 'nokogiri'
-gem 'foreman'
 gem 'annotate'
+# gem 'foreman'
 
 group :test do
-  gem "rspec", ">=2.0.0.beta.8"
-  gem "rspec-rails", ">=2.0.0.beta.8"
+  gem "rspec"
+  gem "rspec-rails"
 end
 
 group :cucumber do
-  gem "cucumber", ">=0.6.3"
-  gem "cucumber-rails", ">=0.3.0"
-  # gem "capybara", ">=0.3.6"
-  gem "database_cleaner", ">=0.5.0"
+  gem "cucumber"
+  gem "cucumber-rails"
+  gem "database_cleaner"
+  gem "capybara"
 end
