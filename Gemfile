@@ -29,6 +29,8 @@ gem 'delayed_job', '2.0.3'
 gem 'clockwork', '0.2.0'
 gem 'nokogiri'
 gem 'annotate'
+gem 'liquid'
+
 # gem 'foreman'
 
 group :test do
