@@ -13,3 +13,8 @@
     = f.input :email
   = f.buttons do
     = f.commit_button "Send invitation"
+
+:javascript
+  $(function() {
+  	$("input[type=submit]").button()
+  })

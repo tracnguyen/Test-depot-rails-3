@@ -22,7 +22,10 @@
 
 :erb
   <script type='text/javascript'>
-    $(document).ready(function() {    
+    $(document).ready(function() {
+    
+      $("#new_stage_button").button();
+      
       $('.update_form, #new_stage_form').hide();
       
       $('.edit_job_stage').bind("ajax:loading", function(){ $(this).parent().siblings('.progress').show();}).bind("ajax:complete", function(){$(this).parent().siblings('.progress').hide();});
