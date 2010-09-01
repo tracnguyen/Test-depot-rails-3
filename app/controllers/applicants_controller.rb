@@ -35,7 +35,7 @@ class ApplicantsController < BaseAccountController
     @conversation = @applicant.conversations.build
     @templates = {}
     current_account.message_templates.each { |t|
-      @templates[t.id] = {:subject => t.subject, :body => t.body}
+      @templates[t.id] = t.render_for(@applicant)
     }
 
     respond_to do |format|
