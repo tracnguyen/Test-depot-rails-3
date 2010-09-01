@@ -31,8 +31,8 @@ class ApplicantsController < BaseAccountController
     
     @activities = @applicant.activities.order("created_at ASC").includes(:actor, :prev_stage, :next_stage).all
     @activity = @applicant.activities.build
-    @conversation = Conversation.new
-    @conversation.applicant = @applicant
+    @conversations = @applicant.conversations.order("created_at DESC").all
+    @conversation = @applicant.conversations.build
 
     respond_to do |format|
       format.html # show.html.erb

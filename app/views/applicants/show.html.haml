@@ -132,11 +132,10 @@
     %p Cannot view resume on this browser
 </div><!--#tab3-->
 
+<div id=tab4 class=jstab>
 - if @applicant.job.has_email_setting?
-  <div id=tab4 class=jstab>
   #conversations
-    - @applicant.conversations.each do |c|
-      = render :partial => 'conversations/conversation', :locals => { :conversation => c, :applicant => @applicant }
+    = render :partial => 'conversations/conversation', :collection => @conversations
 
   %h2 Send an e-mail to #{@applicant.display_name.inspect} #{@applicant.email}
   = semantic_form_for @conversation, :url => conversations_path, :html => {:id => 'frm-msg', :multipart => true} do |f|
@@ -148,7 +147,7 @@
     = f.buttons do
       = f.commit_button 'Send', :id => 'send', :style => 'vertical-align: middle'
       = image_tag('loading.gif', :style => 'display:none', :id => 'loading')
-  </div><!--#tab4-->
+</div><!--#tab4-->
      
 </div> <!--#jstabs-->
 
