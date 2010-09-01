@@ -82,7 +82,7 @@ class ApplicantsController < BaseAccountController
         else 
           render :nothing => true 
         end
-      else
+      else respond_to { |format|
         if @applicant.update_attributes(params[:applicant])
           if remove_attachment
             format.html { redirect_to(edit_applicant_url(@applicant), :notice => 'The attachment has been removed.') }
@@ -94,6 +94,7 @@ class ApplicantsController < BaseAccountController
           format.html { render :action => "edit" }
           format.xml  { render :xml => @applicant.errors, :status => :unprocessable_entity }
         end
+      }
     end 
   end
 
