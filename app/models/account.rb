@@ -18,6 +18,7 @@ class Account < ActiveRecord::Base
   has_many :applicants
   has_many :activities
   has_many :messages, :order => "created_at DESC"
+  has_many :message_templates
   has_one :email_setting, :as => :configurable
   
   validates_presence_of :name, :subdomain

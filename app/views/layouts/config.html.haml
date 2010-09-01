@@ -60,6 +60,7 @@
             - if current_user.owns?(current_account)
               %li= link_to "Users", config_users_path
               %li= link_to "Email Setting", config_email_settings_path
+              %li= link_to "Message Templates", config_message_templates_path
           = yield :sidebar
     #footer
       Copyright 2010. Powered by

@@ -1,0 +1,12 @@
+= semantic_form_for [:config, @template] do |f|
+  = f.inputs do
+    = f.input :account_id, :as => :hidden
+    = f.input :subject
+    = f.input :body
+  = f.buttons do
+    = f.commit_button "Submit"
+
+:javascript
+  $(function() {
+  	$("input[type=submit]").button()
+  })

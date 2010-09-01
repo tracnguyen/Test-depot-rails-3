@@ -39,6 +39,7 @@ Hiringapp::Application.routes.draw do |map|
       resources :users, :only => [:index, :create]
       resources :job_stages
       resources :email_settings
+      resources :message_templates, :except => :new
     end
     
     match "dashboard" => "dashboard#index", :as => :dashboard
