@@ -33,6 +33,10 @@ class ApplicantsController < BaseAccountController
     @activity = @applicant.activities.build
     @conversations = @applicant.conversations.order("created_at DESC").all
     @conversation = @applicant.conversations.build
+    @templates = {}
+    current_account.message_templates.each { |t|
+      @templates[t.id] = {:subject => t.subject, :body => t.body}
+    }
 
     respond_to do |format|
       format.html # show.html.erb

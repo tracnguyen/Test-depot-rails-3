@@ -137,22 +137,30 @@
   #conversations
     = render :partial => 'conversations/conversation', :collection => @conversations
 
-  %h2 Send an e-mail to #{@applicant.display_name.inspect} #{@applicant.email}
+  %h2{:style=>"margin-top:20px"}
+    Send an e-mail to #{@applicant.display_name.inspect} #{@applicant.email}
+  
   = semantic_form_for @conversation, :url => conversations_path, :html => {:id => 'frm-msg', :multipart => true} do |f|
     = f.inputs do
+      %li
+        = label :template, "Use a predefined template"
+        = select_tag :template, options_for_select([["--Select--", 0]] + @templates.map{ |k, v| [v[:subject], k] })
       = f.input :applicant_id, :as => :hidden
       = f.input :subject
       = f.input :body, :id => :body, :label => 'Message body:'
       = f.input :attachment, :as => :file
     = f.buttons do
-      = f.commit_button 'Send', :id => 'send', :style => 'vertical-align: middle'
-      = image_tag('loading.gif', :style => 'display:none', :id => 'loading')
+      = f.commit_button 'Send', :id => 'send'
+      = image_tag('loading.gif', :style => 'display:none; padding: 10px', :id => 'loading')
 </div><!--#tab4-->
      
 </div> <!--#jstabs-->
 
 :erb
   <script type="text/javascript">
+  
+  var Templates = <%= @templates.to_json %>;
+  
   $(function() {
     clreload = false;
     rsreload = false;    
@@ -189,7 +197,8 @@
           $(this).ajaxSubmit({            
             success: function(resp) {
       	      $("#conversations").append($(resp).hide().fadeIn(2000));
-      	      $("#body").val('');
+      	      $("#conversation_subject").val('');
+      	      $("#conversation_body").val('');
       	      $("#loading").hide();
       	    },
       	    clearForm: true,
@@ -198,5 +207,13 @@
           return false;
         });
     	}
+  
+  	$("#template").change(function() {
+  		var i = $(this).val()
+  		if (i in Templates) {
+  			$("#conversation_subject").val(Templates[i].subject)
+  			$("#conversation_body").val(Templates[i].body)
+  		}
+  	})
   })
   </script>

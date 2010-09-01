@@ -16,7 +16,8 @@ protected
   def template_vals
     {
       'applicant' => self.applicant.display_name,
-      'company' => self.applicant.account.name
+      'company' => self.applicant.account.name,
+      'job' => self.applicant.job.title
     }
   end
 end
