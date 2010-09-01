@@ -23,6 +23,7 @@ class Config::MessageTemplatesController < BaseAccountController
   end
   
   def edit
+    @templates = current_account.message_templates.all
     @template = MessageTemplate.find(params[:id])
   end
   

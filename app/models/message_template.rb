@@ -1,6 +1,15 @@
 class MessageTemplate < ActiveRecord::Base
   belongs_to :account
   validates_presence_of :subject, :body
+  
+  HELP = %(<div class=help>
+  	<p>The following substitutions are possible:</p>
+  	<ul>
+  		<li><strong>{{applicant}}</strong> is the applicant's full name</li>
+  		<li><strong>{{job}}</strong> is the job title</li>
+  		<li><strong>{{company}}</strong> is the company's name</li>
+  	</ul>
+  </div>)
 
   def render_for(applicant)
     vals = {

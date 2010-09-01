@@ -1,10 +1,28 @@
-= semantic_form_for [:config, @template] do |f|
-  = f.inputs do
-    = f.input :account_id, :as => :hidden
-    = f.input :subject
-    = f.input :body
-  = f.buttons do
-    = f.commit_button "Submit"
+= form_for [:config, @template] do |f|
+  - if @template.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@template.errors.count, "error")} prohibited this template from being saved:"
+      %ul
+        - @template.errors.each do |key, value|
+          - if key == :title
+            %li= "Position #{value}"
+          - else
+            %li= "#{key.to_s.titleize.capitalize} #{value}"
+  = f.hidden_field :account_id
+  %table
+    %tr
+      %th= f.label :subject
+      %td= f.text_field :subject, :style => "width: 100%", :size => 9999
+    %tr
+      %th
+        <label name=body>
+        %p Body
+        != MessageTemplate::HELP
+        </label>
+      %td= f.text_area :body, :style => "width: 100%", :cols => 9999
+    %tr
+      %th
+      %td= f.submit "Submit"
 
 :javascript
   $(function() {

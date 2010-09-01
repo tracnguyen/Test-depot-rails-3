@@ -2,7 +2,7 @@
   %h1 Message templates
 
 - unless @templates.blank?
-  %h2 Edit existing templates
+  %h2 Existing templates
   %ul{:style => "margin-bottom: 30px"}
     - @templates.each do |t|
       %li= link_to t.subject, edit_config_message_template_path(t)

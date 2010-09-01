@@ -12,5 +12,5 @@
         To: &lt;#{conversation.applicant.display_name}&gt; #{conversation.applicant.email}
     %p
       Subject:
-      = conversation.subject ? conversation.subject : "<none>"
+      = (conversation.subject && !conversation.subject.blank?) ? conversation.subject : "<none>"
     %p= simple_format(conversation.body)

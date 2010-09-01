@@ -338,6 +338,20 @@ form fieldset.ui-buttonset .ui-button-text { font-size: 95%; padding: .25em 1em;
 form.edit_job th, form.new_job th { width: 7.5em; font-weight: normal; }
 form.edit_job th, form.edit_job td, form.new_job th, form.new_job td  { padding-bottom: 1em; }
 
+form.edit_message_template th,
+form.new_message_template th {
+	width: 30%; font-weight: normal;
+}
+
+form table th .help { font-size: 85%; }
+
+form.edit_message_template th,
+form.edit_message_template td,
+form.new_message_template th,
+form.new_message_template td  {
+	padding-bottom: 1em;
+}
+
 form#new_activity label { font-size: 90%; font-weight: bold; display: block; margin-bottom: 5px; }
 form#new_activity li { margin-bottom: .25em; }
 form#new_activity table { margin-left: 10px; }
