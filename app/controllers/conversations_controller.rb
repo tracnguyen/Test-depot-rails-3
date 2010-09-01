@@ -3,9 +3,9 @@ class ConversationsController < BaseAccountController
   
   def create
     file = params[:attachment]
-    conversation = Conversation.new(params[:conversation])  
+    conversation = Conversation.new(params[:conversation])
     conversation.content_type = "text"
-    conversation.outcome = true
+    conversation.outgoing = true
     if conversation.save
       applicant = Applicant.find(conversation.applicant_id)
       UserMailer.conversation_email(applicant, conversation).deliver

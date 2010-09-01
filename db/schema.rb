@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100901024003) do
+ActiveRecord::Schema.define(:version => 20100901070803) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name"
@@ -123,11 +123,12 @@ ActiveRecord::Schema.define(:version => 20100901024003) do
 
   create_table "conversations", :force => true do |t|
     t.string   "content_type"
-    t.text     "message"
-    t.boolean  "outcome"
+    t.text     "body"
+    t.boolean  "outgoing"
     t.integer  "applicant_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "subject"
   end
 
   create_table "default_job_stages", :force => true do |t|

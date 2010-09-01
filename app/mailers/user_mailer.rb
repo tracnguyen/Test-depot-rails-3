@@ -11,12 +11,12 @@ class UserMailer < ActionMailer::Base
   end
   
   def conversation_email(applicant, conversation)
-    @message = conversation.message
+    @message = conversation.body
     if conversation.attachment
       attachments["#{conversation.attachment.original_filename}"] = File.read(conversation.attachment.path)
     end
     mail :from => applicant.job.email_setting.username,
           :to => applicant.email,
-          :subject => "#{applicant.job.account.name} has sent you a message"          
+          :subject => conversation.subject
   end
 end

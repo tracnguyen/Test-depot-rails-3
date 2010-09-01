@@ -1,16 +1,3 @@
-# == Schema Information
-#
-# Table name: conversations
-#
-#  id           :integer         not null, primary key
-#  content_type :string(255)
-#  message      :text
-#  outcome      :boolean
-#  applicant_id :integer
-#  created_at   :datetime
-#  updated_at   :datetime
-#
-
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
@@ -24,4 +11,20 @@ two:
   message: MyText
   outcome: false
   applicant_id: 1
+
+
+
+# == Schema Information
+#
+# Table name: conversations
+#
+#  id           :integer         not null, primary key
+#  content_type :string(255)
+#  message      :text
+#  outgoing     :boolean
+#  applicant_id :integer
+#  created_at   :datetime
+#  updated_at   :datetime
+#  subject      :string(255)
+#
 

@@ -138,19 +138,16 @@
     - @applicant.conversations.each do |c|
       = render :partial => 'conversations/conversation', :locals => { :conversation => c, :applicant => @applicant }
 
-  = form_for @conversation, :url => conversations_path, :html => {:id => 'frm-msg', :multipart => true} do |f|
-    = f.hidden_field :applicant_id
-    %p
-      = f.label :message, 'Enter message:'
-      = f.text_area :message, :cols => 80, :rows => 7, :id => 'message'
-    %p
-      = f.label :attachment, 'Attachment:'
-      = f.file_field :attachment
-    %p
-      %b Note:
-      = "This message will be sent as an e-mail to #{@applicant.display_name}." 
-    = f.submit 'Send Message', :id => 'send'
-    = image_tag('loading.gif', :style => 'display:none', :id => 'loading')
+  %h2 Send an e-mail to #{@applicant.display_name.inspect} #{@applicant.email}
+  = semantic_form_for @conversation, :url => conversations_path, :html => {:id => 'frm-msg', :multipart => true} do |f|
+    = f.inputs do
+      = f.input :applicant_id, :as => :hidden
+      = f.input :subject
+      = f.input :body, :id => :body, :label => 'Message body:'
+      = f.input :attachment, :as => :file
+    = f.buttons do
+      = f.commit_button 'Send', :id => 'send', :style => 'vertical-align: middle'
+      = image_tag('loading.gif', :style => 'display:none', :id => 'loading')
   </div><!--#tab4-->
      
 </div> <!--#jstabs-->
@@ -193,7 +190,7 @@
           $(this).ajaxSubmit({            
             success: function(resp) {
       	      $("#conversations").append($(resp).hide().fadeIn(2000));
-      	      $("#message").val('');
+      	      $("#body").val('');
       	      $("#loading").hide();
       	    },
       	    clearForm: true,
