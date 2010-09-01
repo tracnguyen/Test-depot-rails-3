@@ -8,7 +8,7 @@ class ConversationsController < BaseAccountController
     conversation.outcome = true
     if conversation.save
       applicant = Applicant.find(conversation.applicant_id)
-      InvitationMailer.conversation_email(applicant, conversation).deliver
+      UserMailer.conversation_email(applicant, conversation).deliver
       render :partial => 'conversation', :locals => { :conversation => conversation,
                                                       :applicant => applicant }
     else

@@ -15,7 +15,7 @@ class Config::UsersController < BaseAccountController
     @invitation = current_user.invitations.build(params[:user])
 
     if @invitation.save 
-      if InvitationMailer.welcome_email(@invitation).deliver
+      if UserMailer.welcome_email(@invitation).deliver
         flash[:notice] = "The Invitation has been sent."
         redirect_to config_users_path
       else 

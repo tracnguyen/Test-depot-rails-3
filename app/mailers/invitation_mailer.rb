@@ -1,4 +1,4 @@
-class InvitationMailer < ActionMailer::Base
+class UserMailer < ActionMailer::Base
   default :from => "no-reply@hiring.com"
   
   def welcome_email(invitation)
