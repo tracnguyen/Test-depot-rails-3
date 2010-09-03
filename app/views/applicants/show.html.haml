@@ -33,12 +33,12 @@
 
 <div id=jstabs>
 %ul
-  %li= link_to "Activities", "#tab1"
-  %li= link_to "Attachments", "#tab2"
-  %li= link_to "Resume", "#tab3"
-  %li= link_to "Conversation", "#tab4"
+  %li= link_to "Activities", "#activities"
+  %li= link_to "Attachments", "#attachments"
+  %li= link_to "Resume", "#resume"
+  %li= link_to "Conversation", "#conversation"
 
-<div id=tab1 class=jstab>
+<div id=activities class=jstab>
 %table.activities
   - @activities.each_with_index do |activity, i|
     %tr
@@ -86,9 +86,9 @@
               %div{:style => "background: #{stage.color}; color:#{map_to_char_color(stage.color)}", :class => "statusbox"}
                 = stage.name
         = f.submit "Submit"
-</div><!--#tab1-->
+</div><!--#activities-->
 
-<div id=tab2 class=jstab>
+<div id=attachments class=jstab>
 - unless @applicant.attachments.blank?
   %h3 Listing attachments
   %ul.attachments
@@ -116,9 +116,9 @@
       %td
       %td
         = f.submit "Attach"              
-</div><!--#tab2-->
+</div><!--#attachments-->
 
-<div id=tab3 class=jstab>
+<div id=resume class=jstab>
 - if !@applicant.cover_letter.blank?
   = link_to 'Cover Letter', '#', :id => 'cover_letter'
   %span#arrow
@@ -130,9 +130,9 @@
   %h4{:style => 'margin-top:10px;'} Resume
   %iframe#rs.viewer.autoHeight
     %p Cannot view resume on this browser
-</div><!--#tab3-->
+</div><!--#resume-->
 
-<div id=tab4 class=jstab>
+<div id=conversation class=jstab>
 - if @applicant.job.has_email_setting?
   #conversations
     = render :partial => 'conversations/conversation', :collection => @conversations
@@ -152,7 +152,7 @@
     = f.buttons do
       = f.commit_button 'Send', :id => 'send'
       = image_tag('loading.gif', :style => 'display:none; padding: 10px', :id => 'loading')
-</div><!--#tab4-->
+</div><!--#conversation-->
      
 </div> <!--#jstabs-->
 
@@ -214,6 +214,11 @@
   			$("#conversation_subject").val(Templates[i].subject)
   			$("#conversation_body").val(Templates[i].body)
   		}
+  	})
+  	
+  	$("#jstabs > ul > li > a").click(function() {
+  		window.location.hash = this.hash
+  		$("#jstabs")[0].scrollIntoView()
   	})
   })
   </script>
