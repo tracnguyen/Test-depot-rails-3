@@ -39,7 +39,6 @@ class Main::AccountsController < ApplicationController
         flash.now[:notice] = 'Account was successfully created.'
         render :show, :status => :created
       rescue StandardError => err
-        flash.now[:alert] = err.to_s
         render :action => :new, :status => :unprocessable_entity
       end
     end
