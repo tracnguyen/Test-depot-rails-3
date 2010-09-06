@@ -146,8 +146,8 @@
         = label :template, "Use a predefined template"
         = select_tag :template, options_for_select([["--Select--", 0]] + @templates.map{ |k, v| [v[:subject], k] }), :style => "width: 75%"
       = f.input :applicant_id, :as => :hidden
-      = f.input :subject
-      = f.input :body, :id => :body, :label => 'Message body:'
+      = f.input :subject, :input_html => { :size => 75 }
+      = f.input :body, :id => :body, :label => 'Message body'
       = f.input :attachment, :as => :file
     = f.buttons do
       = f.commit_button 'Send', :id => 'send'
