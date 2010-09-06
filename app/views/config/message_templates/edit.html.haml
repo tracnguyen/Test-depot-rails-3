@@ -5,7 +5,10 @@
   %h2 Existing templates
   %ul{:style => "margin-bottom: 30px"}
     - @templates.each do |t|
-      %li= link_to t.subject, edit_config_message_template_path(t)
+      %li
+        = link_to t.subject, edit_config_message_template_path(t)
+        &nbsp;
+        = link_to image_tag("delete-icon.png"), config_message_template_path(t), :confirm => 'Are you sure?', :method => :delete
 
 %h2 Edit message template
 

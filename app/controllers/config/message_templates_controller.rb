@@ -41,9 +41,10 @@ class Config::MessageTemplatesController < BaseAccountController
   def destroy
     @template = MessageTemplate.find(params[:id])
     if @template.destroy
-      render :text => @template.id
+      flash[:notice] = "Message template successfully deleted."
     else
-      render :text => @template.id, :status => :unprocessable_entity
+      flash[:alert] = "Could not delete message template. Please report this error."
     end
+    redirect_to config_message_templates_path
   end
 end
