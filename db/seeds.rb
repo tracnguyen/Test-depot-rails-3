@@ -12,3 +12,29 @@ DefaultJobStage.create :name => "Interviewed", :color => "#00ccff"
 DefaultJobStage.create :name => "Offered", :color => "#3366ff"
 DefaultJobStage.create :name => "Hired", :color => "#800000"
 DefaultJobStage.create :name => "Rejected", :color => "#ff0000"
+DefaultMessageTemplate.create! \
+  :subject => "re: your application to the {{job}} position at {{company}}",
+  :body => <<-EOS
+Dear {{applicant}},
+
+
+
+Regards,
+
+HR Department
+{{company}}
+EOS
+
+
+DefaultMessageTemplate.create! \
+  :subject => "Interview for a {{job}} position",
+  :body => <<-EOS
+Dear {{applicant}},
+
+We are impressed by your application. We would like to schedule an interview with you in the coming week. What day would be best for you?
+
+Regards,
+
+HR Department
+{{company}}
+EOS

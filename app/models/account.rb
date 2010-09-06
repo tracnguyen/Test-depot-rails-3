@@ -37,6 +37,11 @@ class Account < ActiveRecord::Base
       }
     }
     
+    DefaultMessageTemplate.all.each { |t|
+      MessageTemplate.create! :account_id => self.id, :subject => t.subject, :body => t.body
+    }
+  }
+    
   def self.find_by_owner_email(email)
     sql = "SELECT accounts.id FROM accounts "
     sql << "INNER JOIN users ON accounts.owner_id = users.id "
