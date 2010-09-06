@@ -1,5 +1,5 @@
 class Main::AccountsController < ApplicationController
-  before_filter
+  before_filter :authenticate_admin!, :except => [:new, :create]
   layout 'main'
   
   def index
@@ -26,25 +26,21 @@ class Main::AccountsController < ApplicationController
     @account = Account.new(params[:account])
     
     if !simple_captcha_valid?
-      flash[:notice] = "CAPTCHA confirmation failed!"
+      flash[:alert] = "CAPTCHA confirmation failed!"
       render :action => 'new'
     else
-      success = false
       begin
         Account.transaction do
-          @account.save
-          owner = @account.owner
-          owner.account_id = @account.id
-          owner.save
-          success = true
+          @account.save!
+          @owner = @account.owner
+          @owner.account_id = @account.id
+          @owner.save!
         end
-      rescue
-        success = false
-      end
-      if success
-        redirect_to main_account_path(@account), :notice => 'Account was successfully created.'
-      else
-        render :action => "new"
+        flash.now[:notice] = 'Account was successfully created.'
+        render :show, :status => :created
+      rescue StandardError => err
+        flash.now[:alert] = err.to_s
+        render :action => :new, :status => :unprocessable_entity
       end
     end
   end

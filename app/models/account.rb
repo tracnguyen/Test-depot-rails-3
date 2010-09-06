@@ -29,12 +29,11 @@ class Account < ActiveRecord::Base
   
   after_create lambda {
     DefaultJobStage.all.each_with_index { |s, i|
-      JobStage.create \
+      JobStage.create! \
         :account_id => self.id,
         :name => s.name,
         :position => i,
         :color => s.color
-      }
     }
     
     DefaultMessageTemplate.all.each { |t|
