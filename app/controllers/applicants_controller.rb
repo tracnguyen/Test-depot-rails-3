@@ -27,7 +27,9 @@ class ApplicantsController < BaseAccountController
 
   def show
     @applicant = Applicant.where(:id => params[:id]).includes(:job).first
+    
     UserView.mark_as_read(current_user, @applicant)
+    @n_unread_applications = current_account.applicants.count - current_user.viewed_applications.count
     
     @activities = @applicant.activities.order("created_at ASC").includes(:actor, :prev_stage, :next_stage).all
     @activity = @applicant.activities.build
